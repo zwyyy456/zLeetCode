@@ -16,16 +16,19 @@ public:
         int right = 1;
         int len = 1;
         int sum = 0;
-        for (len = 0; len <= nums.size(); len++) {
-            for (left = 0, right = 0 + len; sum < target; left++, right++) {
-                sum = 0;
-                for (int i = left; i <= right; i++)
-                    sum += nums[i];
+        for (len = 1; len <= nums.size(); len++) {
+            sum = 0;
+            for (int i = 0; i < len; i++)
+                sum += nums[i];
+            if (sum >= target)
+                return len;
+            for (left = 1, right = 1 + len; right <= nums.size(); left++, right++) {
+                sum = sum + nums[right - 1] -nums[left - 1];
+                if (sum >= target)
+                    return len;
             }
-            return len;
         }
         return 0;
-
     }
 };
 // @lc code=end

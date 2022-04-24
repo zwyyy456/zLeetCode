@@ -1,7 +1,7 @@
 /*
- * @lc app=leetcode id=209 lang=cpp
+ * @lc app=leetcode id=59 lang=cpp
  *
- * [209] Minimum Size Subarray Sum
+ * [59] Spiral Matrix II
  */
 
 // @lc code=start
@@ -10,26 +10,20 @@
 using std::vector;
 class Solution {
 public:
-    int minSubArrayLen(int target, vector<int>& nums) {
-        vector<int> subA;
-        int left = 0;
-        int right = 1;
-        int len = 1;
-        int sum = 0;
-        for (len = 1; len <= nums.size(); len++) {
-            sum = 0;
-            for (int i = 0; i < len; i++)
-                sum += nums[i];
-            if (sum >= target)
-                return len;
-            for (left = 1, right = 1 + len; right <= nums.size(); left++, right++) {
-                sum = sum + nums[right - 1] -nums[left - 1];
-                if (sum >= target)
-                    return len;
-            }
+    vector<vector<int>> generateMatrix(int n) {
+        vector<vector<int>> nums(n, vector<int>(n, 0));
+        int num = 0;
+        for (int i = n; i > 0; i = i - 2) {
+            for (int j = 0; j < i - 1; j++)
+                nums[(n - i) / 2][j + (n - i) / 2] = ++num;
+            for (int j = 0; j < i -1; j++)
+                nums[j + (n - i) / 2][i - 1 + (n - i) / 2] = ++num;
+            for (int j = i; j > 1; j--)
+                nums[i - 1 + (n - i) / 2][j - 1 + (n - i) / 2] = ++num;
+            for (int j = i; j > 1; j--)
+                nums[j - 1 + (n - i) / 2][(n - i) / 2] = ++num;
         }
-        return 0;
+        return nums;
     }
 };
 // @lc code=end
-

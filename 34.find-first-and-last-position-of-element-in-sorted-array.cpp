@@ -34,7 +34,6 @@ public:
                 return result;
             }
         }
-        result = {-1, -1};
         return result;  
     }
 };

@@ -1,20 +1,29 @@
 #include <iostream>
-using namespace std;
-struct ListNode {
-    int val;
-    ListNode *next;
-    ListNode() : val(0), next(nullptr) {}
-    ListNode(int x) : val(x), next(nullptr) {}
-    ListNode(int x, ListNode *next) : val(x), next(next) {}
-};
+#include <unordered_set>
+using std::unordered_set;
+int mysum(int n) {
+    int sum = 0;
+    while (n != 0) {
+        sum += (n % 10) * (n % 10);
+        n = n / 10;
+    }
+    return sum;
+}
+bool isHappy(int n) {
+    unordered_set<int> happy;
+    int sum = mysum(n);
+    while (sum != 1) {
+        if (happy.find(sum) != happy.end()) {
+            return false;
+        } else {
+            happy.insert(sum);
+            sum = mysum(sum);
+        }
+    }
+    return true;
+}
+
 int main() {
-    ListNode *head = new ListNode(1);
-    ListNode *test = head;
-    ListNode second(2);
-    ListNode third(3);
-    head->next = &second;
-    cout << head->next->val << " " << test->next->val << endl;
-    head->next = &third;
-    cout << head->next->val << " " << test->next->val << endl;
-    return 0;
+    int n = isHappy(19);
+    std::cout << isHappy(19) << "\n";
 }

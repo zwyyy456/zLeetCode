@@ -16,32 +16,34 @@
  *     TreeNode(int x, TreeNode *left, TreeNode *right) : val(x), left(left), right(right) {}
  * };
  */
-#include <queue>
-using std::queue;
-class Solution {
-  public:
-    int minDepth(TreeNode *root) {
-        int dp = 0;
-        int min = 1;
-        queue<TreeNode *> q;
-        if (root == nullptr)
-            return 0;
-        q.push(root);
-        while (!q.empty()) {
-            int sz = q.size();
-            for (int i = 0; i < sz; i++) {
-                TreeNode *node = q.front();
-                q.pop();
-                if (node->left == nullptr && node->right == nullptr)
-                    return dp + 1;
-                if (node->left != nullptr)
-                    q.push(node->left);
-                if (node->right != nullptr)
-                    q.push(node->right);
-            }
-            dp++;
-        }
-        return dp;
-    }
-};
+
+//层序遍历法
+// #include <queue>
+// using std::queue;
+// class Solution {
+//   public:
+//     int minDepth(TreeNode *root) {
+//         int dp = 0;
+//         int min = 1;
+//         queue<TreeNode *> q;
+//         if (root == nullptr)
+//             return 0;
+//         q.push(root);
+//         while (!q.empty()) {
+//             int sz = q.size();
+//             for (int i = 0; i < sz; i++) {
+//                 TreeNode *node = q.front();
+//                 q.pop();
+//                 if (node->left == nullptr && node->right == nullptr)
+//                     return dp + 1;
+//                 if (node->left != nullptr)
+//                     q.push(node->left);
+//                 if (node->right != nullptr)
+//                     q.push(node->right);
+//             }
+//             dp++;
+//         }
+//         return dp;
+//     }
+// };
 // @lc code=end

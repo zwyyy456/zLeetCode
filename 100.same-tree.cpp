@@ -19,8 +19,21 @@
 class Solution {
   public:
     bool isSameTree(TreeNode *p, TreeNode *q) {
+        return cmp(p, q);
     }
     bool cmp(TreeNode *p, TreeNode *q) {
+        if (p == nullptr && q == nullptr)
+            return true;
+        else if (p == nullptr && q != nullptr)
+            return false;
+        else if (p != nullptr && q == nullptr)
+            return false;
+        else if (p->val != q->val)
+            return false;
+
+        bool left_same = cmp(p->left, q->left);
+        bool right_same = cmp(p->right, q->right);
+        return left_same && right_same;
     }
 };
 // @lc code=end

@@ -39,6 +39,6 @@ class Solution {
   public:
     TreeNode *constructMaximumBinaryTree(vector<int> &nums) {
         return build_tree(nums, 0, nums.size());
-    }
+        }
 };
 // @lc code=end

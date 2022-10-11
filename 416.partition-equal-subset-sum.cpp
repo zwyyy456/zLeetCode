@@ -9,26 +9,26 @@
 #include <vector>
 using std::vector;
 class Solution {
+    private:
+    int max(int a, int b) {
+        return a >= b ? a : b;
+    }
   public:
     bool canPartition(vector<int> &nums) {
         int sum = 0;
         int sum_half = 0;
-        std::sort(nums.begin(), nums.end());
         for (int i = 0; i < nums.size(); i++) {
             sum += nums[i];
-            if (i < nums.size() / 2)
-                sum_half += nums[i];
         }
         if (sum % 2 == 1)
             return false;
-        for (int i = nums.size() / 2; i < nums.size(); i++) {
-            if (sum_half == sum / 2)
-                return true;
-            sum_half += nums[i];
-            if (sum_half > sum / 2)
-                return false;
+        sum_half = sum / 2;
+        vector<int> dp(sum_half + 1, 0);
+        for (int i = 0; i < nums.size(); i++) {
+            for (int j = sum_half; j >= nums[i]; j--)
+                dp[j] = max(dp[j], dp[j - nums[i]] + nums[i]);
         }
-        return false;
+        return dp[sum_half] == sum_half;
     }
 };
 // @lc code=end

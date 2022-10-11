@@ -16,7 +16,7 @@ class Solution {
     string letter_map[10] = {"", "", "abc", "def", "ghi", "jkl", "mno", "pqrs", "tuv", "wxyz"};
     // n为digits的长度
     void track_back(string digits, int index, int n) {
-        if (path.size() >= n) {
+        if (index >= n) {
             res.push_back(path);
             return;
         }

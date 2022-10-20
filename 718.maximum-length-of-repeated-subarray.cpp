@@ -18,7 +18,7 @@ class Solution {
                     // dp[i][j] = max(dp[i - 1][j - 1] + 1, dp[i][j]);
                     dp[i][j] = dp[i - 1][j - 1] + 1;
                 if (dp[i][j] > m)
-                    m = dp[i][j];
+                    m = dp[i][j]; // 记录最大的dp[i][j]
             }
         }
         return m;

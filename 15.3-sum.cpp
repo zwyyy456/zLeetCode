@@ -25,29 +25,26 @@ class Solution {
                 continue;
             i = k + 1;
             j = nums.size() - 1;
-            while (i < j) {
-                if (nums[k] + nums[i] + nums[j] > 0) {
+            if (nums[k] + nums[i] + nums[j] > 0) {
+                j--;
+                //跳过重复的值，同时注意i<j的限定条件
+                while (nums[j + 1] == nums[j] && i < j - 1)
                     j--;
-                    //跳过重复的值，同时注意i<j的限定条件
-                    while (nums[j + 1] == nums[j] && i < j - 1)
-                        j--;
-                } else if (nums[k] + nums[i] + nums[j] < 0) {
+            } else if (nums[k] + nums[i] + nums[j] < 0) {
+                i++;
+                //跳过重复的值，同时注意i<j的限定条件
+                while (nums[i - 1] == nums[i] && i < j - 1)
                     i++;
-                    //跳过重复的值，同时注意i<j的限定条件
-                    while (nums[i - 1] == nums[i] && i < j - 1)
-                        i++;
-                } else {
-                    res.push_back({nums[k], nums[i], nums[j]});
+            } else {
+                res.push_back({nums[k], nums[i], nums[j]});
+                j--;
+                while (nums[j + 1] == nums[j] && i < j - 1)
                     j--;
-                    while (nums[j + 1] == nums[j] && i < j - 1)
-                        j--;
+                i++;
+                while (nums[i - 1] == nums[i] && i < j - 1)
                     i++;
-                    while (nums[i - 1] == nums[i] && i < j - 1)
-                        i++;
-                }
             }
         }
-
         return res;
     }
 };

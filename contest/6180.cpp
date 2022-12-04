@@ -1,9 +1,31 @@
-class Solution {
-public:
-    int smallestEvenMultiple(int n) {
-        if (n % 2 == 1)
-            return 2 * n;
-        else
-            return n;
+#include <iostream>
+#include <string>
+#include <vector>
+using namespace std;
+int appendCharacters(string s, string t) {
+    vector<vector<int>> dp(s.size() + 1, vector<int>(t.size() + 1, 0));
+    for (int i = 0; i <= s.size(); i++) {
+        dp[i][0] = 1;
     }
-};
+    for (int i = 1; i <= s.size(); i++) {
+        for (int j = 1; j <= i && j <= t.size(); j++) {
+            if (s[i - 1] == t[j - 1])
+                dp[i][j] = dp[i - 1][j - 1];
+            else
+                dp[i][j] = dp[i - 1][j];
+            cout << " " << dp[i][j];
+        }
+    }
+    int cnt = 0;
+    for (int j = 1; j <= t.size(); j++) {
+        if (dp[s.size()][j] == 1) {
+            cnt++;
+        }
+    }
+    return cnt;
+}
+
+int main() {
+    cout << appendCharacters("coaching", "coding");
+    return 0;
+}

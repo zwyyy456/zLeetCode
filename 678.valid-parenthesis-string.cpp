@@ -7,6 +7,8 @@
 // @lc code=start
 #include <stack>
 #include <string>
+#include <vector>
+using std::vector;
 using std::stack;
 using std::string;
 class Solution {
@@ -20,13 +22,16 @@ class Solution {
         for (char c : s) {
             if (c == '(') {
                 if (flag == 0) { // 说明前面必然不是'('，且前面必然有')'
-                    if (arr[0] > arr[1] + arr[2] || arr[2] > arr[0] + arr[1])
-                        diff_flag = 1;
-                    else {
-                        arr[1] -= abs(arr[2] - arr[0]);
-                    }
-                    if (diff_flag != 0)
+                    if (arr[0] >= arr[2]) {
+                        arr[0] -= arr[2];
+                        arr[2] = 0;
+                    } else if (arr[2] > arr[0] + arr[1])
                         return false;
+                    else {
+                        arr[1] -= abs(arr[2] - arr[1]);
+                        arr[2] = 0;
+                        arr[1] = 0;
+                    }
                 }
                 stk.push(c);
                 flag = 1;
@@ -54,4 +59,5 @@ class Solution {
             return true;
     }
 };
+
 // @lc code=end

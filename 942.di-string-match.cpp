@@ -5,6 +5,10 @@
  */
 
 // @lc code=start
+#include <vector>
+#include <string>
+using std::vector;
+using std::string;
 class Solution {
 public:
     vector<int> diStringMatch(string s) {

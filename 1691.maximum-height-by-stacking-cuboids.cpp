@@ -5,6 +5,8 @@
  */
 
 // @lc code=start
+#include <vector>
+using std::vector;
 class Solution {
 public:
     int maxHeight(vector<vector<int>>& cuboids) {

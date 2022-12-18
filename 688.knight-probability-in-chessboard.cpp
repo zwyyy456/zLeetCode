@@ -26,9 +26,17 @@ class Solution {
                         if (loc_x < n && loc_x > 0 && loc_y < n && loc_y > 0)
                             tmp += dp[loc_x][loc_y][num - 1];
                     }
+                    dp[i][j][num] = tmp / 8;
                 }
             }
         }
+        double res;
+        for (int i = 0; i < n; i++) {
+            for (int j = 0; j < n; j++) {
+                res += dp[i][j][k];
+            }
+        }
+        return res;
     }
 };
 // @lc code=end

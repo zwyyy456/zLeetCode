@@ -5,18 +5,18 @@
  */
 
 // @lc code=start
+#include <vector>
+using std::vector;
 class ExamRoom {
-public:
+  public:
     ExamRoom(int n) {
-        
+        vector<int> seats(n, 0);
     }
-    
+
     int seat() {
-        
     }
-    
+
     void leave(int p) {
-        
     }
 };
 
@@ -27,4 +27,3 @@ public:
  * obj->leave(p);
  */
 // @lc code=end
-

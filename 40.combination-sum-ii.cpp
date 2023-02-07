@@ -5,11 +5,11 @@
  */
 
 // @lc code=start
-#include <vector>
 #include <algorithm>
+#include <vector>
 using std::vector;
 class Solution {
-    private:
+  private:
     int sum = 0;
     vector<int> path;
     vector<vector<int>> res;
@@ -17,12 +17,13 @@ class Solution {
         if (sum == target) {
             res.push_back(path);
             return;
-        } else if (sum > target)
-        {
+        } else if (sum > target) {
             return;
         }
-        for (int i = index; i < candidates.size() && sum + candidates[i] <= target; i++) {
-            // if (i >= 1 && candidates[i] == candidates[i - 1] && candidates[i] != path[i - 1])
+        for (int i = index; i < candidates.size() && sum + candidates[i] <= target;
+             i++) {
+            // if (i >= 1 && candidates[i] == candidates[i - 1] && candidates[i] !=
+            // path[i - 1])
             //     continue;
             sum += candidates[i];
             path.push_back(candidates[i]);
@@ -34,12 +35,12 @@ class Solution {
         }
         return;
     }
-public:
-    vector<vector<int>> combinationSum2(vector<int>& candidates, int target) {
+
+  public:
+    vector<vector<int>> combinationSum2(vector<int> &candidates, int target) {
         std::sort(candidates.begin(), candidates.end());
         track_back(candidates, target, 0);
         return res;
     }
 };
 // @lc code=end
-

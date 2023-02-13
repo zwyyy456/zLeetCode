@@ -21,5 +21,6 @@ public:
         return res[coins.size()] + 1;
     }
 };
+
 // @lc code=end
 

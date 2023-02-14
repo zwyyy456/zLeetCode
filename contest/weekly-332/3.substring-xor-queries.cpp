@@ -47,11 +47,19 @@ So, the answer is [0,0].
 
 
 // @lc code=begin
-
+#include <string>
+#include <vector>
+#include <unordered_set>
+using std::unordered_set;
+using std::vector;
+using std::string;
 class Solution {
 public:
     vector<vector<int>> substringXorQueries(string s, vector<vector<int>>& queries) {
-        
+        vector<int> myquerie;
+        for (auto &vec : queries)
+            myquerie.push_back(vec[0] ^ vec[1]);
+
     }
 };
 

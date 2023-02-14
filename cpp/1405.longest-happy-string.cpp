@@ -34,11 +34,57 @@ Explanation: It is the only correct answer in this case.
 
 
 // @lc code=begin
-
+#include <string>
+#include <vector>
+using std::string;
+using std::vector;
 class Solution {
 public:
+    int Findmax(vector<int> &nums) {
+        int idx = 0;
+        for (int i = 0; i < 3; i++) {
+            if (nums[i] > idx) {
+                idx = i;
+            }
+        }
+        return idx;
+    }
+    int FindMid(vector<int> &nums) {
+        int max_num = nums[0];
+        int min_num = nums[0];
+        for (int i = 1; i < 3; i++) {
+            if (nums[i] > max_num)
+                max_num = nums[i];
+            if (nums[i] < min_num)
+                min_num = nums[i];
+        }
+        for (int i = 0; i < 3; i++) {
+            if (nums[i] <= max_num && nums[i] >= min_num)
+                return i;
+        }
+        return 0;
+    }
     string longestDiverseString(int a, int b, int c) {
-        
+        vector<int> num{a, b, c};
+        vector<char> ch{'a', 'b', 'c'};
+        vector<int> cnt{0, 0, 0};
+        int sum = a + b + c;
+        string res;
+        for (int i = 0; i < sum; i++) {
+            int idx_max = Findmax(num);
+            int idx_mid = FindMid(num);
+            if (cnt[idx_max] < 2) {
+                res.push_back(ch[idx_max]);
+                num[idx_max]--;
+                cnt[idx_max]++;
+                cnt[idx_mid] = 0;
+            } else {
+                res.push_back(ch[idx_mid]);
+                num[idx_mid]++;
+                
+            }
+
+        }
     }
 };
 

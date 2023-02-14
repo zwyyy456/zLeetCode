@@ -57,11 +57,32 @@ Since the concatenation value is 673 so the answer is 673.
 
 
 // @lc code=begin
-
+#include <vector>
+#include <deque>
+using std::vector;
+using std::deque;
 class Solution {
 public:
+    long long GetNum(int head, int tail) {
+        int tmp = 0;
+        for (tmp = tail; tail != 0; tail /= 10)
+            head *= 10;
+        return head + tmp;
+    }
     long long findTheArrayConcVal(vector<int>& nums) {
-        
+        deque<int> dq(nums.begin(), nums.end());
+        long long res = 0;
+        while (dq.size() > 1) {
+            int head = dq.front();
+            int tail = dq.back();
+            dq.pop_front();
+            dq.pop_back();
+            res += GetNum(head, tail);
+        }
+        if (dq.empty())
+            return res;
+        else
+            return res + dq.back();
     }
 };
 

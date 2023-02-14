@@ -48,17 +48,23 @@ using std::map;
 class Solution {
   public:
     int numberOfWeakCharacters(vector<vector<int>> &properties) {
-        // std::sort(properties.begin(), properties.end(), [&](vector<int> vec1, vector<int> vec2) {
-        //     if (vec1[1] == vec2[1])
-        //         return vec1[0] >= vec2[0];
-        //     return vec1[1] < vec2[1];
-        // });
+        std::sort(properties.begin(), properties.end(), [&](vector<int> vec1, vector<int> vec2) {
+            if (vec1[0] == vec2[0])
+                return vec1[1] >= vec2[1];
+            return vec1[0] < vec2[0];
+        });
         map<int, int> roles;
         int cnt = 0;
         for (auto &vec : properties) {
-            for (auto iter = roles.lower_bound(vec[0]); iter != roles.end(); iter++) {
+            int is_weak = 0;
+            for (auto iter = roles.begin(); iter != roles.upper_bound(vec); iter++) {
+                if (vec[1] < iter->second)
+                    is_weak = 1;
             }
+            if (is_weak == 0)
+                roles[vec[0]] = vec[1];
         }
+        return roles.size();
     }
 };
 // @lc code=end

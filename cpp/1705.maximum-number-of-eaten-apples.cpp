@@ -60,11 +60,11 @@ class Solution {
         // 优先队列的top应该是腐烂日期最小的
         priority_queue<vector<int>, vector<vector<int>>, decltype(cmp)> pq(cmp);
         app_decay[0][1]--;
+        int res = 0;
         if (app_decay[0][1] > 0) {
-            int res = 1;
+            res++;
             pq.push(app_decay[0]);
         }
-
         for (int i = 1; i < apples.size(); i++) {
             if (app_decay[i][1] != 0) {
                 pq.push(app_decay[i]);
@@ -78,7 +78,7 @@ class Solution {
                 vec = pq.top();
                 pq.pop();
             }
-            if (!pq.empty()) {
+            if (!vec.empty() && vec[0] > i) {
                 vec[1]--;
                 if (vec[1] != 0) {
                     pq.push(vec);

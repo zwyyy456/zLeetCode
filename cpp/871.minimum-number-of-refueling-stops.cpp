@@ -70,7 +70,7 @@ class Solution {
         pq.push(stations[0]);
         int cur_fuel = startFuel - stations[0][0];
         for (int i = 1; i < n; i++) {
-            if (cur_fuel < stations[i][0] - stations[i - 1][0]) {
+            while (!pq.empty() && cur_fuel < stations[i][0] - stations[i - 1][0]) {
                 cur_fuel += pq.top()[1];
                 pq.pop();
                 res++;
@@ -91,5 +91,4 @@ class Solution {
         return res;
     }
 };
-
 // @lc code=end

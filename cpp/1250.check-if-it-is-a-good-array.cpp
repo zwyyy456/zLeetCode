@@ -38,11 +38,21 @@ using std::vector;
 class Solution {
   public:
     int gcd(int a, int b) {
+        // 其中b^=a,a^=b,b^=a相当于swap(a,b)
         while (b ^= (a ^= (b ^= (a %= b))))
             ;
         return a;
     }
     bool isGoodArray(vector<int> &nums) {
+        if (nums.size() == 1)
+            return nums[0] == 1;
+        for (int i = 0; i < nums.size() - 1; i++) {
+            int tmp = gcd(nums[i], nums[i + 1]);
+            if (tmp == 1) // 最大公因数已经是1了
+                return true;
+            nums[i + 1] = tmp;
+        }
+        return true;
     }
 };
 

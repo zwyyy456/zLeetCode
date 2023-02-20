@@ -1,13 +1,15 @@
-# leetgo project level config, global config is at /Users/zwyyy456/.config/leetgo/config.yaml
+# leetgo project level config, global config is at /Users/zwy/.config/leetgo/config.yaml
 # for more details, please refer to https://github.com/j178/leetgo
+# author
+author: zwyyy456
 language: en
 code:
   lang: cpp
-  filename_template: '{{ .Id }}{{ if .SlugIsMeaningful }}.{{ .Slug }}{{ end }}'
 leetcode:
   site: https://leetcode.com
 #  credentials:
 #    from: browser
 editor:
   use: custom
-  command: subl
+  command: "subl"
+  # use: vscode

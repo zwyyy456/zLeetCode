@@ -31,8 +31,8 @@ Output: 0
 #include <set>
 #include <stack>
 #include <vector>
-#include <map>
-using std::map;
+#include <unordered_map>
+using std::unordered_map;
 using std::set;
 using std::stack;
 using std::vector;
@@ -57,19 +57,15 @@ class Solution {
         for (int i = 1; i < n; i++) {
             prefix[i] = prefix[i - 1] + hours[i];
         }
-        map<int, int, std::greater<int>> mp; // 前缀相同时，保留下标最小的那个
+        unordered_map<int, int> mp; // 前缀相同时，保留下标最小的那个
         int res = 0;
         for (int i = 0; i < n; i++) {
             if (prefix[i] > 0)
                 res = max(res, i + 1);
             else {
-                auto iter = mp.upper_bound(prefix[i]);
-                // if (prefix[i] > mp.begin()->first) {
-                //     res = max(res, i - mp.begin()->second);
-                // }
-                while (iter != mp.end()) {
-                    res = max(res, i - mp.begin()->second);
-                    iter++;
+                auto iter = mp.find(prefix[i] - 1);
+                if (iter != mp.end()) {
+                    res = max(res, i - iter->second);
                 }
                 if (mp.find(prefix[i]) == mp.end()) {
                     mp[prefix[i]] = i;

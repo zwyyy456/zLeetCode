@@ -40,19 +40,19 @@ using std::vector;
 class Solution {
   public:
     bool find132pattern(vector<int> &nums) {
-        int first = nums[0], second = nums[nums.size() - 1], third = nums[nums.size() - 1];
+        int first = nums[0], second = nums[nums.size() - 1], third = -INT_MAX;
         int i = 0;
         stack<int> stk; // 栈顶到栈底从小到大
-        vector<int> diff(nums.size() + 1, nums[0]);
         stk.push(nums[nums.size() - 1]);
         for (int r = nums.size() - 2; r >= 0; r--) {
             // 栈应该不可能为空
             if (nums[r] < stk.top()) {
-                if (stk.top() > third) {
-                    if (nums[r] < third) {
-                        return true;
-                    }
+                // if (stk.top() > third) {
+                if (nums[r] < third) {
+                    return true;
+                    // }
                 }
+                stk.push(nums[r]);
             } else if (nums[r] == stk.top()) {
                 stk.push(nums[r]);
             } else {

@@ -1,4 +1,4 @@
-// Created by Bob at 2023/02/09 17:48
+// Created by Bob at 2023/02/18 14:45
 // https://leetcode.com/problems/maximum-length-of-pair-chain/
 
 /*
@@ -33,18 +33,19 @@ using std::vector;
 class Solution {
   public:
     int findLongestChain(vector<vector<int>> &pairs) {
-        std::sort(pairs.begin(), pairs.end(), [&](vector<int> vec1, vector<int> vec2) {
-            if (vec1[1] == vec2[1]) {
-                return vec1[0] < vec2[0];
+        auto cmp = [&](vector<int> &v1, vector<int> &v2) {
+            if (v1[1] == v2[1]) {
+                return v1[0] <= v2[0];
             }
-            return vec1[1] < vec2[1];
-        });
-        int r = pairs[0][1];
+            return v1[1] < v2[1];
+        };
+        std::sort(pairs.begin(), pairs.end(), cmp);
         int cnt = 1;
+        int left = pairs[0][1];
         for (int i = 1; i < pairs.size(); i++) {
-            if (pairs[i][0] > r) {
+            if (pairs[i][0] > left) {
                 cnt++;
-                r = pairs[i][1];
+                left = pairs[i][1];
             }
         }
         return cnt;

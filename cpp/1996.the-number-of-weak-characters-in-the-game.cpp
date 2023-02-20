@@ -41,30 +41,29 @@ and defense.
 // @lc code=begin
 #include <string>
 #include <vector>
-#include <map>
+#include <unordered_map>
 using std::vector;
-using std::map;
+using std::unordered_map;
 
 class Solution {
   public:
     int numberOfWeakCharacters(vector<vector<int>> &properties) {
-        std::sort(properties.begin(), properties.end(), [&](vector<int> vec1, vector<int> vec2) {
+        std::sort(properties.begin(), properties.end(), [&](vector<int> &vec1, vector<int> &vec2) {
             if (vec1[0] == vec2[0])
-                return vec1[1] >= vec2[1];
-            return vec1[0] < vec2[0];
+                return vec1[1] <= vec2[1];
+            return vec1[0] > vec2[0];
         });
-        map<int, int> roles;
         int cnt = 0;
-        for (auto &vec : properties) {
-            int is_weak = 0;
-            for (auto iter = roles.begin(); iter != roles.upper_bound(vec); iter++) {
-                if (vec[1] < iter->second)
-                    is_weak = 1;
+        int attack_max = properties[0][0];
+        int defend_max = properties[0][1];
+        for (int i = 1; i < properties.size(); i++) {
+            if (properties[i][0] < attack_max && properties[i][1] < defend_max) {
+                cnt++;
+            } else if (properties[i][1] > defend_max) {
+                defend_max = properties[i][1];
             }
-            if (is_weak == 0)
-                roles[vec[0]] = vec[1];
         }
-        return roles.size();
+        return cnt;
     }
 };
 // @lc code=end

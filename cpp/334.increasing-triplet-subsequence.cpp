@@ -64,6 +64,7 @@ class Solution {
                 if (nums[i] > mid)
                     return true;
                 mid = nums[i];
+                left = left2;
             }
             ++i;
         }

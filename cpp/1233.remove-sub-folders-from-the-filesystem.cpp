@@ -1,7 +1,6 @@
 // Created by Bob at 2023/02/08 20:09
 // https://leetcode.com/problems/remove-sub-folders-from-the-filesystem/
 
-
 /*
 1233. Remove Sub-Folders from the Filesystem (Medium)
 
@@ -38,15 +37,34 @@ Output: ["/a/b/c","/a/b/ca","/a/b/d"]
 - Each folder name is **unique**.
 */
 
-
 // @lc code=begin
-
+#include <string>
+#include <unordered_set>
+#include <vector>
+using std::vector;
+using std::string;
+using std::unordered_set;
 class Solution {
-public:
-    vector<string> removeSubfolders(vector<string>& folder) {
-        
+  public:
+    bool CheckSub(unordered_set<string> &folders, string &loc) {
+        for (int i = 1; i < loc.size(); i++) {
+            if (loc[i] == '/') {
+                if (folders.find(loc.substr(0, i)) != folders.end())
+                    return true;
+            }
+        }
+        return false;
+    }
+    vector<string> removeSubfolders(vector<string> &folder) {
+        sort(folder.begin(), folder.end());
+        unordered_set<string> folders;
+        for (auto &loc : folder) {
+            if (!CheckSub(folders, loc))
+                folders.insert(loc);
+        }
+        vector<string> res(folders.begin(), folders.end());
+        return res;
     }
 };
 
 // @lc code=end
-

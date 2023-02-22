@@ -43,11 +43,49 @@ Output: 3
 */
 
 // @lc code=begin
-
+#include <vector>
+#include <unordered_map>
+using std::vector;
+using std::unordered_map;
 class Solution {
-public:
-    int minOperations(vector<int>& target, vector<int>& arr) {
-        
+  public:
+    int Bfind(vector<int> &new_arr, int len, int target) {
+        int left = 1, right = len;
+        int mid = left + (right - left) / 2;
+        while (left < right) {
+            if (new_arr[mid] < target) {
+                left = mid + 1;
+            } else {
+                right = mid;
+            }
+            mid = left + (right - left) / 2;
+        }
+        return left;
+    }
+    int minOperations(vector<int> &target, vector<int> &arr) {
+        unordered_map<int, int> ust;
+        for (int i = 0; i < target.size(); i++) {
+            ust[target[i]] = i;
+        }
+        vector<int> new_arr;
+        for (int &num : arr) {
+            if (ust.find(num) != ust.end()) {
+                new_arr.push_back(ust[num]);
+            }
+        }
+        // 问题就变成了找new_arr的最长递增子序列
+        int len = 1;
+        vector<int> tail_len(target.size() + 1, new_arr[0]);
+        for (int i = 1; i < target.size(); i++) {
+            if (new_arr[i] > tail_len[len]) {
+                len++;
+                tail_len[len] = new_arr[i];
+            } else {
+                int idx = Bfind(new_arr, len, new_arr[i]);
+                tail_len[idx] = new_arr[i];
+            }
+        }
+        return len;
     }
 };
 

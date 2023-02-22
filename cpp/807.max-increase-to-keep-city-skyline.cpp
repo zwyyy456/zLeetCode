@@ -64,7 +64,7 @@ class Solution {
         int diff = 0;
         for (int i = 0; i < n; i++) {
             for (int j = 0; j < n; j++) {
-                diff = std::min(row_max[i], col_max[j]);
+                diff = std::min(row_max[i], col_max[j]) - grid[i][j];
                 res += diff > 0 ? diff : 0;
             }
         }

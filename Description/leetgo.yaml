@@ -1,0 +1,13 @@
+# leetgo project level config, global config is at /Users/zwyyy456/.config/leetgo/config.yaml
+# for more details, please refer to https://github.com/j178/leetgo
+language: zh
+code:
+  lang: cpp
+  filename_template: '{{ .Id }}{{ if .SlugIsMeaningful }}.{{ .Slug }}{{ end }}'
+leetcode:
+  site: https://leetcode.cn
+#  credentials:
+#    from: browser
+editor:
+  use: custom
+  command: subl

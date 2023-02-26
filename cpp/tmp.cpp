@@ -49,23 +49,40 @@ Output: 104
 using std::vector;
 class Solution {
 public:
-    int dfs(int idx_start, int M, vector<int> &postfix, int n, vector<vector<int>> &cach) {
+    int dfs(int idx_start, int M, vector<int> &postfix, bool flag, int n, vector<vector<int>> &cach) {
         if (idx_start >= n)
             return 0;
-        
-        int minnum = 100001;
-        if (cach[idx_start][M] >= 0) {
-            return cach[idx_start][M];
-        }
-        for (int i = idx_start + 1; i <= idx_start +  2 * M && i <= n; i++) { // i表示下一个人拿石子的开始位置，所以i至少为idx_start+1
-            int tmp = dfs(i, std::max(i - idx_start, M), postfix, n, cach);
-            if (minnum > tmp) {
-                minnum = tmp;
+        if (flag) {
+            int minnum = 100001;
+            for (int i = idx_start + 1; i <= idx_start +  2 * M && i <= n; i++) { // i表示下一个人拿石子的开始位置，所以i至少为idx_start+1
+                if (cach[i][0] >= 0) {
+                    if (minnum > cach[i][0]) {
+                        minnum = cach[i][0];
+                    }
+                } else {
+                    cach[i][0] = dfs(i, std::max(i - idx_start, M), postfix, false, n, cach);
+                    if (minnum > cach[i][0]) {
+                        minnum = cach[i][0];
+                    }
+                }
             }
+            return postfix[idx_start] - minnum;
+        } else {
+            int minnum = 100001;
+            for (int i = idx_start + 1; i <= idx_start +  2 * M && i <= n; i++) {
+                if (cach[i][1] >= 0) {
+                    if (minnum > cach[i][1]) {
+                        minnum = cach[i][1];
+                    }
+                } else {
+                    cach[i][1] = dfs(i, std::max(i - idx_start, M), postfix, true, n, cach);
+                    if (minnum > cach[i][1]) {
+                        minnum = cach[i][1];
+                    }
+                }
+            }
+            return postfix[idx_start] - minnum;
         }
-        cach[idx_start][M] = postfix[idx_start] - minnum;
-        return cach[idx_start][M];
-         
     }
     int stoneGameII(vector<int>& piles) {
         int n = piles.size();
@@ -73,8 +90,8 @@ public:
         for (int i = n - 1; i >= 0; i--) {
             postfix[i] = postfix[i + 1] + piles[i];
         }
-        vector<vector<int>> cach(n + 1, vector<int>(n, -1));
-        return dfs(0, 1, postfix, n, cach);
+        vector<vector<int>> cach(n + 1, vector<int>(2, -1));
+        return dfs(0, 1, postfix, true, n, cach);
     }
 };
 

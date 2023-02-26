@@ -1,0 +1,21 @@
+cmake_minimum_required(VERSION 3.25)
+# 指定CMAKE_CXX_COMPILER
+set(CMAKE_CXX_COMPILER "C:/Users/zwyyy/Program/200work/Qt/Tools/mingw900_64/bin/g++.exe")
+set(CMAKE_C_COMPILER "C:/Users/zwyyy/Program/200work/Qt/Tools/mingw900_64/bin/gcc.exe")
+# Enable C++17，但对compile_commands.json似乎无效
+set(CMAKE_CXX_STANDARD 17)
+# 启用环境变量指定clang的target
+set(CMAKE_CXX_FLAGS "-target=x86_64-pc-windows-gnu")
+# 设置项目名
+project(LeetCpp)
+
+
+
+# 源文件
+aux_source_directory(. SOURCES)
+
+# 头文件
+include_directories(.)
+
+add_executable(${PROJECT_NAME} ${SOURCES})
+

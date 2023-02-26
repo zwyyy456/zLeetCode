@@ -54,7 +54,8 @@ It does not matter what you leave beyond the returned k (hence they are undersco
 
 
 // @lc code=begin
-
+#include <vector>
+using std::vector;
 class Solution {
 public:
     int removeElement(vector<int>& nums, int val) {

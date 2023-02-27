@@ -70,7 +70,7 @@ class Solution {
         for (int i = 0; i < nums.size(); i += 2) {
             mp1[nums[i]]++;
             if (i + 1 < nums.size()) {
-                mp2[nums[i]]++;
+                mp2[nums[i + 1]]++;
             }
         }
         int max_1 = 0, second_1 = 0;
@@ -94,7 +94,7 @@ class Solution {
                 second_num2 = max_num2;
                 max_2 = p2.second;
                 max_num2 = p2.first;
-            } else if (p2.second >= second_1) {
+            } else if (p2.second >= second_2) {
                 second_2 = p2.second;
                 second_num2 = p2.first;
             }

@@ -27,7 +27,8 @@ Explanation: "leeto" did not occur in "leetcode", so we return -1.
 
 
 // @lc code=begin
-
+#include <string>
+using std::string;
 class Solution {
 public:
     int strStr(string haystack, string needle) {

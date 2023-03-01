@@ -1,7 +1,6 @@
 // Created by Bob at 2023/02/17 16:00
 // https://leetcode.cn/problems/flip-string-to-monotone-increasing/
 
-
 /*
 926. 将字符串翻转到单调递增 (Medium)
 
@@ -32,15 +31,12 @@
 - `s[i]` 为 `'0'` 或 `'1'`
 */
 
-
 // @lc code=begin
 
 class Solution {
-public:
+  public:
     int minFlipsMonoIncr(string s) {
-
     }
 };
 
 // @lc code=end
-

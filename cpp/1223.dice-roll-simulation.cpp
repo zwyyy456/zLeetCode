@@ -1,4 +1,4 @@
-// Created by zwyyy456 at 2023/03/02 20:07
+// Created by zwyyy456 at 2023/03/03 15:43
 // https://leetcode.com/problems/dice-roll-simulation/
 
 /*
@@ -55,6 +55,42 @@ using std::vector;
 class Solution {
   public:
     int dieSimulator(int n, vector<int> &rollMax) {
+        int mod = 1000000007;
+        if (n == 1) return 6;
+        vector<vector<int>> dp(n + 1, vector<int>(6, 0));
+        for (int i = 0; i < 6; i++) {
+            dp[0][i] = 1;
+            dp[1][i] = 1;
+        }
+        for (int i = 2; i <= n; i++) {
+            for (int j = 0; j < 6; j++) {
+                if (i <= rollMax[j]) {
+                    dp[i][j] = (dp[i - 1][0] + dp[i - 1][1] + dp[i - 1][2] + dp[i - 1][3] + dp[i - 1][4] + dp[i - 1][5]) % mod;
+                } else if (i == rollMax[j] + 1) {
+                    int tmp_sum = 0;
+                    for (int k = 0; k < 6; k++) {
+                        tmp_sum = (tmp_sum + dp[i - 1][k]) % mod;
+                    }
+                    dp[i][j] = (tmp_sum - 1) % mod;
+                } else {
+                    int tmp_sum = 0;
+                    int tmp_minus = 0;
+                    for (int k = 0; k < 6; k++) {
+                        tmp_sum = (tmp_sum + dp[i - 1][k]) % mod;
+                        if (k == j) {
+                            continue;
+                        }
+                        tmp_minus = (tmp_minus + dp[i - rollMax[j] - 1][k]) % mod;
+                    }
+                    dp[i][j] = (tmp_sum - tmp_minus + mod) % mod;
+                }
+            }
+        }
+        int res = 0;
+        for (int j = 0; j < 6; j++) {
+            res = (res + dp[n][j]) % mod;
+        }
+        return res;
     }
 };
 

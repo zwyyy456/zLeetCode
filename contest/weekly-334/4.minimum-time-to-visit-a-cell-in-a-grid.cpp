@@ -89,6 +89,12 @@ class Solution {
             return v1[2] > v2[2];
         };
         priority_queue<vector<int>, vector<vector<int>>, decltype(cmp)> pq(cmp); // 小顶堆
+        pq.push({0, 0, 0});
+        while (!pq.empty()) {
+            vector<int> tmp = pq.top();
+            pq.pop();
+        }
+        return -1;
     }
 };
 

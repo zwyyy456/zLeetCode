@@ -92,8 +92,8 @@ The profit was never positive, so return -1.
 #include <vector>
 using std::vector;
 class Solution {
-public:
-    int minOperationsMaxProfit(vector<int>& customers, int boardingCost, int runningCost) {
+  public:
+    int minOperationsMaxProfit(vector<int> &customers, int boardingCost, int runningCost) {
         if (boardingCost * 4 <= runningCost) {
             return -1;
         }
@@ -105,7 +105,7 @@ public:
             if (i < customers.size()) {
                 if (people + customers[i] <= 4) {
                     total_cost += runningCost;
-                    total_get += boardingCost * people;
+                    total_get += boardingCost * (people + customers[i]);
                     if (total_get - total_cost > max_profit) {
                         max_profit = total_get - total_cost;
                         max_idx = i;
@@ -143,8 +143,7 @@ public:
         if (max_profit <= 0) {
             return -1;
         }
-        return max_idx;
+        return max_idx + 1;
     }
 };
-
 // @lc code=end

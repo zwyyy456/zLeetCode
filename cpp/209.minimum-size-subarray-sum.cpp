@@ -77,9 +77,6 @@ class Solution {
         for (int i = 1; i <= n; i++) {
             int j = BSearch(i, target - 1, prefix);
             if (prefix[i] >= target) {
-                // if (prefix[j] == prefix[i] - target)
-                //     res = std::min(i - j, res);
-                // else {
                 res = std::min(i - j + 1, res);
             }
         }

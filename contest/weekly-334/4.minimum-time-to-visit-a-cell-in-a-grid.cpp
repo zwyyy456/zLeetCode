@@ -60,7 +60,9 @@ Explanation: There is no path from the top left to the bottom-right cell.
 
 // @lc code=begin
 #include <climits>
+#include <queue>
 #include <vector>
+using std::priority_queue;
 using std::vector;
 class Solution {
   public:
@@ -80,16 +82,19 @@ class Solution {
     }
     int minimumTime(vector<vector<int>> &grid) {
         int m = grid.size(), n = grid[0].size();
-        if (grid[0][1] > 1 && grid[1][0] > 1)
+        if (grid[0][1] > 1 && grid[1][0] > 1) {
             return -1;
-        vector<vector<int>> dp(m, vector<int>(n, 0));
-        vector<vector<int>> pre_pos{{-1, 0}, {0, -1}, {1, 0}, {0, 1}};
-        for (int i = 0; i < m; i++) {
-            for (int j = 0; j < n; j++) {
-                dp[i][j] = GetMin(i, j, pre_pos, grid, m, n, dp);
-            }
         }
-        return dp[m - 1][n - 1];
+        auto cmp = [&](vector<int> &v1, vector<int> &v2) {
+            return v1[2] > v2[2];
+        };
+        priority_queue<vector<int>, vector<vector<int>>, decltype(cmp)> pq(cmp); // 小顶堆
+        pq.push({0, 0, 0});
+        while (!pq.empty()) {
+            vector<int> tmp = pq.top();
+            pq.pop();
+        }
+        return -1;
     }
 };
 

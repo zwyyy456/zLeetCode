@@ -41,16 +41,15 @@ class Solution {
   public:
     int subarraySum(vector<int> &nums, int k) {
         vector<int> prefix(nums.size() + 1);
+        std::unordered_map<int, int> ump;
+        ump[0] = 1;
+        int res = 0;
         for (int i = 1; i <= nums.size(); ++i) {
             prefix[i] = prefix[i - 1] + nums[i - 1];
-        }
-        std::unordered_map<int, int> ump;
-        int res = 0;
-        for (int num : prefix) {
-            if (ump.find(num - k) != ump.end()) {
-                res += ump[num - k];
+            if (ump.find(prefix[i] - k) != ump.end()) {
+                res += ump[prefix[i] - k];
             }
-            ++ump[num];
+            ++ump[prefix[i]];
         }
         return res;
     }

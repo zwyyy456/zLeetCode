@@ -1,4 +1,8 @@
+<<<<<<< HEAD
 // Created by zwyyy456 at 2023/03/09 09:29
+=======
+// Created by zwyyy456 at 2023/03/09 23:21
+>>>>>>> 2435687622386b4e03c7cd5907553e19cbc67e14
 // https://leetcode.com/problems/range-sum-query-mutable/
 
 /*
@@ -50,37 +54,47 @@ using std::vector;
 class NumArray {
   private:
     vector<int> arr;
+    vector<int> prefix;
     vector<int> carr;
+    int n;
     int Lowbit(int x) {
-        return x ^ -x;
+        return (x & -x);
     }
-    int GetPrefix(int right) {
-        int ans = 0;
-        while (right > 0) {
-            ans += carr[right];
-            right -= Lowbit(right);
+    int GetSum(int x) {
+        int sum = 0;
+        while (x > 0) {
+            sum += carr[x];
+            x -= Lowbit(x);
         }
-        return ans;
+        return sum;
     }
 
   public:
     NumArray(vector<int> &nums) {
+        n = nums.size();
         arr.resize(n + 1);
+        prefix.resize(n + 1);
         carr.resize(n + 1);
-        vector<int> prefix(n + 1);
         for (int i = 1; i <= n; ++i) {
             arr[i] = nums[i - 1];
             prefix[i] = prefix[i - 1] + arr[i];
         }
         for (int i = 1; i <= n; ++i) {
-            carr[i] = prefix[i] - prefix[i - Lowbit(i)];
+            carr[i] = prefix[i] - prefix[i - Lowbit(i) + 1 - 1];
         }
     }
 
     void update(int index, int val) {
+        int x = index + 1;
+        while (x < n + 1) {
+            carr[x] += val - arr[index + 1];
+            x += Lowbit(x);
+        }
+        arr[index + 1] = val;
     }
 
     int sumRange(int left, int right) {
+        return GetSum(right + 1) - GetSum(left);
     }
 };
 

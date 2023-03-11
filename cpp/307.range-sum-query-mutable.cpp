@@ -65,14 +65,14 @@ class NumArray {
 
   public:
     NumArray(vector<int> &nums) {
-        arr.resize(nums.size() + 1);
-        carr.resize(nums.size() + 1);
-        vector<int> prefix(nums.size() + 1);
-        for (int i = 1; i <= nums.size(); ++i) {
+        arr.resize(n + 1);
+        carr.resize(n + 1);
+        vector<int> prefix(n + 1);
+        for (int i = 1; i <= n; ++i) {
             arr[i] = nums[i - 1];
             prefix[i] = prefix[i - 1] + arr[i];
         }
-        for (int i = 1; i <= nums.size(); ++i) {
+        for (int i = 1; i <= n; ++i) {
             carr[i] = prefix[i] - prefix[i - Lowbit(i)];
         }
     }

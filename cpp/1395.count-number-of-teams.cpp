@@ -51,11 +51,11 @@ Output: 4
 */
 
 // @lc code=begin
-
+#include <vector>
+using std::vector;
 class Solution {
-public:
-    int numTeams(vector<int>& rating) {
-        
+  public:
+    int numTeams(vector<int> &rating) {
     }
 };
 

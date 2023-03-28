@@ -1,4 +1,4 @@
-// Created by zwyyy456 at 2023/03/19 10:11
+// Created by zwyyy456 at 2023/03/19 16:20
 // https://leetcode.com/problems/maximum-binary-tree/
 
 /*
@@ -53,11 +53,28 @@ Output: [3,null,2,null,1]
 */
 
 // @lc code=begin
-
+#include <vector>
+#include <TreeNode.h>
+using std::vector;
 class Solution {
 public:
+    TreeNode *dfs(vector<int> &nums, int l, int r) {
+        if (l == r) {
+            return nullptr;
+        }
+        int val = nums[l], idx = l;
+        for (int i = l; i < r; ++i) {
+            if (nums[i] > val) {
+                val = nums[i];
+                idx = i;
+            }
+        }
+        // node会被销毁，导致&node变成野指针
+        TreeNode node(val, dfs(nums, l, idx), dfs(nums, idx + 1, r));
+        return &node;
+    }
     TreeNode* constructMaximumBinaryTree(vector<int>& nums) {
-        
+         return dfs(nums, 0, nums.size());
     }
 };
 

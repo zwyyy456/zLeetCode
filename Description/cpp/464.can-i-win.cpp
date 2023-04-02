@@ -1,4 +1,4 @@
-// Created by Bob at 2023/03/02 09:31
+// Created by Bob at 2023/03/31 14:54
 // https://leetcode.cn/problems/can-i-win/
 
 /*
@@ -52,48 +52,12 @@
 */
 
 // @lc code=begin
-#include <functional>
-#include <unordered_map>
-#include <set>
-using std::set;
-using std::unordered_map;
+
 class Solution {
-  public:
-    // 改写成位运算的形式
-    bool dfs(int desired_total, int cur_total, int bit20, int max_int, unordered_map<int, int> &ump) {
-        if (desired_total <= 0) {
-            return false;
-        }
-        if (bit20 == 0) {
-            return true;
-        }
-        if (ump.find(bit20) != ump.end()) {
-            return ump[bit20];
-        }
-        bool tmp = false;
-        int cnt = 1;
-        for (int i = max_int - 1; i >= 0; --i) {
-            if ((bit20 & (1 << i)) != 0) { // 说明数i + 1还没有被选
-                int mask = (bit20 ^ (1 << i));
-                tmp = tmp || (!dfs(desired_total - i - 1, cur_total + i + 1, mask, max_int, ump));
-            }
-            if (tmp) {
-                ump[bit20] = true;
-                return ump[bit20];
-            }
-        }
-        ump[bit20] = false;
-        return ump[bit20];
-    }
+public:
     bool canIWin(int maxChoosableInteger, int desiredTotal) {
-        if (desiredTotal <= maxChoosableInteger) {
-            return true;
-        }
-        if ((maxChoosableInteger + 1) * maxChoosableInteger / 2 < desiredTotal)
-            return false;
-        unordered_map<int, int> ump;
-        int bit20 = (1 << maxChoosableInteger) - 1;
-        return dfs(desiredTotal, 0, bit20, maxChoosableInteger, ump);
+
     }
 };
+
 // @lc code=end

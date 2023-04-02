@@ -52,11 +52,36 @@
 */
 
 // @lc code=begin
-
+#include <vector>
+using std::vector;
 class Solution {
 public:
+    bool dfs(int choosed_set, int desiredTotal, int max_c, vector<int> &cach) {
+        if (desiredTotal <= 0) {
+            return false;
+        }
+        bool res = false;
+        if (cach[choosed_set] != -1) {
+            return cach[choosed_set];
+        }
+        for (int i = 0; i < max_c; ++i) {
+            if (((1 << i) & choosed_set) == 0) {
+                res |= !dfs(choosed_set | (1 << i), (desiredTotal - (i + 1)), max_c, cach);
+            }
+        }
+        cach[choosed_set] = res;
+        return res;
+    }
     bool canIWin(int maxChoosableInteger, int desiredTotal) {
-
+        int choosed_set = 0;
+        if (desiredTotal <= maxChoosableInteger) {
+            return true;
+        }
+        if (maxChoosableInteger * maxChoosableInteger + maxChoosableInteger < 2 * desiredTotal) {
+            return false;
+        }
+        vector<int> cach(1 <<maxChoosableInteger, -1);
+        return dfs(choosed_set, desiredTotal, maxChoosableInteger, cach); //
     }
 };
 

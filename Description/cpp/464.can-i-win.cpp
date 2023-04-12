@@ -1,4 +1,4 @@
-// Created by Bob at 2023/03/02 09:31
+// Created by Bob at 2023/03/31 14:54
 // https://leetcode.cn/problems/can-i-win/
 
 /*
@@ -52,48 +52,37 @@
 */
 
 // @lc code=begin
-#include <functional>
-#include <unordered_map>
-#include <set>
-using std::set;
-using std::unordered_map;
+#include <vector>
+using std::vector;
 class Solution {
-  public:
-    // 改写成位运算的形式
-    bool dfs(int desired_total, int cur_total, int bit20, int max_int, unordered_map<int, int> &ump) {
-        if (desired_total <= 0) {
+public:
+    bool dfs(int choosed_set, int desiredTotal, int max_c, vector<int> &cach) {
+        if (desiredTotal <= 0) {
             return false;
         }
-        if (bit20 == 0) {
-            return true;
+        bool res = false;
+        if (cach[choosed_set] != -1) {
+            return cach[choosed_set];
         }
-        if (ump.find(bit20) != ump.end()) {
-            return ump[bit20];
-        }
-        bool tmp = false;
-        int cnt = 1;
-        for (int i = max_int - 1; i >= 0; --i) {
-            if ((bit20 & (1 << i)) != 0) { // 说明数i + 1还没有被选
-                int mask = (bit20 ^ (1 << i));
-                tmp = tmp || (!dfs(desired_total - i - 1, cur_total + i + 1, mask, max_int, ump));
-            }
-            if (tmp) {
-                ump[bit20] = true;
-                return ump[bit20];
+        for (int i = 0; i < max_c; ++i) {
+            if (((1 << i) & choosed_set) == 0) {
+                res |= !dfs(choosed_set | (1 << i), (desiredTotal - (i + 1)), max_c, cach);
             }
         }
-        ump[bit20] = false;
-        return ump[bit20];
+        cach[choosed_set] = res;
+        return res;
     }
     bool canIWin(int maxChoosableInteger, int desiredTotal) {
+        int choosed_set = 0;
         if (desiredTotal <= maxChoosableInteger) {
             return true;
         }
-        if ((maxChoosableInteger + 1) * maxChoosableInteger / 2 < desiredTotal)
+        if (maxChoosableInteger * maxChoosableInteger + maxChoosableInteger < 2 * desiredTotal) {
             return false;
-        unordered_map<int, int> ump;
-        int bit20 = (1 << maxChoosableInteger) - 1;
-        return dfs(desiredTotal, 0, bit20, maxChoosableInteger, ump);
+        }
+        vector<int> cach(1 <<maxChoosableInteger, -1);
+        return dfs(choosed_set, desiredTotal, maxChoosableInteger, cach); //
     }
 };
+
 // @lc code=end

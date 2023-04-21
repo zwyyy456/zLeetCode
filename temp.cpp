@@ -15,3 +15,5 @@ int main() {
 	}
 	alloc.deallocate(p, n);
 }
+
+Sales_data() = default;

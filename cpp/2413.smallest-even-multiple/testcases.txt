@@ -1,0 +1,11 @@
+target_case: 0
+
+input:
+5
+output:
+10
+
+input:
+6
+output:
+6

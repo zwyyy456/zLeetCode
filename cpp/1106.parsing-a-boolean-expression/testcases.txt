@@ -1,0 +1,16 @@
+target_case: 0
+
+input:
+"&(|(f))"
+output:
+false
+
+input:
+"|(f,f,f,t)"
+output:
+true
+
+input:
+"!(&(f,t))"
+output:
+true

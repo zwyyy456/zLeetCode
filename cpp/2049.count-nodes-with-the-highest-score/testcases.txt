@@ -1,0 +1,11 @@
+target_case: 0
+
+input:
+[-1,2,0,2,0]
+output:
+3
+
+input:
+[-1,2,0]
+output:
+2

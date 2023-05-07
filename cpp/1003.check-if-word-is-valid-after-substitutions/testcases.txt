@@ -1,0 +1,16 @@
+target_case: 0
+
+input:
+"aabcbc"
+output:
+true
+
+input:
+"abcabcababcc"
+output:
+true
+
+input:
+"abccba"
+output:
+false

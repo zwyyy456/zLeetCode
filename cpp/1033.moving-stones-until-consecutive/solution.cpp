@@ -60,29 +60,45 @@ using namespace std;
 // @lc code=begin
 
 class Solution {
-public:
+  public:
     vector<int> numMovesStones(int a, int b, int c) {
-        
+        vector<int> vec{a, b, c};
+        sort(vec.begin(), vec.end());
+        if (vec[2] - vec[0] == 2) {
+            return {0, 0};
+        }
+        vector<int> len{b - a, c - b};
+        int max_num = max(vec[1] - vec[0], vec[2] - vec[1]) - 1;
+        int min_num = 0;
+        while (max(len[0], len[1]) > 1) {
+            ++min_num;
+            len[1] = len[0] - len[0] / 2;
+            len[0] = len[0] / 2;
+        }
+        return {min_num, max_num};
     }
 };
 
 // @lc code=end
 
 int main() {
-	ios_base::sync_with_stdio(false);
-	stringstream out_stream;
+    ios_base::sync_with_stdio(false);
+    stringstream out_stream;
 
-	int a; LeetCodeIO::scan(cin, a);
-	int b; LeetCodeIO::scan(cin, b);
-	int c; LeetCodeIO::scan(cin, c);
+    int a;
+    LeetCodeIO::scan(cin, a);
+    int b;
+    LeetCodeIO::scan(cin, b);
+    int c;
+    LeetCodeIO::scan(cin, c);
 
-	Solution *obj = new Solution();
+    Solution *obj = new Solution();
 
-	auto res = obj->numMovesStones(a, b, c);
+    auto res = obj->numMovesStones(a, b, c);
 
-	LeetCodeIO::print(out_stream, res);
-	cout << "output: " << out_stream.rdbuf() << endl;
+    LeetCodeIO::print(out_stream, res);
+    cout << "output: " << out_stream.rdbuf() << endl;
 
-	delete obj;
-	return 0;
+    delete obj;
+    return 0;
 }

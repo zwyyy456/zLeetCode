@@ -1,0 +1,13 @@
+target_case: 0
+
+input:
+"ab"
+"ba"
+output:
+1
+
+input:
+"abc"
+"bca"
+output:
+2

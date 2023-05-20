@@ -5,8 +5,10 @@
 # vscode
 *.json
 *.DS_Store
-cpp/build
-cpp/.cache
+cpp/build/
+cpp/.cache/
+build/
+.cache/
 
 # Compiled Object files
 *.slo

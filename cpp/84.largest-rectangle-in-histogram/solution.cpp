@@ -1,38 +1,36 @@
-// Created by Bob at 2023/05/20 20:38
-// https://leetcode.cn/problems/largest-rectangle-in-histogram/
+// Created by zwyyy456 at 2023/05/23 14:55
+// https://leetcode.com/problems/largest-rectangle-in-histogram/
 
 /*
-84. 柱状图中最大的矩形 (Hard)
-给定 n 个非负整数，用来表示柱状图中各个柱子的高度。每个柱子
-彼此相邻，且宽度为 1 。
+84. Largest Rectangle in Histogram (Hard)
+Given an array of integers `heights` representing the histogram's bar height where the width of each
+bar is `1`, return the area of the largest rectangle in the histogram.
 
-求在该柱状图中，能够勾勒出来的矩形的最大面积。
+**Example 1:**
 
-**示例 1:**
-
-![](https://assets.leetcode.com/uploads/2021/01/04/histogram
-.jpg)
+![](https://assets.leetcode.com/uploads/2021/01/04/histogram.jpg)
 
 ```
-输入：heights = [2,1,5,6,2,3]
-输出：10
-解释：最大的矩形为图中红色区域，面积为 10
+Input: heights = [2,1,5,6,2,3]
+Output: 10
+Explanation: The above is a histogram where width of each bar is 1.
+The largest rectangle is shown in the red area, which has an area = 10 units.
 
 ```
 
-**示例 2：**
+**Example 2:**
 
-![](https://assets.leetcode.com/uploads/2021/01/04/histogram
--1.jpg)
+![](https://assets.leetcode.com/uploads/2021/01/04/histogram-1.jpg)
 
 ```
-输入： heights = [2,4]
-输出： 4
+Input: heights = [2,4]
+Output: 4
+
 ```
 
-**提示：**
+**Constraints:**
 
-- `1 <= heights.length <=10⁵`
+- `1 <= heights.length <= 10⁵`
 - `0 <= heights[i] <= 10⁴`
 
 */
@@ -42,6 +40,7 @@
 using namespace std;
 
 // @lc code=begin
+
 class Solution {
   public:
     int largestRectangleArea(vector<int> &heights) {

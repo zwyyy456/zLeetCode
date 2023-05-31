@@ -56,13 +56,28 @@ class Solution {
             if (root->right != nullptr) {
                 root->right = dfs(root->right, to_delete, res);
             }
+            return root;
         }
+        if (root->left != nullptr) {
+            res.push_back(root->left);
+            root->left = dfs(root->left, to_delete, res);
+        }
+        if (root->right != nullptr) {
+            res.push_back(root->right);
+            root->right = dfs(root->right, to_delete, res);
+        }
+        root = nullptr;
+        return root;
     }
     vector<TreeNode *> delNodes(TreeNode *root, vector<int> &to_delete) {
         // 前序遍历?
         vector<TreeNode *> res;
         unordered_set<int> del(to_delete.begin(), to_delete.end());
+        if (del.find(root->val) == del.end()) {
+            res.push_back(root);
+        }
         dfs(root, del, res);
+        return res;
     }
 };
 

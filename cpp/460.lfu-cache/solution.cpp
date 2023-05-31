@@ -1,4 +1,4 @@
-// Created by zwyyy456 at 2023/05/04 19:13
+// Created by zwyyy456 at 2023/05/31 14:19
 // https://leetcode.com/problems/lfu-cache/
 
 /*
@@ -67,120 +67,151 @@ lfu.get(4);      // return 4
 
 */
 
-#include <algorithm>
 #include <bits/stdc++.h>
+#include <climits>
 #include <unordered_map>
 #include "LC_IO.h"
 using namespace std;
 
 // @lc code=begin
 struct Node {
-    Node *next_;
-    Node *prev_;
     int val_;
-    int idx_;
-    Node(int val) :
-        next_(nullptr), prev_(nullptr), val_(val), idx_(0) {
-    }
+    int freq_;
+    Node *next_;
+    Node *pre_;
+    int key_;
 };
-struct Mlist {
+struct List {
+    List() :
+        vhead_(new Node()), vtail_(new Node()) {
+        vhead_->next_ = vtail_;
+        vhead_->pre_ = nullptr;
+        vtail_->pre_ = vhead_;
+        vtail_->next_ = nullptr;
+    }
+    ~List() {
+        delete vhead_;
+        delete vtail_;
+        vhead_ = nullptr;
+        vtail_ = nullptr;
+    }
     Node *vhead_;
     Node *vtail_;
     int size_;
-    Mlist() :
-        vhead_(new Node(0)), vtail_(new Node(0)), size_(2) {
-        vhead_->next_ = vtail_;
-        vtail_->prev_ = vhead_;
-    }
-    void Insert(Node *to_ins) {
-        Node *tmp = vtail_->prev_;
-        tmp->next_ = to_ins;
-        to_ins->prev_ = tmp;
-        to_ins->next_ = vtail_;
-        vtail_->prev_ = to_ins;
-        ++size_;
-    }
-    void Delete(Node *to_del) {
-        to_del->prev_->next_ = to_del->next_;
-        to_del->next_->prev_ = to_del->prev_;
-        delete to_del;
-        to_del = nullptr;
-        --size_;
-    }
-    void Delete() {
-        Delete(vhead_->next_);
-    }
-    ~Mlist() {
-        delete vhead_;
-        delete vtail_;
-    }
 };
 class LFUCache {
   public:
     LFUCache(int capacity) :
-        cap_(capacity), size_(0), min_freq_(0) {
+        cap_(capacity) {
     }
 
     int get(int key) {
-        if (id_freq.find(key) == id_freq.end()) {
+        if (map_.find(key) == map_.end()) {
             return -1;
         }
-        auto freq = id_freq[key]++;
-        auto plist = freq_list[freq];
-        auto pnode = id_p[key];
-        int val = pnode->val_;
-        plist->Delete(pnode); // pnode 已经被 delete 了
-        if (plist->size_ == 2) {
-            if (freq == min_freq_) {
-                min_freq_++;
+        Node *cur = map_[key];
+        int freq = cur->freq_;
+        int val = cur->val_;
+        // 删除当前 freq 的对应结点
+        cur->next_->pre_ = cur->pre_;
+        cur->pre_->next_ = cur->next_;
+        // delete cur;
+        // cur = nullptr;
+        // 如果删除后 list 变为空
+        if (freqs_[freq]->vhead_->next_ == freqs_[freq]->vtail_) {
+            delete freqs_[freq];
+            // 如果最小频率就是 freq，更新最小频率
+            if (min_freq_ == freq) {
+                min_freq_ = freq + 1;
             }
-            freq_list.erase(freq);
+            // 删除该 freq
+            freqs_.erase(freq);
         }
-        auto new_node = new Node(val);
-        new_node->idx_ = key; // 创建出来这个新的 node
+        // 删除之后，在 freq + 1 处插入新的结点
         ++freq;
-        (freq_list[freq])->Insert(new_node);
-        id_p[key] = new_node;
+        // 如果 freq 不存在
+        if (freqs_.find(freq) == freqs_.end()) {
+            freqs_[freq] = new List();
+        }
+        List *lst = freqs_[freq];
+        // 从尾部插入
+        ++cur->freq_;
+        cur->pre_ = lst->vtail_->pre_;
+        lst->vtail_->pre_->next_ = cur;
+        cur->next_ = lst->vtail_;
+        lst->vtail_->pre_ = cur;
+        return val;
     }
 
     void put(int key, int value) {
-        if (id_freq.find(key) != id_freq.end()) {
+        if (map_.find(key) != map_.end()) {
             get(key);
-            id_p[key]->val_ = value;
-        } else {
-            auto new_node = new Node(value);
-            new_node->idx_ = key;
-            if (size_ < cap_) {
-                // 直接插入即可
-                freq_list[id_freq[key]]->Insert(new_node);
-                ++size_;
-                min_freq_ = 1;
-                id_freq[key]++;
-            } else {
-                // 先删除，再插入
-                int del_id = freq_list[min_freq_]->vtail_->prev_->idx_;
-                freq_list[min_freq_]->Delete();
-                if (freq_list[min_freq_]->size_ == 2) {
-                    id_freq.erase(del_id);
-                    freq_list.erase(min_freq_);
-                }
-                min_freq_ = 1;
-                freq_list[min_freq_]->Insert(new_node);
-                id_freq[key]++;
+            map_[key]->val_ = value;
+            return;
+        }
+        // 说明找得到键，并且容量已经满了
+        if (cnt_ == cap_) {
+            // 要先删除结点
+            List *lst = freqs_[min_freq_];
+            Node *head = lst->vhead_->next_;
+            head->next_->pre_ = head->pre_;
+            head->pre_->next_ = head->next_;
+            map_.erase(head->key_);
+            delete head;
+            // 因为要重新插入 key-value，min_freq_ 一定会变成 1
+            if (lst->vhead_->next_ == lst->vtail_ && lst->vtail_->pre_ == lst->vhead_) {
+                delete lst;
+                freqs_.erase(min_freq_);
             }
-            id_p[key] = new_node;
+            min_freq_ = 1;
+            // 插入结点
+            Node *cur = new Node();
+            cur->val_ = value;
+            cur->freq_ = 1;
+            cur->key_ = key;
+            if (freqs_.find(cur->freq_) == freqs_.end()) {
+                freqs_[cur->freq_] = new List();
+            }
+            lst = freqs_[cur->freq_];
+            // 从尾部插入
+            // ++cur->freq_;
+            cur->pre_ = lst->vtail_->pre_;
+            lst->vtail_->pre_->next_ = cur;
+            cur->next_ = lst->vtail_;
+            lst->vtail_->pre_ = cur;
+            map_[key] = cur;
+        } else {
+            // 最小频率会变为 1
+            min_freq_ = 1;
+            // List *lst = freqs_[min_freq_];
+            List *lst;
+            // 插入结点
+            Node *cur = new Node();
+            cur->val_ = value;
+            cur->freq_ = 1;
+            cur->key_ = key;
+            if (freqs_.find(cur->freq_) == freqs_.end()) {
+                freqs_[cur->freq_] = new List();
+            }
+            lst = freqs_[cur->freq_];
+            // 从尾部插入
+            // ++cur->freq_;
+            cur->pre_ = lst->vtail_->pre_;
+            lst->vtail_->pre_->next_ = cur;
+            cur->next_ = lst->vtail_;
+            lst->vtail_->pre_ = cur;
+            map_[key] = cur;
+            ++cnt_;
         }
     }
 
   private:
-    unordered_map<int, int> id_freq;
-    unordered_map<int, Node *> id_p;
-    unordered_map<int, Mlist *> freq_list;
-    int size_;
+    unordered_map<int, Node *> map_;
+    unordered_map<int, List *> freqs_;
     int cap_;
-    int min_freq_;
+    int min_freq_ = INT_MAX;
+    int cnt_ = 0;
 };
-
 // @lc code=end
 
 int main() {

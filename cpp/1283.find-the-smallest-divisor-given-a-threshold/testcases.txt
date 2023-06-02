@@ -1,0 +1,13 @@
+target_case: 0
+
+input:
+[1,2,5,9]
+6
+output:
+5
+
+input:
+[44,22,33,11,1]
+5
+output:
+44

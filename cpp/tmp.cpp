@@ -56,6 +56,39 @@ struct Node {
     int key_;
 };
 struct List {
+    Node *vhead_;  // 虚拟头结点
+    Node *vtail_;  // 虚拟尾结点
+    int size_ = 0; // 链表中有效结点的数量
+    List() :
+        vhead_(new Node()), vtail_(new Node()) {
+        vhead_->next_ = vtail_;
+        vtail_->pre_ = vhead_;
+        vhead_->pre_ = nullptr;
+        vtail_->next_ = nullptr;
+    }
+    ~List() {
+        delete vtail_;
+        delete vhead_;
+        vhead_ = nullptr;
+        vtail_ = nullptr;
+    }
+    void Insert(Node *node) {
+        // 双向链表的插入, node 表示待插入结点，插入作为双向链表的尾结点
+        node->pre_ = vtail_->pre_;
+        vtail_->pre_->next_ = node;
+        vtail_->pre_ = node;
+        node->next_ = vtail_;
+        ++size_;
+    }
+    void Delete(Node *node) {
+        // node 指向待删除结点
+        node->next_->pre_ = node->pre_;
+        node->pre_->next_ = node->next_;
+        --size_;
+    }
+    bool Empty() {
+        return size_ <= 0;
+    }
 };
 
 // @lc code=end

@@ -1,6 +1,6 @@
 # CMake generated Testfile for 
-# Source directory: /Users/zwyyy/Documents/zCode/zLeetCode
-# Build directory: /Users/zwyyy/Documents/zCode/zLeetCode/build
+# Source directory: C:/Users/zwyyy/OneDrive/Documents/code/zLeetCode
+# Build directory: C:/Users/zwyyy/OneDrive/Documents/code/zLeetCode/build
 # 
 # This file includes the relevant testing commands required for 
 # testing this directory and lists subdirectories to be tested as well.

@@ -1,0 +1,483 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="17.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <PreferredToolArchitecture>x64</PreferredToolArchitecture>
+  </PropertyGroup>
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Debug|x64">
+      <Configuration>Debug</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|x64">
+      <Configuration>Release</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="MinSizeRel|x64">
+      <Configuration>MinSizeRel</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="RelWithDebInfo|x64">
+      <Configuration>RelWithDebInfo</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <ProjectGuid>{DD4287D7-AA02-3937-9DD6-C664D2A34D3E}</ProjectGuid>
+    <Keyword>Win32Proj</Keyword>
+    <WindowsTargetPlatformVersion>10.0.22000.0</WindowsTargetPlatformVersion>
+    <Platform>x64</Platform>
+    <ProjectName>leetgo</ProjectName>
+    <VCProjectUpgraderObjectName>NoUpgrade</VCProjectUpgraderObjectName>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <CharacterSet>MultiByte</CharacterSet>
+    <PlatformToolset>v143</PlatformToolset>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <CharacterSet>MultiByte</CharacterSet>
+    <PlatformToolset>v143</PlatformToolset>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <CharacterSet>MultiByte</CharacterSet>
+    <PlatformToolset>v143</PlatformToolset>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <CharacterSet>MultiByte</CharacterSet>
+    <PlatformToolset>v143</PlatformToolset>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <ImportGroup Label="ExtensionSettings">
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <PropertyGroup Label="UserMacros" />
+  <PropertyGroup>
+    <_ProjectFileVersion>10.0.20506.1</_ProjectFileVersion>
+    <OutDir Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">C:\Users\zwyyy\OneDrive\Documents\code\zLeetCode\build\Debug\</OutDir>
+    <IntDir Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">leetgo.dir\Debug\</IntDir>
+    <TargetName Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">leetgo</TargetName>
+    <TargetExt Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">.exe</TargetExt>
+    <LinkIncremental Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</LinkIncremental>
+    <GenerateManifest Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</GenerateManifest>
+    <OutDir Condition="'$(Configuration)|$(Platform)'=='Release|x64'">C:\Users\zwyyy\OneDrive\Documents\code\zLeetCode\build\Release\</OutDir>
+    <IntDir Condition="'$(Configuration)|$(Platform)'=='Release|x64'">leetgo.dir\Release\</IntDir>
+    <TargetName Condition="'$(Configuration)|$(Platform)'=='Release|x64'">leetgo</TargetName>
+    <TargetExt Condition="'$(Configuration)|$(Platform)'=='Release|x64'">.exe</TargetExt>
+    <LinkIncremental Condition="'$(Configuration)|$(Platform)'=='Release|x64'">false</LinkIncremental>
+    <GenerateManifest Condition="'$(Configuration)|$(Platform)'=='Release|x64'">true</GenerateManifest>
+    <OutDir Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">C:\Users\zwyyy\OneDrive\Documents\code\zLeetCode\build\MinSizeRel\</OutDir>
+    <IntDir Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">leetgo.dir\MinSizeRel\</IntDir>
+    <TargetName Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">leetgo</TargetName>
+    <TargetExt Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">.exe</TargetExt>
+    <LinkIncremental Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">false</LinkIncremental>
+    <GenerateManifest Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">true</GenerateManifest>
+    <OutDir Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">C:\Users\zwyyy\OneDrive\Documents\code\zLeetCode\build\RelWithDebInfo\</OutDir>
+    <IntDir Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">leetgo.dir\RelWithDebInfo\</IntDir>
+    <TargetName Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">leetgo</TargetName>
+    <TargetExt Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">.exe</TargetExt>
+    <LinkIncremental Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">true</LinkIncremental>
+    <GenerateManifest Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">true</GenerateManifest>
+  </PropertyGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <ClCompile>
+      <AdditionalIncludeDirectories>C:\Users\zwyyy\OneDrive\Documents\code\zLeetCode\cpp;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AssemblerListingLocation>$(IntDir)</AssemblerListingLocation>
+      <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
+      <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
+      <ExceptionHandling>Sync</ExceptionHandling>
+      <InlineFunctionExpansion>Disabled</InlineFunctionExpansion>
+      <LanguageStandard>stdcpp17</LanguageStandard>
+      <Optimization>Disabled</Optimization>
+      <PrecompiledHeader>NotUsing</PrecompiledHeader>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+      <RuntimeTypeInfo>true</RuntimeTypeInfo>
+      <UseFullPaths>false</UseFullPaths>
+      <WarningLevel>Level3</WarningLevel>
+      <PreprocessorDefinitions>%(PreprocessorDefinitions);WIN32;_WINDOWS;CMAKE_INTDIR="Debug"</PreprocessorDefinitions>
+      <ObjectFileName>$(IntDir)</ObjectFileName>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>%(PreprocessorDefinitions);WIN32;_DEBUG;_WINDOWS;CMAKE_INTDIR=\"Debug\"</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories>C:\Users\zwyyy\OneDrive\Documents\code\zLeetCode\cpp;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Midl>
+      <AdditionalIncludeDirectories>C:\Users\zwyyy\OneDrive\Documents\code\zLeetCode\cpp;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <OutputDirectory>$(ProjectDir)/$(IntDir)</OutputDirectory>
+      <HeaderFileName>%(Filename).h</HeaderFileName>
+      <TypeLibraryName>%(Filename).tlb</TypeLibraryName>
+      <InterfaceIdentifierFileName>%(Filename)_i.c</InterfaceIdentifierFileName>
+      <ProxyFileName>%(Filename)_p.c</ProxyFileName>
+    </Midl>
+    <Link>
+      <AdditionalDependencies>kernel32.lib;user32.lib;gdi32.lib;winspool.lib;shell32.lib;ole32.lib;oleaut32.lib;uuid.lib;comdlg32.lib;advapi32.lib</AdditionalDependencies>
+      <AdditionalLibraryDirectories>%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalOptions>%(AdditionalOptions) /machine:x64</AdditionalOptions>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <IgnoreSpecificDefaultLibraries>%(IgnoreSpecificDefaultLibraries)</IgnoreSpecificDefaultLibraries>
+      <ImportLibrary>C:/Users/zwyyy/OneDrive/Documents/code/zLeetCode/build/Debug/leetgo.lib</ImportLibrary>
+      <ProgramDataBaseFile>C:/Users/zwyyy/OneDrive/Documents/code/zLeetCode/build/Debug/leetgo.pdb</ProgramDataBaseFile>
+      <SubSystem>Console</SubSystem>
+    </Link>
+    <ProjectReference>
+      <LinkLibraryDependencies>false</LinkLibraryDependencies>
+    </ProjectReference>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <ClCompile>
+      <AdditionalIncludeDirectories>C:\Users\zwyyy\OneDrive\Documents\code\zLeetCode\cpp;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AssemblerListingLocation>$(IntDir)</AssemblerListingLocation>
+      <ExceptionHandling>Sync</ExceptionHandling>
+      <InlineFunctionExpansion>AnySuitable</InlineFunctionExpansion>
+      <LanguageStandard>stdcpp17</LanguageStandard>
+      <Optimization>MaxSpeed</Optimization>
+      <PrecompiledHeader>NotUsing</PrecompiledHeader>
+      <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
+      <RuntimeTypeInfo>true</RuntimeTypeInfo>
+      <UseFullPaths>false</UseFullPaths>
+      <WarningLevel>Level3</WarningLevel>
+      <PreprocessorDefinitions>%(PreprocessorDefinitions);WIN32;_WINDOWS;NDEBUG;CMAKE_INTDIR="Release"</PreprocessorDefinitions>
+      <ObjectFileName>$(IntDir)</ObjectFileName>
+      <DebugInformationFormat>
+      </DebugInformationFormat>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>%(PreprocessorDefinitions);WIN32;_WINDOWS;NDEBUG;CMAKE_INTDIR=\"Release\"</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories>C:\Users\zwyyy\OneDrive\Documents\code\zLeetCode\cpp;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Midl>
+      <AdditionalIncludeDirectories>C:\Users\zwyyy\OneDrive\Documents\code\zLeetCode\cpp;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <OutputDirectory>$(ProjectDir)/$(IntDir)</OutputDirectory>
+      <HeaderFileName>%(Filename).h</HeaderFileName>
+      <TypeLibraryName>%(Filename).tlb</TypeLibraryName>
+      <InterfaceIdentifierFileName>%(Filename)_i.c</InterfaceIdentifierFileName>
+      <ProxyFileName>%(Filename)_p.c</ProxyFileName>
+    </Midl>
+    <Link>
+      <AdditionalDependencies>kernel32.lib;user32.lib;gdi32.lib;winspool.lib;shell32.lib;ole32.lib;oleaut32.lib;uuid.lib;comdlg32.lib;advapi32.lib</AdditionalDependencies>
+      <AdditionalLibraryDirectories>%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalOptions>%(AdditionalOptions) /machine:x64</AdditionalOptions>
+      <GenerateDebugInformation>false</GenerateDebugInformation>
+      <IgnoreSpecificDefaultLibraries>%(IgnoreSpecificDefaultLibraries)</IgnoreSpecificDefaultLibraries>
+      <ImportLibrary>C:/Users/zwyyy/OneDrive/Documents/code/zLeetCode/build/Release/leetgo.lib</ImportLibrary>
+      <ProgramDataBaseFile>C:/Users/zwyyy/OneDrive/Documents/code/zLeetCode/build/Release/leetgo.pdb</ProgramDataBaseFile>
+      <SubSystem>Console</SubSystem>
+    </Link>
+    <ProjectReference>
+      <LinkLibraryDependencies>false</LinkLibraryDependencies>
+    </ProjectReference>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">
+    <ClCompile>
+      <AdditionalIncludeDirectories>C:\Users\zwyyy\OneDrive\Documents\code\zLeetCode\cpp;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AssemblerListingLocation>$(IntDir)</AssemblerListingLocation>
+      <ExceptionHandling>Sync</ExceptionHandling>
+      <InlineFunctionExpansion>OnlyExplicitInline</InlineFunctionExpansion>
+      <LanguageStandard>stdcpp17</LanguageStandard>
+      <Optimization>MinSpace</Optimization>
+      <PrecompiledHeader>NotUsing</PrecompiledHeader>
+      <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
+      <RuntimeTypeInfo>true</RuntimeTypeInfo>
+      <UseFullPaths>false</UseFullPaths>
+      <WarningLevel>Level3</WarningLevel>
+      <PreprocessorDefinitions>%(PreprocessorDefinitions);WIN32;_WINDOWS;NDEBUG;CMAKE_INTDIR="MinSizeRel"</PreprocessorDefinitions>
+      <ObjectFileName>$(IntDir)</ObjectFileName>
+      <DebugInformationFormat>
+      </DebugInformationFormat>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>%(PreprocessorDefinitions);WIN32;_WINDOWS;NDEBUG;CMAKE_INTDIR=\"MinSizeRel\"</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories>C:\Users\zwyyy\OneDrive\Documents\code\zLeetCode\cpp;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Midl>
+      <AdditionalIncludeDirectories>C:\Users\zwyyy\OneDrive\Documents\code\zLeetCode\cpp;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <OutputDirectory>$(ProjectDir)/$(IntDir)</OutputDirectory>
+      <HeaderFileName>%(Filename).h</HeaderFileName>
+      <TypeLibraryName>%(Filename).tlb</TypeLibraryName>
+      <InterfaceIdentifierFileName>%(Filename)_i.c</InterfaceIdentifierFileName>
+      <ProxyFileName>%(Filename)_p.c</ProxyFileName>
+    </Midl>
+    <Link>
+      <AdditionalDependencies>kernel32.lib;user32.lib;gdi32.lib;winspool.lib;shell32.lib;ole32.lib;oleaut32.lib;uuid.lib;comdlg32.lib;advapi32.lib</AdditionalDependencies>
+      <AdditionalLibraryDirectories>%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalOptions>%(AdditionalOptions) /machine:x64</AdditionalOptions>
+      <GenerateDebugInformation>false</GenerateDebugInformation>
+      <IgnoreSpecificDefaultLibraries>%(IgnoreSpecificDefaultLibraries)</IgnoreSpecificDefaultLibraries>
+      <ImportLibrary>C:/Users/zwyyy/OneDrive/Documents/code/zLeetCode/build/MinSizeRel/leetgo.lib</ImportLibrary>
+      <ProgramDataBaseFile>C:/Users/zwyyy/OneDrive/Documents/code/zLeetCode/build/MinSizeRel/leetgo.pdb</ProgramDataBaseFile>
+      <SubSystem>Console</SubSystem>
+    </Link>
+    <ProjectReference>
+      <LinkLibraryDependencies>false</LinkLibraryDependencies>
+    </ProjectReference>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">
+    <ClCompile>
+      <AdditionalIncludeDirectories>C:\Users\zwyyy\OneDrive\Documents\code\zLeetCode\cpp;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AssemblerListingLocation>$(IntDir)</AssemblerListingLocation>
+      <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
+      <ExceptionHandling>Sync</ExceptionHandling>
+      <InlineFunctionExpansion>OnlyExplicitInline</InlineFunctionExpansion>
+      <LanguageStandard>stdcpp17</LanguageStandard>
+      <Optimization>MaxSpeed</Optimization>
+      <PrecompiledHeader>NotUsing</PrecompiledHeader>
+      <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
+      <RuntimeTypeInfo>true</RuntimeTypeInfo>
+      <UseFullPaths>false</UseFullPaths>
+      <WarningLevel>Level3</WarningLevel>
+      <PreprocessorDefinitions>%(PreprocessorDefinitions);WIN32;_WINDOWS;NDEBUG;CMAKE_INTDIR="RelWithDebInfo"</PreprocessorDefinitions>
+      <ObjectFileName>$(IntDir)</ObjectFileName>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>%(PreprocessorDefinitions);WIN32;_WINDOWS;NDEBUG;CMAKE_INTDIR=\"RelWithDebInfo\"</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories>C:\Users\zwyyy\OneDrive\Documents\code\zLeetCode\cpp;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Midl>
+      <AdditionalIncludeDirectories>C:\Users\zwyyy\OneDrive\Documents\code\zLeetCode\cpp;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <OutputDirectory>$(ProjectDir)/$(IntDir)</OutputDirectory>
+      <HeaderFileName>%(Filename).h</HeaderFileName>
+      <TypeLibraryName>%(Filename).tlb</TypeLibraryName>
+      <InterfaceIdentifierFileName>%(Filename)_i.c</InterfaceIdentifierFileName>
+      <ProxyFileName>%(Filename)_p.c</ProxyFileName>
+    </Midl>
+    <Link>
+      <AdditionalDependencies>kernel32.lib;user32.lib;gdi32.lib;winspool.lib;shell32.lib;ole32.lib;oleaut32.lib;uuid.lib;comdlg32.lib;advapi32.lib</AdditionalDependencies>
+      <AdditionalLibraryDirectories>%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalOptions>%(AdditionalOptions) /machine:x64</AdditionalOptions>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <IgnoreSpecificDefaultLibraries>%(IgnoreSpecificDefaultLibraries)</IgnoreSpecificDefaultLibraries>
+      <ImportLibrary>C:/Users/zwyyy/OneDrive/Documents/code/zLeetCode/build/RelWithDebInfo/leetgo.lib</ImportLibrary>
+      <ProgramDataBaseFile>C:/Users/zwyyy/OneDrive/Documents/code/zLeetCode/build/RelWithDebInfo/leetgo.pdb</ProgramDataBaseFile>
+      <SubSystem>Console</SubSystem>
+    </Link>
+    <ProjectReference>
+      <LinkLibraryDependencies>false</LinkLibraryDependencies>
+    </ProjectReference>
+  </ItemDefinitionGroup>
+  <ItemGroup>
+    <CustomBuild Include="C:\Users\zwyyy\OneDrive\Documents\code\zLeetCode\CmakeLists.txt">
+      <UseUtf8Encoding>Always</UseUtf8Encoding>
+      <Message Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Building Custom Rule C:/Users/zwyyy/OneDrive/Documents/code/zLeetCode/CMakeLists.txt</Message>
+      <Command Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">setlocal
+C:\Users\zwyyy\scoop\apps\cmake\3.25.2\bin\cmake.exe -SC:/Users/zwyyy/OneDrive/Documents/code/zLeetCode -BC:/Users/zwyyy/OneDrive/Documents/code/zLeetCode/build --check-stamp-file C:/Users/zwyyy/OneDrive/Documents/code/zLeetCode/build/CMakeFiles/generate.stamp
+if %errorlevel% neq 0 goto :cmEnd
+:cmEnd
+endlocal &amp; call :cmErrorLevel %errorlevel% &amp; goto :cmDone
+:cmErrorLevel
+exit /b %1
+:cmDone
+if %errorlevel% neq 0 goto :VCEnd</Command>
+      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">C:\Users\zwyyy\OneDrive\Documents\code\zLeetCode\build\CMakeFiles\3.25.2\CMakeCCompiler.cmake;C:\Users\zwyyy\OneDrive\Documents\code\zLeetCode\build\CMakeFiles\3.25.2\CMakeCXXCompiler.cmake;C:\Users\zwyyy\OneDrive\Documents\code\zLeetCode\build\CMakeFiles\3.25.2\CMakeRCCompiler.cmake;C:\Users\zwyyy\OneDrive\Documents\code\zLeetCode\build\CMakeFiles\3.25.2\CMakeSystem.cmake;C:\Users\zwyyy\scoop\apps\cmake\3.25.2\share\cmake-3.25\Modules\CMakeCInformation.cmake;C:\Users\zwyyy\scoop\apps\cmake\3.25.2\share\cmake-3.25\Modules\CMakeCXXInformation.cmake;C:\Users\zwyyy\scoop\apps\cmake\3.25.2\share\cmake-3.25\Modules\CMakeCommonLanguageInclude.cmake;C:\Users\zwyyy\scoop\apps\cmake\3.25.2\share\cmake-3.25\Modules\CMakeGenericSystem.cmake;C:\Users\zwyyy\scoop\apps\cmake\3.25.2\share\cmake-3.25\Modules\CMakeInitializeConfigs.cmake;C:\Users\zwyyy\scoop\apps\cmake\3.25.2\share\cmake-3.25\Modules\CMakeLanguageInformation.cmake;C:\Users\zwyyy\scoop\apps\cmake\3.25.2\share\cmake-3.25\Modules\CMakeRCInformation.cmake;C:\Users\zwyyy\scoop\apps\cmake\3.25.2\share\cmake-3.25\Modules\CMakeSystemSpecificInformation.cmake;C:\Users\zwyyy\scoop\apps\cmake\3.25.2\share\cmake-3.25\Modules\CMakeSystemSpecificInitialize.cmake;C:\Users\zwyyy\scoop\apps\cmake\3.25.2\share\cmake-3.25\Modules\CTest.cmake;C:\Users\zwyyy\scoop\apps\cmake\3.25.2\share\cmake-3.25\Modules\CTestTargets.cmake;C:\Users\zwyyy\scoop\apps\cmake\3.25.2\share\cmake-3.25\Modules\CTestUseLaunchers.cmake;C:\Users\zwyyy\scoop\apps\cmake\3.25.2\share\cmake-3.25\Modules\Compiler\CMakeCommonCompilerMacros.cmake;C:\Users\zwyyy\scoop\apps\cmake\3.25.2\share\cmake-3.25\Modules\Compiler\MSVC-C.cmake;C:\Users\zwyyy\scoop\apps\cmake\3.25.2\share\cmake-3.25\Modules\Compiler\MSVC-CXX.cmake;C:\Users\zwyyy\scoop\apps\cmake\3.25.2\share\cmake-3.25\Modules\Compiler\MSVC.cmake;C:\Users\zwyyy\scoop\apps\cmake\3.25.2\share\cmake-3.25\Modules\DartConfiguration.tcl.in;C:\Users\zwyyy\scoop\apps\cmake\3.25.2\share\cmake-3.25\Modules\Platform\Windows-MSVC-C.cmake;C:\Users\zwyyy\scoop\apps\cmake\3.25.2\share\cmake-3.25\Modules\Platform\Windows-MSVC-CXX.cmake;C:\Users\zwyyy\scoop\apps\cmake\3.25.2\share\cmake-3.25\Modules\Platform\Windows-MSVC.cmake;C:\Users\zwyyy\scoop\apps\cmake\3.25.2\share\cmake-3.25\Modules\Platform\Windows.cmake;C:\Users\zwyyy\scoop\apps\cmake\3.25.2\share\cmake-3.25\Modules\Platform\WindowsPaths.cmake;%(AdditionalInputs)</AdditionalInputs>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">C:\Users\zwyyy\OneDrive\Documents\code\zLeetCode\build\CMakeFiles\generate.stamp</Outputs>
+      <LinkObjects Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">false</LinkObjects>
+      <Message Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Building Custom Rule C:/Users/zwyyy/OneDrive/Documents/code/zLeetCode/CMakeLists.txt</Message>
+      <Command Condition="'$(Configuration)|$(Platform)'=='Release|x64'">setlocal
+C:\Users\zwyyy\scoop\apps\cmake\3.25.2\bin\cmake.exe -SC:/Users/zwyyy/OneDrive/Documents/code/zLeetCode -BC:/Users/zwyyy/OneDrive/Documents/code/zLeetCode/build --check-stamp-file C:/Users/zwyyy/OneDrive/Documents/code/zLeetCode/build/CMakeFiles/generate.stamp
+if %errorlevel% neq 0 goto :cmEnd
+:cmEnd
+endlocal &amp; call :cmErrorLevel %errorlevel% &amp; goto :cmDone
+:cmErrorLevel
+exit /b %1
+:cmDone
+if %errorlevel% neq 0 goto :VCEnd</Command>
+      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Release|x64'">C:\Users\zwyyy\OneDrive\Documents\code\zLeetCode\build\CMakeFiles\3.25.2\CMakeCCompiler.cmake;C:\Users\zwyyy\OneDrive\Documents\code\zLeetCode\build\CMakeFiles\3.25.2\CMakeCXXCompiler.cmake;C:\Users\zwyyy\OneDrive\Documents\code\zLeetCode\build\CMakeFiles\3.25.2\CMakeRCCompiler.cmake;C:\Users\zwyyy\OneDrive\Documents\code\zLeetCode\build\CMakeFiles\3.25.2\CMakeSystem.cmake;C:\Users\zwyyy\scoop\apps\cmake\3.25.2\share\cmake-3.25\Modules\CMakeCInformation.cmake;C:\Users\zwyyy\scoop\apps\cmake\3.25.2\share\cmake-3.25\Modules\CMakeCXXInformation.cmake;C:\Users\zwyyy\scoop\apps\cmake\3.25.2\share\cmake-3.25\Modules\CMakeCommonLanguageInclude.cmake;C:\Users\zwyyy\scoop\apps\cmake\3.25.2\share\cmake-3.25\Modules\CMakeGenericSystem.cmake;C:\Users\zwyyy\scoop\apps\cmake\3.25.2\share\cmake-3.25\Modules\CMakeInitializeConfigs.cmake;C:\Users\zwyyy\scoop\apps\cmake\3.25.2\share\cmake-3.25\Modules\CMakeLanguageInformation.cmake;C:\Users\zwyyy\scoop\apps\cmake\3.25.2\share\cmake-3.25\Modules\CMakeRCInformation.cmake;C:\Users\zwyyy\scoop\apps\cmake\3.25.2\share\cmake-3.25\Modules\CMakeSystemSpecificInformation.cmake;C:\Users\zwyyy\scoop\apps\cmake\3.25.2\share\cmake-3.25\Modules\CMakeSystemSpecificInitialize.cmake;C:\Users\zwyyy\scoop\apps\cmake\3.25.2\share\cmake-3.25\Modules\CTest.cmake;C:\Users\zwyyy\scoop\apps\cmake\3.25.2\share\cmake-3.25\Modules\CTestTargets.cmake;C:\Users\zwyyy\scoop\apps\cmake\3.25.2\share\cmake-3.25\Modules\CTestUseLaunchers.cmake;C:\Users\zwyyy\scoop\apps\cmake\3.25.2\share\cmake-3.25\Modules\Compiler\CMakeCommonCompilerMacros.cmake;C:\Users\zwyyy\scoop\apps\cmake\3.25.2\share\cmake-3.25\Modules\Compiler\MSVC-C.cmake;C:\Users\zwyyy\scoop\apps\cmake\3.25.2\share\cmake-3.25\Modules\Compiler\MSVC-CXX.cmake;C:\Users\zwyyy\scoop\apps\cmake\3.25.2\share\cmake-3.25\Modules\Compiler\MSVC.cmake;C:\Users\zwyyy\scoop\apps\cmake\3.25.2\share\cmake-3.25\Modules\DartConfiguration.tcl.in;C:\Users\zwyyy\scoop\apps\cmake\3.25.2\share\cmake-3.25\Modules\Platform\Windows-MSVC-C.cmake;C:\Users\zwyyy\scoop\apps\cmake\3.25.2\share\cmake-3.25\Modules\Platform\Windows-MSVC-CXX.cmake;C:\Users\zwyyy\scoop\apps\cmake\3.25.2\share\cmake-3.25\Modules\Platform\Windows-MSVC.cmake;C:\Users\zwyyy\scoop\apps\cmake\3.25.2\share\cmake-3.25\Modules\Platform\Windows.cmake;C:\Users\zwyyy\scoop\apps\cmake\3.25.2\share\cmake-3.25\Modules\Platform\WindowsPaths.cmake;%(AdditionalInputs)</AdditionalInputs>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='Release|x64'">C:\Users\zwyyy\OneDrive\Documents\code\zLeetCode\build\CMakeFiles\generate.stamp</Outputs>
+      <LinkObjects Condition="'$(Configuration)|$(Platform)'=='Release|x64'">false</LinkObjects>
+      <Message Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">Building Custom Rule C:/Users/zwyyy/OneDrive/Documents/code/zLeetCode/CMakeLists.txt</Message>
+      <Command Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">setlocal
+C:\Users\zwyyy\scoop\apps\cmake\3.25.2\bin\cmake.exe -SC:/Users/zwyyy/OneDrive/Documents/code/zLeetCode -BC:/Users/zwyyy/OneDrive/Documents/code/zLeetCode/build --check-stamp-file C:/Users/zwyyy/OneDrive/Documents/code/zLeetCode/build/CMakeFiles/generate.stamp
+if %errorlevel% neq 0 goto :cmEnd
+:cmEnd
+endlocal &amp; call :cmErrorLevel %errorlevel% &amp; goto :cmDone
+:cmErrorLevel
+exit /b %1
+:cmDone
+if %errorlevel% neq 0 goto :VCEnd</Command>
+      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">C:\Users\zwyyy\OneDrive\Documents\code\zLeetCode\build\CMakeFiles\3.25.2\CMakeCCompiler.cmake;C:\Users\zwyyy\OneDrive\Documents\code\zLeetCode\build\CMakeFiles\3.25.2\CMakeCXXCompiler.cmake;C:\Users\zwyyy\OneDrive\Documents\code\zLeetCode\build\CMakeFiles\3.25.2\CMakeRCCompiler.cmake;C:\Users\zwyyy\OneDrive\Documents\code\zLeetCode\build\CMakeFiles\3.25.2\CMakeSystem.cmake;C:\Users\zwyyy\scoop\apps\cmake\3.25.2\share\cmake-3.25\Modules\CMakeCInformation.cmake;C:\Users\zwyyy\scoop\apps\cmake\3.25.2\share\cmake-3.25\Modules\CMakeCXXInformation.cmake;C:\Users\zwyyy\scoop\apps\cmake\3.25.2\share\cmake-3.25\Modules\CMakeCommonLanguageInclude.cmake;C:\Users\zwyyy\scoop\apps\cmake\3.25.2\share\cmake-3.25\Modules\CMakeGenericSystem.cmake;C:\Users\zwyyy\scoop\apps\cmake\3.25.2\share\cmake-3.25\Modules\CMakeInitializeConfigs.cmake;C:\Users\zwyyy\scoop\apps\cmake\3.25.2\share\cmake-3.25\Modules\CMakeLanguageInformation.cmake;C:\Users\zwyyy\scoop\apps\cmake\3.25.2\share\cmake-3.25\Modules\CMakeRCInformation.cmake;C:\Users\zwyyy\scoop\apps\cmake\3.25.2\share\cmake-3.25\Modules\CMakeSystemSpecificInformation.cmake;C:\Users\zwyyy\scoop\apps\cmake\3.25.2\share\cmake-3.25\Modules\CMakeSystemSpecificInitialize.cmake;C:\Users\zwyyy\scoop\apps\cmake\3.25.2\share\cmake-3.25\Modules\CTest.cmake;C:\Users\zwyyy\scoop\apps\cmake\3.25.2\share\cmake-3.25\Modules\CTestTargets.cmake;C:\Users\zwyyy\scoop\apps\cmake\3.25.2\share\cmake-3.25\Modules\CTestUseLaunchers.cmake;C:\Users\zwyyy\scoop\apps\cmake\3.25.2\share\cmake-3.25\Modules\Compiler\CMakeCommonCompilerMacros.cmake;C:\Users\zwyyy\scoop\apps\cmake\3.25.2\share\cmake-3.25\Modules\Compiler\MSVC-C.cmake;C:\Users\zwyyy\scoop\apps\cmake\3.25.2\share\cmake-3.25\Modules\Compiler\MSVC-CXX.cmake;C:\Users\zwyyy\scoop\apps\cmake\3.25.2\share\cmake-3.25\Modules\Compiler\MSVC.cmake;C:\Users\zwyyy\scoop\apps\cmake\3.25.2\share\cmake-3.25\Modules\DartConfiguration.tcl.in;C:\Users\zwyyy\scoop\apps\cmake\3.25.2\share\cmake-3.25\Modules\Platform\Windows-MSVC-C.cmake;C:\Users\zwyyy\scoop\apps\cmake\3.25.2\share\cmake-3.25\Modules\Platform\Windows-MSVC-CXX.cmake;C:\Users\zwyyy\scoop\apps\cmake\3.25.2\share\cmake-3.25\Modules\Platform\Windows-MSVC.cmake;C:\Users\zwyyy\scoop\apps\cmake\3.25.2\share\cmake-3.25\Modules\Platform\Windows.cmake;C:\Users\zwyyy\scoop\apps\cmake\3.25.2\share\cmake-3.25\Modules\Platform\WindowsPaths.cmake;%(AdditionalInputs)</AdditionalInputs>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">C:\Users\zwyyy\OneDrive\Documents\code\zLeetCode\build\CMakeFiles\generate.stamp</Outputs>
+      <LinkObjects Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">false</LinkObjects>
+      <Message Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">Building Custom Rule C:/Users/zwyyy/OneDrive/Documents/code/zLeetCode/CMakeLists.txt</Message>
+      <Command Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">setlocal
+C:\Users\zwyyy\scoop\apps\cmake\3.25.2\bin\cmake.exe -SC:/Users/zwyyy/OneDrive/Documents/code/zLeetCode -BC:/Users/zwyyy/OneDrive/Documents/code/zLeetCode/build --check-stamp-file C:/Users/zwyyy/OneDrive/Documents/code/zLeetCode/build/CMakeFiles/generate.stamp
+if %errorlevel% neq 0 goto :cmEnd
+:cmEnd
+endlocal &amp; call :cmErrorLevel %errorlevel% &amp; goto :cmDone
+:cmErrorLevel
+exit /b %1
+:cmDone
+if %errorlevel% neq 0 goto :VCEnd</Command>
+      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">C:\Users\zwyyy\OneDrive\Documents\code\zLeetCode\build\CMakeFiles\3.25.2\CMakeCCompiler.cmake;C:\Users\zwyyy\OneDrive\Documents\code\zLeetCode\build\CMakeFiles\3.25.2\CMakeCXXCompiler.cmake;C:\Users\zwyyy\OneDrive\Documents\code\zLeetCode\build\CMakeFiles\3.25.2\CMakeRCCompiler.cmake;C:\Users\zwyyy\OneDrive\Documents\code\zLeetCode\build\CMakeFiles\3.25.2\CMakeSystem.cmake;C:\Users\zwyyy\scoop\apps\cmake\3.25.2\share\cmake-3.25\Modules\CMakeCInformation.cmake;C:\Users\zwyyy\scoop\apps\cmake\3.25.2\share\cmake-3.25\Modules\CMakeCXXInformation.cmake;C:\Users\zwyyy\scoop\apps\cmake\3.25.2\share\cmake-3.25\Modules\CMakeCommonLanguageInclude.cmake;C:\Users\zwyyy\scoop\apps\cmake\3.25.2\share\cmake-3.25\Modules\CMakeGenericSystem.cmake;C:\Users\zwyyy\scoop\apps\cmake\3.25.2\share\cmake-3.25\Modules\CMakeInitializeConfigs.cmake;C:\Users\zwyyy\scoop\apps\cmake\3.25.2\share\cmake-3.25\Modules\CMakeLanguageInformation.cmake;C:\Users\zwyyy\scoop\apps\cmake\3.25.2\share\cmake-3.25\Modules\CMakeRCInformation.cmake;C:\Users\zwyyy\scoop\apps\cmake\3.25.2\share\cmake-3.25\Modules\CMakeSystemSpecificInformation.cmake;C:\Users\zwyyy\scoop\apps\cmake\3.25.2\share\cmake-3.25\Modules\CMakeSystemSpecificInitialize.cmake;C:\Users\zwyyy\scoop\apps\cmake\3.25.2\share\cmake-3.25\Modules\CTest.cmake;C:\Users\zwyyy\scoop\apps\cmake\3.25.2\share\cmake-3.25\Modules\CTestTargets.cmake;C:\Users\zwyyy\scoop\apps\cmake\3.25.2\share\cmake-3.25\Modules\CTestUseLaunchers.cmake;C:\Users\zwyyy\scoop\apps\cmake\3.25.2\share\cmake-3.25\Modules\Compiler\CMakeCommonCompilerMacros.cmake;C:\Users\zwyyy\scoop\apps\cmake\3.25.2\share\cmake-3.25\Modules\Compiler\MSVC-C.cmake;C:\Users\zwyyy\scoop\apps\cmake\3.25.2\share\cmake-3.25\Modules\Compiler\MSVC-CXX.cmake;C:\Users\zwyyy\scoop\apps\cmake\3.25.2\share\cmake-3.25\Modules\Compiler\MSVC.cmake;C:\Users\zwyyy\scoop\apps\cmake\3.25.2\share\cmake-3.25\Modules\DartConfiguration.tcl.in;C:\Users\zwyyy\scoop\apps\cmake\3.25.2\share\cmake-3.25\Modules\Platform\Windows-MSVC-C.cmake;C:\Users\zwyyy\scoop\apps\cmake\3.25.2\share\cmake-3.25\Modules\Platform\Windows-MSVC-CXX.cmake;C:\Users\zwyyy\scoop\apps\cmake\3.25.2\share\cmake-3.25\Modules\Platform\Windows-MSVC.cmake;C:\Users\zwyyy\scoop\apps\cmake\3.25.2\share\cmake-3.25\Modules\Platform\Windows.cmake;C:\Users\zwyyy\scoop\apps\cmake\3.25.2\share\cmake-3.25\Modules\Platform\WindowsPaths.cmake;%(AdditionalInputs)</AdditionalInputs>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">C:\Users\zwyyy\OneDrive\Documents\code\zLeetCode\build\CMakeFiles\generate.stamp</Outputs>
+      <LinkObjects Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">false</LinkObjects>
+    </CustomBuild>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="C:\Users\zwyyy\OneDrive\Documents\code\zLeetCode\cpp\0027.remove-element.cpp" />
+    <ClCompile Include="C:\Users\zwyyy\OneDrive\Documents\code\zLeetCode\cpp\0237.delete-node-in-a-linked-list.cpp" />
+    <ClCompile Include="C:\Users\zwyyy\OneDrive\Documents\code\zLeetCode\cpp\0312.burst-balloons.cpp" />
+    <ClCompile Include="C:\Users\zwyyy\OneDrive\Documents\code\zLeetCode\cpp\0553.optimal-division.cpp" />
+    <ClCompile Include="C:\Users\zwyyy\OneDrive\Documents\code\zLeetCode\cpp\0575.distribute-candies.cpp" />
+    <ClCompile Include="C:\Users\zwyyy\OneDrive\Documents\code\zLeetCode\cpp\0881.boats-to-save-people.cpp" />
+    <ClCompile Include="C:\Users\zwyyy\OneDrive\Documents\code\zLeetCode\cpp\1000.minimum-cost-to-merge-stones.cpp" />
+    <ClCompile Include="C:\Users\zwyyy\OneDrive\Documents\code\zLeetCode\cpp\1019.next-greater-node-in-linked-list.cpp" />
+    <ClCompile Include="C:\Users\zwyyy\OneDrive\Documents\code\zLeetCode\cpp\1020.number-of-enclaves.cpp" />
+    <ClCompile Include="C:\Users\zwyyy\OneDrive\Documents\code\zLeetCode\cpp\1023.camelcase-matching.cpp" />
+    <ClCompile Include="C:\Users\zwyyy\OneDrive\Documents\code\zLeetCode\cpp\1034.coloring-a-border.cpp" />
+    <ClCompile Include="C:\Users\zwyyy\OneDrive\Documents\code\zLeetCode\cpp\1037.valid-boomerang.cpp" />
+    <ClCompile Include="C:\Users\zwyyy\OneDrive\Documents\code\zLeetCode\cpp\1040.moving-stones-until-consecutive-ii.cpp" />
+    <ClCompile Include="C:\Users\zwyyy\OneDrive\Documents\code\zLeetCode\cpp\1042.flower-planting-with-no-adjacent.cpp" />
+    <ClCompile Include="C:\Users\zwyyy\OneDrive\Documents\code\zLeetCode\cpp\1053.previous-permutation-with-one-swap.cpp" />
+    <ClCompile Include="C:\Users\zwyyy\OneDrive\Documents\code\zLeetCode\cpp\109.convert-sorted-list-to-binary-search-tree.cpp" />
+    <ClCompile Include="C:\Users\zwyyy\OneDrive\Documents\code\zLeetCode\cpp\1092.shortest-common-supersequence.cpp" />
+    <ClCompile Include="C:\Users\zwyyy\OneDrive\Documents\code\zLeetCode\cpp\1124.longest-well-performing-interval.cpp" />
+    <ClCompile Include="C:\Users\zwyyy\OneDrive\Documents\code\zLeetCode\cpp\1125.smallest-sufficient-team.cpp" />
+    <ClCompile Include="C:\Users\zwyyy\OneDrive\Documents\code\zLeetCode\cpp\1137.n-th-tribonacci-number.cpp" />
+    <ClCompile Include="C:\Users\zwyyy\OneDrive\Documents\code\zLeetCode\cpp\1138.alphabet-board-path.cpp" />
+    <ClCompile Include="C:\Users\zwyyy\OneDrive\Documents\code\zLeetCode\cpp\1139.largest-1-bordered-square.cpp" />
+    <ClCompile Include="C:\Users\zwyyy\OneDrive\Documents\code\zLeetCode\cpp\1140.stone-game-ii.cpp" />
+    <ClCompile Include="C:\Users\zwyyy\OneDrive\Documents\code\zLeetCode\cpp\1144.decrease-elements-to-make-array-zigzag.cpp" />
+    <ClCompile Include="C:\Users\zwyyy\OneDrive\Documents\code\zLeetCode\cpp\1147.longest-chunked-palindrome-decomposition.cpp" />
+    <ClCompile Include="C:\Users\zwyyy\OneDrive\Documents\code\zLeetCode\cpp\1218.longest-arithmetic-subsequence-of-given-difference.cpp" />
+    <ClCompile Include="C:\Users\zwyyy\OneDrive\Documents\code\zLeetCode\cpp\1223.dice-roll-simulation.cpp" />
+    <ClCompile Include="C:\Users\zwyyy\OneDrive\Documents\code\zLeetCode\cpp\1233.remove-sub-folders-from-the-filesystem.cpp" />
+    <ClCompile Include="C:\Users\zwyyy\OneDrive\Documents\code\zLeetCode\cpp\1234.replace-the-substring-for-balanced-string.cpp" />
+    <ClCompile Include="C:\Users\zwyyy\OneDrive\Documents\code\zLeetCode\cpp\1237.find-positive-integer-solution-for-a-given-equation.cpp" />
+    <ClCompile Include="C:\Users\zwyyy\OneDrive\Documents\code\zLeetCode\cpp\1238.circular-permutation-in-binary-representation.cpp" />
+    <ClCompile Include="C:\Users\zwyyy\OneDrive\Documents\code\zLeetCode\cpp\1239.maximum-length-of-a-concatenated-string-with-unique-characters.cpp" />
+    <ClCompile Include="C:\Users\zwyyy\OneDrive\Documents\code\zLeetCode\cpp\1247.minimum-swaps-to-make-strings-equal.cpp" />
+    <ClCompile Include="C:\Users\zwyyy\OneDrive\Documents\code\zLeetCode\cpp\1250.check-if-it-is-a-good-array.cpp" />
+    <ClCompile Include="C:\Users\zwyyy\OneDrive\Documents\code\zLeetCode\cpp\1255.maximum-score-words-formed-by-letters.cpp" />
+    <ClCompile Include="C:\Users\zwyyy\OneDrive\Documents\code\zLeetCode\cpp\1310.xor-queries-of-a-subarray.cpp" />
+    <ClCompile Include="C:\Users\zwyyy\OneDrive\Documents\code\zLeetCode\cpp\1326.minimum-number-of-taps-to-open-to-water-a-garden.cpp" />
+    <ClCompile Include="C:\Users\zwyyy\OneDrive\Documents\code\zLeetCode\cpp\1395.count-number-of-teams.cpp" />
+    <ClCompile Include="C:\Users\zwyyy\OneDrive\Documents\code\zLeetCode\cpp\1405.longest-happy-string.cpp" />
+    <ClCompile Include="C:\Users\zwyyy\OneDrive\Documents\code\zLeetCode\cpp\1470.shuffle-the-array.cpp" />
+    <ClCompile Include="C:\Users\zwyyy\OneDrive\Documents\code\zLeetCode\cpp\1487.making-file-names-unique.cpp" />
+    <ClCompile Include="C:\Users\zwyyy\OneDrive\Documents\code\zLeetCode\cpp\153.find-minimum-in-rotated-sorted-array.cpp" />
+    <ClCompile Include="C:\Users\zwyyy\OneDrive\Documents\code\zLeetCode\cpp\154.find-minimum-in-rotated-sorted-array-ii.cpp" />
+    <ClCompile Include="C:\Users\zwyyy\OneDrive\Documents\code\zLeetCode\cpp\1574.shortest-subarray-to-be-removed-to-make-array-sorted.cpp" />
+    <ClCompile Include="C:\Users\zwyyy\OneDrive\Documents\code\zLeetCode\cpp\1590.make-sum-divisible-by-p.cpp" />
+    <ClCompile Include="C:\Users\zwyyy\OneDrive\Documents\code\zLeetCode\cpp\1599.maximum-profit-of-operating-a-centennial-wheel.cpp" />
+    <ClCompile Include="C:\Users\zwyyy\OneDrive\Documents\code\zLeetCode\cpp\1604.alert-using-same-key-card-three-or-more-times-in-a-one-hour-period.cpp" />
+    <ClCompile Include="C:\Users\zwyyy\OneDrive\Documents\code\zLeetCode\cpp\1605.find-valid-matrix-given-row-and-column-sums.cpp" />
+    <ClCompile Include="C:\Users\zwyyy\OneDrive\Documents\code\zLeetCode\cpp\1615.maximal-network-rank.cpp" />
+    <ClCompile Include="C:\Users\zwyyy\OneDrive\Documents\code\zLeetCode\cpp\162.find-peak-element.cpp" />
+    <ClCompile Include="C:\Users\zwyyy\OneDrive\Documents\code\zLeetCode\cpp\1626.best-team-with-no-conflicts.cpp" />
+    <ClCompile Include="C:\Users\zwyyy\OneDrive\Documents\code\zLeetCode\cpp\1630.arithmetic-subarrays.cpp" />
+    <ClCompile Include="C:\Users\zwyyy\OneDrive\Documents\code\zLeetCode\cpp\1631.path-with-minimum-effort.cpp" />
+    <ClCompile Include="C:\Users\zwyyy\OneDrive\Documents\code\zLeetCode\cpp\1637.widest-vertical-area-between-two-points-containing-no-points.cpp" />
+    <ClCompile Include="C:\Users\zwyyy\OneDrive\Documents\code\zLeetCode\cpp\1641.count-sorted-vowel-strings.cpp" />
+    <ClCompile Include="C:\Users\zwyyy\OneDrive\Documents\code\zLeetCode\cpp\1653.minimum-deletions-to-make-string-balanced.cpp" />
+    <ClCompile Include="C:\Users\zwyyy\OneDrive\Documents\code\zLeetCode\cpp\1697.checking-existence-of-edge-length-limited-paths.cpp" />
+    <ClCompile Include="C:\Users\zwyyy\OneDrive\Documents\code\zLeetCode\cpp\1705.maximum-number-of-eaten-apples.cpp" />
+    <ClCompile Include="C:\Users\zwyyy\OneDrive\Documents\code\zLeetCode\cpp\1710.maximum-units-on-a-truck.cpp" />
+    <ClCompile Include="C:\Users\zwyyy\OneDrive\Documents\code\zLeetCode\cpp\1713.minimum-operations-to-make-a-subsequence.cpp" />
+    <ClCompile Include="C:\Users\zwyyy\OneDrive\Documents\code\zLeetCode\cpp\1736.latest-time-by-replacing-hidden-digits.cpp" />
+    <ClCompile Include="C:\Users\zwyyy\OneDrive\Documents\code\zLeetCode\cpp\1744.can-you-eat-your-favorite-candy-on-your-favorite-day.cpp" />
+    <ClCompile Include="C:\Users\zwyyy\OneDrive\Documents\code\zLeetCode\cpp\1775.equal-sum-arrays-with-minimum-number-of-operations.cpp" />
+    <ClCompile Include="C:\Users\zwyyy\OneDrive\Documents\code\zLeetCode\cpp\1786.number-of-restricted-paths-from-first-to-last-node.cpp" />
+    <ClCompile Include="C:\Users\zwyyy\OneDrive\Documents\code\zLeetCode\cpp\179.largest-number.cpp" />
+    <ClCompile Include="C:\Users\zwyyy\OneDrive\Documents\code\zLeetCode\cpp\1792.maximum-average-pass-ratio.cpp" />
+    <ClCompile Include="C:\Users\zwyyy\OneDrive\Documents\code\zLeetCode\cpp\1797.design-authentication-manager.cpp" />
+    <ClCompile Include="C:\Users\zwyyy\OneDrive\Documents\code\zLeetCode\cpp\1817.finding-the-users-active-minutes.cpp" />
+    <ClCompile Include="C:\Users\zwyyy\OneDrive\Documents\code\zLeetCode\cpp\1833.maximum-ice-cream-bars.cpp" />
+    <ClCompile Include="C:\Users\zwyyy\OneDrive\Documents\code\zLeetCode\cpp\1976.number-of-ways-to-arrive-at-destination.cpp" />
+    <ClCompile Include="C:\Users\zwyyy\OneDrive\Documents\code\zLeetCode\cpp\1996.the-number-of-weak-characters-in-the-game.cpp" />
+    <ClCompile Include="C:\Users\zwyyy\OneDrive\Documents\code\zLeetCode\cpp\2039.the-time-when-the-network-becomes-idle.cpp" />
+    <ClCompile Include="C:\Users\zwyyy\OneDrive\Documents\code\zLeetCode\cpp\2049.count-nodes-with-the-highest-score.cpp" />
+    <ClCompile Include="C:\Users\zwyyy\OneDrive\Documents\code\zLeetCode\cpp\2071.maximum-number-of-tasks-you-can-assign.cpp" />
+    <ClCompile Include="C:\Users\zwyyy\OneDrive\Documents\code\zLeetCode\cpp\208.implement-trie-prefix-tree.cpp" />
+    <ClCompile Include="C:\Users\zwyyy\OneDrive\Documents\code\zLeetCode\cpp\209.minimum-size-subarray-sum.cpp" />
+    <ClCompile Include="C:\Users\zwyyy\OneDrive\Documents\code\zLeetCode\cpp\2160.minimum-sum-of-four-digit-number-after-splitting-digits.cpp" />
+    <ClCompile Include="C:\Users\zwyyy\OneDrive\Documents\code\zLeetCode\cpp\2170.minimum-operations-to-make-the-array-alternating.cpp" />
+    <ClCompile Include="C:\Users\zwyyy\OneDrive\Documents\code\zLeetCode\cpp\2331.evaluate-boolean-binary-tree.cpp" />
+    <ClCompile Include="C:\Users\zwyyy\OneDrive\Documents\code\zLeetCode\cpp\2335.minimum-amount-of-time-to-fill-cups.cpp" />
+    <ClCompile Include="C:\Users\zwyyy\OneDrive\Documents\code\zLeetCode\cpp\2341.maximum-number-of-pairs-in-array.cpp" />
+    <ClCompile Include="C:\Users\zwyyy\OneDrive\Documents\code\zLeetCode\cpp\2347.best-poker-hand.cpp" />
+    <ClCompile Include="C:\Users\zwyyy\OneDrive\Documents\code\zLeetCode\cpp\2357.make-array-zero-by-subtracting-equal-amounts.cpp" />
+    <ClCompile Include="C:\Users\zwyyy\OneDrive\Documents\code\zLeetCode\cpp\2363.merge-similar-items.cpp" />
+    <ClCompile Include="C:\Users\zwyyy\OneDrive\Documents\code\zLeetCode\cpp\2367.number-of-arithmetic-triplets.cpp" />
+    <ClCompile Include="C:\Users\zwyyy\OneDrive\Documents\code\zLeetCode\cpp\2373.largest-local-values-in-a-matrix.cpp" />
+    <ClCompile Include="C:\Users\zwyyy\OneDrive\Documents\code\zLeetCode\cpp\2379.minimum-recolors-to-get-k-consecutive-black-blocks.cpp" />
+    <ClCompile Include="C:\Users\zwyyy\OneDrive\Documents\code\zLeetCode\cpp\2383.minimum-hours-of-training-to-win-a-competition.cpp" />
+    <ClCompile Include="C:\Users\zwyyy\OneDrive\Documents\code\zLeetCode\cpp\2389.longest-subsequence-with-limited-sum.cpp" />
+    <ClCompile Include="C:\Users\zwyyy\OneDrive\Documents\code\zLeetCode\cpp\2404.most-frequent-even-element.cpp" />
+    <ClCompile Include="C:\Users\zwyyy\OneDrive\Documents\code\zLeetCode\cpp\2469.convert-the-temperature.cpp" />
+    <ClCompile Include="C:\Users\zwyyy\OneDrive\Documents\code\zLeetCode\cpp\2488.count-subarrays-with-median-k.cpp" />
+    <ClCompile Include="C:\Users\zwyyy\OneDrive\Documents\code\zLeetCode\cpp\2555.maximize-win-from-two-segments.cpp" />
+    <ClCompile Include="C:\Users\zwyyy\OneDrive\Documents\code\zLeetCode\cpp\2584.split-the-array-to-make-coprime-products.cpp" />
+    <ClCompile Include="C:\Users\zwyyy\OneDrive\Documents\code\zLeetCode\cpp\28.find-the-index-of-the-first-occurrence-in-a-string.cpp" />
+    <ClCompile Include="C:\Users\zwyyy\OneDrive\Documents\code\zLeetCode\cpp\292.nim-game.cpp" />
+    <ClCompile Include="C:\Users\zwyyy\OneDrive\Documents\code\zLeetCode\cpp\297.serialize-and-deserialize-binary-tree.cpp" />
+    <ClCompile Include="C:\Users\zwyyy\OneDrive\Documents\code\zLeetCode\cpp\300.longest-increasing-subsequence.cpp" />
+    <ClCompile Include="C:\Users\zwyyy\OneDrive\Documents\code\zLeetCode\cpp\307.range-sum-query-mutable.cpp" />
+    <ClCompile Include="C:\Users\zwyyy\OneDrive\Documents\code\zLeetCode\cpp\312.burst-balloons.cpp" />
+    <ClCompile Include="C:\Users\zwyyy\OneDrive\Documents\code\zLeetCode\cpp\327.count-of-range-sum.cpp" />
+    <ClCompile Include="C:\Users\zwyyy\OneDrive\Documents\code\zLeetCode\cpp\334.increasing-triplet-subsequence.cpp" />
+    <ClCompile Include="C:\Users\zwyyy\OneDrive\Documents\code\zLeetCode\cpp\397.integer-replacement.cpp" />
+    <ClCompile Include="C:\Users\zwyyy\OneDrive\Documents\code\zLeetCode\cpp\403.frog-jump.cpp" />
+    <ClCompile Include="C:\Users\zwyyy\OneDrive\Documents\code\zLeetCode\cpp\407.trapping-rain-water-ii.cpp" />
+    <ClCompile Include="C:\Users\zwyyy\OneDrive\Documents\code\zLeetCode\cpp\41.first-missing-positive.cpp" />
+    <ClCompile Include="C:\Users\zwyyy\OneDrive\Documents\code\zLeetCode\cpp\417.pacific-atlantic-water-flow.cpp" />
+    <ClCompile Include="C:\Users\zwyyy\OneDrive\Documents\code\zLeetCode\cpp\42.trapping-rain-water.cpp" />
+    <ClCompile Include="C:\Users\zwyyy\OneDrive\Documents\code\zLeetCode\cpp\421.maximum-xor-of-two-numbers-in-an-array.cpp" />
+    <ClCompile Include="C:\Users\zwyyy\OneDrive\Documents\code\zLeetCode\cpp\433.minimum-genetic-mutation.cpp" />
+    <ClCompile Include="C:\Users\zwyyy\OneDrive\Documents\code\zLeetCode\cpp\442.find-all-duplicates-in-an-array.cpp" />
+    <ClCompile Include="C:\Users\zwyyy\OneDrive\Documents\code\zLeetCode\cpp\456.132-pattern.cpp" />
+    <ClCompile Include="C:\Users\zwyyy\OneDrive\Documents\code\zLeetCode\cpp\464.can-i-win.cpp" />
+    <ClCompile Include="C:\Users\zwyyy\OneDrive\Documents\code\zLeetCode\cpp\496.next-greater-element-i.cpp" />
+    <ClCompile Include="C:\Users\zwyyy\OneDrive\Documents\code\zLeetCode\cpp\497.random-point-in-non-overlapping-rectangles.cpp" />
+    <ClCompile Include="C:\Users\zwyyy\OneDrive\Documents\code\zLeetCode\cpp\502.ipo.cpp" />
+    <ClCompile Include="C:\Users\zwyyy\OneDrive\Documents\code\zLeetCode\cpp\503.next-greater-element-ii.cpp" />
+    <ClCompile Include="C:\Users\zwyyy\OneDrive\Documents\code\zLeetCode\cpp\517.super-washing-machines.cpp" />
+    <ClCompile Include="C:\Users\zwyyy\OneDrive\Documents\code\zLeetCode\cpp\524.longest-word-in-dictionary-through-deleting.cpp" />
+    <ClCompile Include="C:\Users\zwyyy\OneDrive\Documents\code\zLeetCode\cpp\552.student-attendance-record-ii.cpp" />
+    <ClCompile Include="C:\Users\zwyyy\OneDrive\Documents\code\zLeetCode\cpp\560.subarray-sum-equals-k.cpp" />
+    <ClCompile Include="C:\Users\zwyyy\OneDrive\Documents\code\zLeetCode\cpp\593.valid-square.cpp" />
+    <ClCompile Include="C:\Users\zwyyy\OneDrive\Documents\code\zLeetCode\cpp\629.k-inverse-pairs-array.cpp" />
+    <ClCompile Include="C:\Users\zwyyy\OneDrive\Documents\code\zLeetCode\cpp\646.maximum-length-of-pair-chain.cpp" />
+    <ClCompile Include="C:\Users\zwyyy\OneDrive\Documents\code\zLeetCode\cpp\654.maximum-binary-tree.cpp" />
+    <ClCompile Include="C:\Users\zwyyy\OneDrive\Documents\code\zLeetCode\cpp\686.repeated-string-match.cpp" />
+    <ClCompile Include="C:\Users\zwyyy\OneDrive\Documents\code\zLeetCode\cpp\743.network-delay-time.cpp" />
+    <ClCompile Include="C:\Users\zwyyy\OneDrive\Documents\code\zLeetCode\cpp\752.open-the-lock.cpp" />
+    <ClCompile Include="C:\Users\zwyyy\OneDrive\Documents\code\zLeetCode\cpp\756.pyramid-transition-matrix.cpp" />
+    <ClCompile Include="C:\Users\zwyyy\OneDrive\Documents\code\zLeetCode\cpp\757.set-intersection-size-at-least-two.cpp" />
+    <ClCompile Include="C:\Users\zwyyy\OneDrive\Documents\code\zLeetCode\cpp\765.couples-holding-hands.cpp" />
+    <ClCompile Include="C:\Users\zwyyy\OneDrive\Documents\code\zLeetCode\cpp\773.sliding-puzzle.cpp" />
+    <ClCompile Include="C:\Users\zwyyy\OneDrive\Documents\code\zLeetCode\cpp\778.swim-in-rising-water.cpp" />
+    <ClCompile Include="C:\Users\zwyyy\OneDrive\Documents\code\zLeetCode\cpp\781.rabbits-in-forest.cpp" />
+    <ClCompile Include="C:\Users\zwyyy\OneDrive\Documents\code\zLeetCode\cpp\787.cheapest-flights-within-k-stops.cpp" />
+    <ClCompile Include="C:\Users\zwyyy\OneDrive\Documents\code\zLeetCode\cpp\802.find-eventual-safe-states.cpp" />
+    <ClCompile Include="C:\Users\zwyyy\OneDrive\Documents\code\zLeetCode\cpp\807.max-increase-to-keep-city-skyline.cpp" />
+    <ClCompile Include="C:\Users\zwyyy\OneDrive\Documents\code\zLeetCode\cpp\814.binary-tree-pruning.cpp" />
+    <ClCompile Include="C:\Users\zwyyy\OneDrive\Documents\code\zLeetCode\cpp\827.making-a-large-island.cpp" />
+    <ClCompile Include="C:\Users\zwyyy\OneDrive\Documents\code\zLeetCode\cpp\851.loud-and-rich.cpp" />
+    <ClCompile Include="C:\Users\zwyyy\OneDrive\Documents\code\zLeetCode\cpp\863.all-nodes-distance-k-in-binary-tree.cpp" />
+    <ClCompile Include="C:\Users\zwyyy\OneDrive\Documents\code\zLeetCode\cpp\871.minimum-number-of-refueling-stops.cpp" />
+    <ClCompile Include="C:\Users\zwyyy\OneDrive\Documents\code\zLeetCode\cpp\881.boats-to-save-people.cpp" />
+    <ClCompile Include="C:\Users\zwyyy\OneDrive\Documents\code\zLeetCode\cpp\89.gray-code.cpp" />
+    <ClCompile Include="C:\Users\zwyyy\OneDrive\Documents\code\zLeetCode\cpp\926.flip-string-to-monotone-increasing.cpp" />
+    <ClCompile Include="C:\Users\zwyyy\OneDrive\Documents\code\zLeetCode\cpp\952.largest-component-size-by-common-factor.cpp" />
+    <ClCompile Include="C:\Users\zwyyy\OneDrive\Documents\code\zLeetCode\cpp\982.triples-with-bitwise-and-equal-to-zero.cpp" />
+    <ClCompile Include="C:\Users\zwyyy\OneDrive\Documents\code\zLeetCode\cpp\987.vertical-order-traversal-of-a-binary-tree.cpp" />
+    <ClCompile Include="C:\Users\zwyyy\OneDrive\Documents\code\zLeetCode\cpp\test_cmake.cpp" />
+    <ClCompile Include="C:\Users\zwyyy\OneDrive\Documents\code\zLeetCode\cpp\tmp.cpp" />
+    <ClCompile Include="C:\Users\zwyyy\OneDrive\Documents\code\zLeetCode\cpp\wrong_312.burst-balloons.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="C:\Users\zwyyy\OneDrive\Documents\code\zLeetCode\build\ZERO_CHECK.vcxproj">
+      <Project>{14A112BB-3F47-3938-AA22-4B404BF75AA4}</Project>
+      <Name>ZERO_CHECK</Name>
+      <ReferenceOutputAssembly>false</ReferenceOutputAssembly>
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </ProjectReference>
+  </ItemGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <ImportGroup Label="ExtensionTargets">
+  </ImportGroup>
+</Project>

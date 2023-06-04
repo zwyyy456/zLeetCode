@@ -1,0 +1,11 @@
+input:
+[12,9]
+1
+output:
+30
+
+input:
+[8,1,2]
+2
+output:
+35

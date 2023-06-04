@@ -41,3 +41,7 @@ cpp/.cache
 
 # vscode
 *.vscode
+build/
+.cache
+Description/cpp/build/
+Description/cpp/.cache

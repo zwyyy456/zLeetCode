@@ -1,8 +1,0 @@
-C:/Users/zwyyy/OneDrive/Documents/code/zLeetCode/build/CMakeFiles/Experimental.dir
-C:/Users/zwyyy/OneDrive/Documents/code/zLeetCode/build/CMakeFiles/Nightly.dir
-C:/Users/zwyyy/OneDrive/Documents/code/zLeetCode/build/CMakeFiles/Continuous.dir
-C:/Users/zwyyy/OneDrive/Documents/code/zLeetCode/build/CMakeFiles/NightlyMemoryCheck.dir
-C:/Users/zwyyy/OneDrive/Documents/code/zLeetCode/build/CMakeFiles/leetgo.dir
-C:/Users/zwyyy/OneDrive/Documents/code/zLeetCode/build/CMakeFiles/RUN_TESTS.dir
-C:/Users/zwyyy/OneDrive/Documents/code/zLeetCode/build/CMakeFiles/ALL_BUILD.dir
-C:/Users/zwyyy/OneDrive/Documents/code/zLeetCode/build/CMakeFiles/ZERO_CHECK.dir

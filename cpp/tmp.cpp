@@ -44,54 +44,50 @@ Output: 104
 */
 
 // @lc code=begin
-#include <vector>
+#include <bits/stdc++.h>
 #include <algorithm>
-using std::vector;
-class Solution {
-public:
-    int dfs(int idx_start, int M, vector<int> &postfix, bool flag, int n, vector<vector<int>> &cach) {
-        if (idx_start >= n)
-            return 0;
-        if (flag) {
-            int minnum = 100001;
-            for (int i = idx_start + 1; i <= idx_start +  2 * M && i <= n; i++) { // i表示下一个人拿石子的开始位置，所以i至少为idx_start+1
-                if (cach[i][0] >= 0) {
-                    if (minnum > cach[i][0]) {
-                        minnum = cach[i][0];
-                    }
-                } else {
-                    cach[i][0] = dfs(i, std::max(i - idx_start, M), postfix, false, n, cach);
-                    if (minnum > cach[i][0]) {
-                        minnum = cach[i][0];
-                    }
-                }
-            }
-            return postfix[idx_start] - minnum;
-        } else {
-            int minnum = 100001;
-            for (int i = idx_start + 1; i <= idx_start +  2 * M && i <= n; i++) {
-                if (cach[i][1] >= 0) {
-                    if (minnum > cach[i][1]) {
-                        minnum = cach[i][1];
-                    }
-                } else {
-                    cach[i][1] = dfs(i, std::max(i - idx_start, M), postfix, true, n, cach);
-                    if (minnum > cach[i][1]) {
-                        minnum = cach[i][1];
-                    }
-                }
-            }
-            return postfix[idx_start] - minnum;
-        }
+using namespace std;
+
+struct Node {
+    int val_;
+    int freq_;
+    Node *next_;
+    Node *pre_;
+    int key_;
+};
+struct List {
+    Node *vhead_;  // 虚拟头结点
+    Node *vtail_;  // 虚拟尾结点
+    int size_ = 0; // 链表中有效结点的数量
+    List() :
+        vhead_(new Node()), vtail_(new Node()) {
+        vhead_->next_ = vtail_;
+        vtail_->pre_ = vhead_;
+        vhead_->pre_ = nullptr;
+        vtail_->next_ = nullptr;
     }
-    int stoneGameII(vector<int>& piles) {
-        int n = piles.size();
-        vector<int> postfix(n + 1, 0);
-        for (int i = n - 1; i >= 0; i--) {
-            postfix[i] = postfix[i + 1] + piles[i];
-        }
-        vector<vector<int>> cach(n + 1, vector<int>(2, -1));
-        return dfs(0, 1, postfix, true, n, cach);
+    ~List() {
+        delete vtail_;
+        delete vhead_;
+        vhead_ = nullptr;
+        vtail_ = nullptr;
+    }
+    void Insert(Node *node) {
+        // 双向链表的插入, node 表示待插入结点，插入作为双向链表的尾结点
+        node->pre_ = vtail_->pre_;
+        vtail_->pre_->next_ = node;
+        vtail_->pre_ = node;
+        node->next_ = vtail_;
+        ++size_;
+    }
+    void Delete(Node *node) {
+        // node 指向待删除结点
+        node->next_->pre_ = node->pre_;
+        node->pre_->next_ = node->next_;
+        --size_;
+    }
+    bool Empty() {
+        return size_ <= 0;
     }
 };
 

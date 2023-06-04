@@ -1,0 +1,16 @@
+target_case: 0
+
+input:
+"(abcd)"
+output:
+"dcba"
+
+input:
+"(u(love)i)"
+output:
+"iloveu"
+
+input:
+"(ed(et(oc))el)"
+output:
+"leetcode"

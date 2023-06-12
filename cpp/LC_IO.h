@@ -1,4 +1,4 @@
-// version: 0.4.0-beta.1
+// version: 1.0-beta.4
 #ifndef LC_IO_H
 #define LC_IO_H
 
@@ -38,6 +38,7 @@ namespace LeetCodeIO {
         [[maybe_unused]]
         L0: is.ignore();
         L1: switch (is.peek()) {
+            case ' ':
             case ',': is.ignore(); goto L1;
             case ']': is.ignore(); goto L2;
             default : int x; is >> x;
@@ -55,6 +56,7 @@ namespace LeetCodeIO {
         [[maybe_unused]]
         L0: is.ignore();
         L1: switch (is.peek()) {
+            case ' ':
             case ',': is.ignore(); goto L1;
             case 'n': is.ignore(4); dq.emplace_back(nullptr);
                       goto L1;
@@ -129,7 +131,7 @@ namespace LeetCodeIO {
     template<typename T>
     void scan(std::istream &is, T &x) {
         /**
-         * operator >> disgards leading whitespaces by default
+         * operator >> discards leading whitespaces by default
          * when not using operator >>, they must be discarded explicitly
          */
         if constexpr (std::is_same_v<T, std::string>) {
@@ -156,6 +158,7 @@ namespace LeetCodeIO {
     L0: is >> std::ws;
         is.ignore();
     L1: switch (is.peek()) {
+        case ' ':
         case ',': is.ignore(); goto L1;
         case ']': is.ignore(); goto L2;
         default : v.emplace_back();

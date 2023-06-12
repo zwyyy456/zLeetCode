@@ -58,7 +58,7 @@
 #include <cstdbool>
 #include <cstdint>
 #include <ctgmath>
-#include <cuchar>
+// #include <cuchar>
 #endif
 
 // C++

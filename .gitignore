@@ -8,7 +8,6 @@
 cpp/build/
 cpp/.cache/
 build/
-.cache/
 
 # Compiled Object files
 *.slo

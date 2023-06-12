@@ -1,4 +1,4 @@
-// Created by zwyyy456 at 2023/05/04 19:13
+// Created by zwyyy456 at 2023/06/02 15:50
 // https://leetcode.com/problems/lfu-cache/
 
 /*
@@ -67,118 +67,146 @@ lfu.get(4);      // return 4
 
 */
 
-#include <algorithm>
+#include <arm/types.h>
 #include <bits/stdc++.h>
 #include <unordered_map>
 #include "LC_IO.h"
 using namespace std;
 
 // @lc code=begin
+
 struct Node {
-    Node *next_;
-    Node *prev_;
+    Node() {
+    }
+    Node(int val, int key) :
+        val_(val), key_(key), next_(nullptr), pre_(nullptr) {
+    }
     int val_;
-    int idx_;
-    Node(int val) :
-        next_(nullptr), prev_(nullptr), val_(val), idx_(0) {
-    }
+    int freq_;
+    Node *next_;
+    Node *pre_;
+    int key_;
 };
-struct Mlist {
-    Node *vhead_;
-    Node *vtail_;
-    int size_;
-    Mlist() :
-        vhead_(new Node(0)), vtail_(new Node(0)), size_(2) {
+struct List {
+    Node *vhead_;  // 虚拟头结点
+    Node *vtail_;  // 虚拟尾结点
+    int size_ = 0; // 链表中有效结点的数量
+    List() :
+        vhead_(new Node()), vtail_(new Node()) {
         vhead_->next_ = vtail_;
-        vtail_->prev_ = vhead_;
+        vtail_->pre_ = vhead_;
+        vhead_->pre_ = nullptr;
+        vtail_->next_ = nullptr;
     }
-    void Insert(Node *to_ins) {
-        Node *tmp = vtail_->prev_;
-        tmp->next_ = to_ins;
-        to_ins->prev_ = tmp;
-        to_ins->next_ = vtail_;
-        vtail_->prev_ = to_ins;
+    ~List() {
+        delete vtail_;
+        delete vhead_;
+        vhead_ = nullptr;
+        vtail_ = nullptr;
+    }
+    void Insert(Node *node) {
+        // 双向链表的插入, node 表示待插入结点，插入作为双向链表的尾结点
+        node->pre_ = vtail_->pre_;
+        vtail_->pre_->next_ = node;
+        vtail_->pre_ = node;
+        node->next_ = vtail_;
         ++size_;
     }
-    void Delete(Node *to_del) {
-        to_del->prev_->next_ = to_del->next_;
-        to_del->next_->prev_ = to_del->prev_;
-        delete to_del;
-        to_del = nullptr;
+    void Delete(Node *node) {
+        // node 指向待删除结点
+        node->next_->pre_ = node->pre_;
+        node->pre_->next_ = node->next_;
         --size_;
     }
-    void Delete() {
-        Delete(vhead_->next_);
-    }
-    ~Mlist() {
-        delete vhead_;
-        delete vtail_;
+    bool Empty() {
+        return size_ <= 0;
     }
 };
 class LFUCache {
   public:
     LFUCache(int capacity) :
-        cap_(capacity), size_(0), min_freq_(0) {
+        cap_(capacity), min_freq_(0), cnt_(0) {
     }
 
     int get(int key) {
-        if (id_freq.find(key) == id_freq.end()) {
+        if (hash_.find(key) == hash_.end()) {
             return -1;
         }
-        auto freq = id_freq[key]++;
-        auto plist = freq_list[freq];
-        auto pnode = id_p[key];
-        int val = pnode->val_;
-        plist->Delete(pnode); // pnode 已经被 delete 了
-        if (plist->size_ == 2) {
-            if (freq == min_freq_) {
-                min_freq_++;
+        Node *node = hash_[key];
+        int freq = node->freq_;
+        // 要更新频率，因此要从原先的频率链表上删除该结点
+        freqs_[freq]->Delete(node);
+        if (freqs_[freq]->Empty()) {
+            // 删除该链表，频率哈希表中移除该频率
+            delete freqs_[freq];
+            freqs_.erase(freq);
+            if (min_freq_ == freq) {
+                // 则需要更新最小频率
+                min_freq_ = freq + 1;
             }
-            freq_list.erase(freq);
         }
-        auto new_node = new Node(val);
-        new_node->idx_ = key; // 创建出来这个新的 node
-        ++freq;
-        (freq_list[freq])->Insert(new_node);
-        id_p[key] = new_node;
+        // 更新频率
+        ++node->freq_;
+        freq = node->freq_;
+        if (freqs_.find(freq) == freqs_.end()) {
+            freqs_[freq] = new List();
+        }
+        freqs_[freq]->Insert(node);
+        return node->val_;
     }
 
     void put(int key, int value) {
-        if (id_freq.find(key) != id_freq.end()) {
+        // key 已经在缓存中了
+        if (hash_.find(key) != hash_.end()) {
             get(key);
-            id_p[key]->val_ = value;
-        } else {
-            auto new_node = new Node(value);
-            new_node->idx_ = key;
-            if (size_ < cap_) {
-                // 直接插入即可
-                freq_list[id_freq[key]]->Insert(new_node);
-                ++size_;
-                min_freq_ = 1;
-                id_freq[key]++;
-            } else {
-                // 先删除，再插入
-                int del_id = freq_list[min_freq_]->vtail_->prev_->idx_;
-                freq_list[min_freq_]->Delete();
-                if (freq_list[min_freq_]->size_ == 2) {
-                    id_freq.erase(del_id);
-                    freq_list.erase(min_freq_);
-                }
-                min_freq_ = 1;
-                freq_list[min_freq_]->Insert(new_node);
-                id_freq[key]++;
+            hash_[key]->val_ = value;
+            return;
+        }
+        /* key 不在缓存中 */
+        // 缓存已满
+        if (cnt_ == cap_) {
+            // 删除 min_freq_ 链表对应的头结点
+            List *lst = freqs_[min_freq_];
+            Node *to_del = lst->vhead_->next_;
+            lst->Delete(to_del);
+            hash_.erase(to_del->key_);
+            delete to_del;
+            to_del = nullptr;
+            // 如果 lst 变为空
+            if (lst->Empty()) {
+                delete lst;
+                lst = nullptr;
+                freqs_.erase(min_freq_);
             }
-            id_p[key] = new_node;
+            // 现在执行插入
+            Node *node = new Node(value, key);
+            node->freq_ = 1;
+            min_freq_ = 1;
+            if (freqs_.find(node->freq_) == freqs_.end()) {
+                freqs_[node->freq_] = new List();
+            }
+            freqs_[node->freq_]->Insert(node);
+            hash_[key] = node;
+        } else {
+            // 现在执行插入
+            Node *node = new Node(value, key);
+            node->freq_ = 1;
+            min_freq_ = 1;
+            if (freqs_.find(node->freq_) == freqs_.end()) {
+                freqs_[node->freq_] = new List();
+            }
+            freqs_[node->freq_]->Insert(node);
+            hash_[key] = node;
+            ++cnt_;
         }
     }
 
   private:
-    unordered_map<int, int> id_freq;
-    unordered_map<int, Node *> id_p;
-    unordered_map<int, Mlist *> freq_list;
-    int size_;
-    int cap_;
+    unordered_map<int, Node *> hash_;
+    unordered_map<int, List *> freqs_;
     int min_freq_;
+    int cnt_;
+    int cap_;
 };
 
 // @lc code=end

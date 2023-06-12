@@ -5,8 +5,9 @@
 # vscode
 *.json
 *.DS_Store
-cpp/build
-cpp/.cache
+cpp/build/
+cpp/.cache/
+build/
 .cache/
 
 # Compiled Object files
@@ -45,3 +46,6 @@ cpp/.cache
 
 # leetgo
 leetgo.yaml
+build/
+Description/cpp/build/
+Description/cpp/.cache

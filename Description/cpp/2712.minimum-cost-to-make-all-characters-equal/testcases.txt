@@ -1,0 +1,11 @@
+target_case: 0
+
+input:
+"0011"
+output:
+2
+
+input:
+"010101"
+output:
+9

@@ -1,0 +1,11 @@
+target_case: 0
+
+input:
+"banana"
+output:
+"ana"
+
+input:
+"abcd"
+output:
+""

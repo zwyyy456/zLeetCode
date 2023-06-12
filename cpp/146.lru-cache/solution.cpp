@@ -1,4 +1,4 @@
-// Created by zwyyy456 at 2023/05/04 15:36
+// Created by zwyyy456 at 2023/06/02 14:41
 // https://leetcode.com/problems/lru-cache/
 
 /*
@@ -54,81 +54,108 @@ lRUCache.get(4);    // return 4
 using namespace std;
 
 // @lc code=begin
+
 struct Node {
-    Node *pre_;
-    Node *next_;
+    Node() {
+    }
+    Node(int val, int key) :
+        val_(val), key_(key), next_(nullptr), pre_(nullptr) {
+    }
     int val_;
+    int freq_;
+    Node *next_;
+    Node *pre_;
     int key_;
-    Node() :
-        pre_(nullptr), next_(nullptr),  val_(0), key_(0){};
+};
+struct List {
+    Node *vhead_;  // 虚拟头结点
+    Node *vtail_;  // 虚拟尾结点
+    int size_ = 0; // 链表中有效结点的数量
+    List() :
+        vhead_(new Node()), vtail_(new Node()) {
+        vhead_->next_ = vtail_;
+        vtail_->pre_ = vhead_;
+        vhead_->pre_ = nullptr;
+        vtail_->next_ = nullptr;
+    }
+    ~List() {
+        delete vtail_;
+        delete vhead_;
+        vhead_ = nullptr;
+        vtail_ = nullptr;
+    }
+    void Insert(Node *node) {
+        // 双向链表的插入, node 表示待插入结点，插入作为双向链表的尾结点
+        node->pre_ = vtail_->pre_;
+        vtail_->pre_->next_ = node;
+        vtail_->pre_ = node;
+        node->next_ = vtail_;
+        ++size_;
+    }
+    void Delete(Node *node) {
+        // node 指向待删除结点
+        node->next_->pre_ = node->pre_;
+        node->pre_->next_ = node->next_;
+        --size_;
+    }
+    bool Empty() {
+        return size_ <= 0;
+    }
 };
 class LRUCache {
   public:
     LRUCache(int capacity) :
-        cap_(capacity) {
-        dum_head_ = new Node();
-        dum_tail_ = new Node();
-        dum_head_->next_ = dum_tail_;
-        dum_tail_->pre_ = dum_head_;
+        lst(new List()), cap_(capacity) {
     }
 
     int get(int key) {
-        if (ump.find(key) == ump.end()) {
+        if (hash.find(key) == hash.end()) {
             return -1;
         }
-        Node *tmp = ump[key];
-        int val = tmp->val_;
-        // 删除该节点，然后再放入链表最末端
-        tmp->pre_->next_ = tmp->next_;
-        tmp->next_->pre_ = tmp->pre_;
-        // 放入链表的最末端
-        tmp->next_ = dum_tail_;
-        tmp->pre_ = dum_tail_->pre_;
-        tmp->next_->pre_ = tmp;
-        tmp->pre_->next_ = tmp;
-        return val;
+        Node *node = hash[key];
+        lst->Delete(node);
+        lst->Insert(node);
+        return node->val_;
     }
 
     void put(int key, int value) {
-        if (ump.find(key) != ump.end()) {
-            ump[key]->val_ = value;
+        if (hash.find(key) != hash.end()) {
+            // key 已经存在
+            Node *node = hash[key];
+            node->val_ = value;
+            node->key_ = key;
             get(key);
+            return;
+        }
+        // key 不存在，需要插入
+        if (cnt_ == cap_) {
+            // 这里先插入或者先删除都能满足题义，我选择先插入，再删除（防止 capacity 为 0 的极限情况）
+            Node *node = new Node(value, key);
+            lst->Insert(node);
+            hash[key] = node;
+
+            // 删除头结点
+            Node *head = lst->vhead_->next_;
+            lst->Delete(head);
+            hash.erase(head->key_);
+            delete head;
+            head = nullptr;
         } else {
-            Node *tmp = new Node();
-            tmp->val_ = value;
-            tmp->key_ = key;
-            // 放入链表的最末端
-            tmp->next_ = dum_tail_;
-            tmp->pre_ = dum_tail_->pre_;
-            tmp->next_->pre_ = tmp;
-            tmp->pre_->next_ = tmp;
-            ump[key] = tmp;
-            ++size_;
-            if (size_ > cap_) {
-            	Node *head = dum_head_->next_;
-            	head->pre_->next_ = head->next_;
-            	head->next_->pre_ = head->pre_;
-            	--size_;
-                int tmp_key = head->key_;
-                ump.erase(tmp_key);
-                delete(head);
-            }
+            // 直接插入即可
+            Node *node = new Node(value, key);
+            lst->Insert(node);
+            hash[key] = node;
+            // 记得修改数量
+            ++cnt_;
         }
     }
 
   private:
-    Node *dum_head_, *dum_tail_;
-    unordered_map<int, Node *> ump;
-    int size_ = 0;
+    unordered_map<int, Node *> hash;
+    List *lst;
+    int cnt_ = 0;
     int cap_;
 };
-
-/**
- * Your LRUCache object will be instantiated and called as such:
- * LRUCache* obj = new LRUCache(capacity);
- * int param_1 = obj->get(key);
- * obj->put(key,value);
- */
 
 // @lc code=end
 

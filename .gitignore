@@ -42,7 +42,9 @@ build/
 
 # vscode
 *.vscode
+
+# leetgo
+leetgo.yaml
 build/
-.cache
 Description/cpp/build/
 Description/cpp/.cache

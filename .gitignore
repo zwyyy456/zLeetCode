@@ -2,13 +2,6 @@
 # Prerequisites
 *.d
 
-# vscode
-*.json
-*.DS_Store
-cpp/build/
-cpp/.cache/
-build/
-.cache/
 
 # Compiled Object files
 *.slo
@@ -41,11 +34,17 @@ build/
 *.app
 *.dSYM
 
-# vscode
-*.vscode
 
 # leetgo
 leetgo.yaml
 build/
 Description/cpp/build/
 Description/cpp/.cache
+
+# vscode
+*.vscode/
+*.DS_Store
+cpp/build/
+cpp/.cache/
+build/
+.cache/

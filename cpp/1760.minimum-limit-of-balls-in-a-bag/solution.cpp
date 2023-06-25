@@ -1,4 +1,4 @@
-// Created by zwyyy456 at 2023/06/02 10:37
+// Created by zwyyy456 at 2023/06/13 11:06
 // https://leetcode.com/problems/minimum-limit-of-balls-in-a-bag/
 
 /*
@@ -52,7 +52,6 @@ The bag with the most number of balls has 2 balls, so your penalty is 2, and you
 */
 
 #include <bits/stdc++.h>
-#include <vector>
 #include "LC_IO.h"
 using namespace std;
 
@@ -60,20 +59,19 @@ using namespace std;
 
 class Solution {
   public:
-    bool Check(vector<int> &nums, int maxOperations, int num) {
+    bool Check(int mid, int k, vector<int> &nums) {
         long cnt = 0;
-        for (int i : nums) {
-            cnt += (i - 1) / num;
+        for (int num : nums) {
+            cnt += (num - 1) / mid;
         }
-        return cnt <= maxOperations;
+        return cnt <= k;
     }
     int minimumSize(vector<int> &nums, int maxOperations) {
-        // 最小化最大值，考虑二分答案
-        int left = 1;
-        int right = 1000000001;
+        // 二分答案
+        int left = 1, right = 1e9 + 1;
         while (left < right) {
             int mid = left + (right - left) / 2;
-            if (!Check(nums, maxOperations, mid)) {
+            if (!Check(mid, maxOperations, nums)) {
                 left = mid + 1;
             } else {
                 right = mid;

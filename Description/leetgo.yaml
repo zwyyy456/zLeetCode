@@ -11,3 +11,5 @@ leetcode:
 editor:
   use: custom
   command: subl
+  args: "{{.Files}}"
+  

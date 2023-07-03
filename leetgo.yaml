@@ -1,11 +1,17 @@
 # leetgo project level config, global config is at /home/zwyyy/.config/leetgo/config.yaml
 # for more details, please refer to https://github.com/j178/leetgo
+# author
+author: zwyyy456
 language: en
 code:
-  lang: go
+  lang: cpp
+  filename_template: '{{ .Id}}{{ if .SlugIsMeaningful }}.{{ .Slug }}{{ end }}'
 leetcode:
   site: https://leetcode.com
 #  credentials:
 #    from: browser
-#editor:
-#  use: none
+editor:
+  use: custom
+  command: "subl"
+  args: "{{.Files}}"
+  # use: vscode

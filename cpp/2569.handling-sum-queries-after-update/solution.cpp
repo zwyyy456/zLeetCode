@@ -48,6 +48,7 @@ Explanation: After the first query, nums2 remains [5], so the answer to the seco
 */
 
 #include <bits/stdc++.h>
+#include <numeric>
 #include "LC_IO.h"
 using namespace std;
 
@@ -55,48 +56,58 @@ using namespace std;
 
 class Solution {
   public:
-    int arr1[400000];
-    int arr2[400000];
-    int toadd[400000];
-    bool toreverse[400000];
-    void Add(int idx, int l, int r, int L, int R, int add) {
-        if (L <= l && R >= r) {
-            // lazy 修改
-            toadd[idx] += add;
-            return;
+    int cnt[400000]; // 统计不同范围的 1 的个数
+    int sum = 0;
+    bool todo[400000];
+    int build(vector<int> &vec1, int idx, int l, int r) {
+        if (l == r) {
+            cnt[idx] = vec1[l];
+            return cnt[idx];
         }
-        // 更新 lazy 到子结点
         int mid = l + (r - l) / 2;
-        doadd(2 * idx, l, mid);
-        doadd(2 * idx + 1, mid + 1, r);
-        toadd[idx] = 0;
-        if (L <= mid) {
-            Add(2 * idx, l, mid, L, R, add);
-        }
-        if (R >= mid) {
-            Add(2 * idx + 1, mid + 1, r, L, R, add);
-        }
+        cnt[idx] = build(vec1, 2 * idx, l, mid) + build(vec1, 2 * idx + 1, mid + 1, r);
+        return cnt[idx];
     }
-    void Reverse(int idx, int l, int r, int L, int R) {
+    void Modify(int idx, int l, int r, int L, int R) {
         if (L <= l && R >= r) {
             // lazy 修改
-            toreverse[idx] = !toreverse[idx];
+            do_modify(idx, l, r);
             return;
         }
         // 更新 lazy 到子结点
         int mid = l + (r - l) / 2;
-        doreverse(2 * idx, l, mid);
-        doreverse(2 * idx, mid + 1, r);
-        toreverse[idx] = !toreverse[idx];
+        if (todo[idx]) {
+            do_modify(2 * idx, l, mid);
+            do_modify(2 * idx + 1, mid + 1, r);
+            todo[idx] = false;
+        }
         if (L <= mid) {
-            Reverse(2 * idx, l, mid, L, R);
+            Modify(2 * idx, l, mid, L, R);
         }
-        if (R >= mid) {
-            Reverse(2 * idx + 1, mid + 1, r, L, R);
+        if (R > mid) {
+            Modify(2 * idx + 1, mid + 1, r, L, R);
         }
+        cnt[idx] = cnt[2 * idx] + cnt[2 * idx + 1];
+    }
+    void do_modify(int idx, int l, int r) {
+        cnt[idx] = r - l + 1 - cnt[idx]; // 即原先的 0 的数量
+        todo[idx] = !todo[idx];
     }
 
     vector<long long> handleQuery(vector<int> &nums1, vector<int> &nums2, vector<vector<int>> &queries) {
+        long sum1 = accumulate(nums2.begin(), nums2.end(), (long)0);
+        build(nums1, 1, 0, nums1.size() - 1);
+        vector<long long> ans;
+        for (auto &vec : queries) {
+            if (vec[0] == 1) {
+                Modify(1, 0, nums1.size() - 1, vec[1], vec[2]);
+            } else if (vec[0] == 2) {
+                sum1 = sum1 + (long)cnt[1] * vec[1];
+            } else {
+                ans.push_back(sum1);
+            }
+        }
+        return ans;
     }
 };
 

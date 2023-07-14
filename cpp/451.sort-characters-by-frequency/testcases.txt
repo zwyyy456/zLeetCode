@@ -1,0 +1,14 @@
+input:
+"tree"
+output:
+"eert"
+
+input:
+"cccaaa"
+output:
+"aaaccc"
+
+input:
+"Aabb"
+output:
+"bbAa"

@@ -1,0 +1,14 @@
+input:
+["O  ","   ","   "]
+output:
+false
+
+input:
+["XOX"," X ","   "]
+output:
+false
+
+input:
+["XOX","O O","XOX"]
+output:
+true

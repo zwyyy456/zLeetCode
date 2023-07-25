@@ -1,0 +1,11 @@
+input:
+"cba"
+"abcd"
+output:
+"cbad"
+
+input:
+"cbafg"
+"abcd"
+output:
+"cbad"

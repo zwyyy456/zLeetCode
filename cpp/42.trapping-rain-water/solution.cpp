@@ -1,33 +1,53 @@
-/*
- * @lc app=leetcode id=42 lang=cpp
- *
- * [42] Trapping Rain Water
- */
+// Created by zwyyy456 at 2023/07/23 11:14
+// leetgo: 1.3.1
+// https://leetcode.com/problems/trapping-rain-water/
 
-// @lc code=start
-#include <stack>
-#include <vector>
-using std::stack;
-using std::vector;
+#include <bits/stdc++.h>
+#include "LC_IO.h"
+using namespace std;
+
+// @lc code=begin
+
 class Solution {
   public:
     int trap(vector<int> &height) {
-        stack<int> stk;
-        stk.push(0);
+        int n = height.size();
+        vector<int> sufmax(n);
+        sufmax[n - 1] = height[n - 1];
+        for (int i = n - 2; i >= 0; --i) {
+            sufmax[i] = max(sufmax[i + 1], height[i]);
+        }
+        vector<int> premax(n);
+        premax[0] = height[0];
         int res = 0;
-        for (int i = 1; i < height.size(); i++) {
-            while (!stk.empty() && height[i] > height[stk.top()]) {
-                int mid = stk.top();
-                stk.pop();
-                if (!stk.empty()) {
-                    int h = min(height[i], height[stk.top()]) - height[mid];
-                    int w = i - stk.top() - 1;
-                    res += h * w;
-                }
+        for (int i = 1; i < n - 1; ++i) {
+            int cur = height[i];
+            int h = min(premax[i - 1], sufmax[i + 1]);
+            if (h > cur) {
+                res += h - cur;
             }
-            stk.push(i);
+            premax[i] = max(cur, premax[i - 1]);
         }
         return res;
     }
 };
+
 // @lc code=end
+
+int main() {
+    ios_base::sync_with_stdio(false);
+    stringstream out_stream;
+
+    vector<int> height;
+    LeetCodeIO::scan(cin, height);
+
+    Solution *obj = new Solution();
+
+    auto res = obj->trap(height);
+
+    LeetCodeIO::print(out_stream, res);
+    cout << "output: " << out_stream.rdbuf() << endl;
+
+    delete obj;
+    return 0;
+}

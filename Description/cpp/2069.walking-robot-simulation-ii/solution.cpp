@@ -1,5 +1,5 @@
-// Created by zwyyy456 at 2023/07/18 23:04
-// leetgo: 1.3.2
+// Created by zwyyy456 at 2023/07/19 09:58
+// leetgo: 1.3.1
 // https://leetcode.cn/problems/walking-robot-simulation-ii/
 
 #include <bits/stdc++.h>
@@ -214,8 +214,7 @@ int main() {
     out_stream.seekp(-1, ios_base::end);
     out_stream << ']';
 
-    cout << "
-        output : " << out_stream.rdbuf() << endl;
+    cout << "output : " << out_stream.rdbuf() << endl;
 
                  delete obj;
     return 0;

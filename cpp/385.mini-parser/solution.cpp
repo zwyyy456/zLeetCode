@@ -1,4 +1,4 @@
-// Created by zwyyy456 at 2023/07/03 23:18
+// Created by zwyyy456 at 2023/07/22 17:50
 // leetgo: 1.3.2
 // https://leetcode.com/problems/mini-parser/
 
@@ -38,28 +38,27 @@ using namespace std;
  * };
  */
 class Solution {
-public:
+  public:
     NestedInteger deserialize(string s) {
-        
     }
 };
 
 // @lc code=end
 
 int main() {
-	ios_base::sync_with_stdio(false);
-	stringstream out_stream;
+    ios_base::sync_with_stdio(false);
+    stringstream out_stream;
 
-	string s; LeetCodeIO::scan(cin, s);
+    string s;
+    LeetCodeIO::scan(cin, s);
 
-	Solution *obj = new Solution();
+    Solution *obj = new Solution();
 
-	auto res = obj->deserialize(s);
+    auto res = obj->deserialize(s);
 
-	LeetCodeIO::print(out_stream, res);
-	cout << "
-output: " << out_stream.rdbuf() << endl;
+    LeetCodeIO::print(out_stream, res);
+    cout << "output: " << out_stream.rdbuf() << endl;
 
-	delete obj;
-	return 0;
+    delete obj;
+    return 0;
 }

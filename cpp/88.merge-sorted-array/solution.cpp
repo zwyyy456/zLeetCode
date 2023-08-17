@@ -1,51 +1,34 @@
-/*
- * @lc app=leetcode id=88 lang=cpp
- *
- * [88] Merge Sorted Array
- */
+// Created by zwyyy456 at 2023/08/13 13:21
+// leetgo: 1.3.5
+// https://leetcode.com/problems/merge-sorted-array/
 
-// @lc code=start
-/*空间复杂度为O(m + n)
-#include <vector>
-using std::vector;
-class Solution {
-public:
-    void merge(vector<int>& nums1, int m, vector<int>& nums2, int n) {
-        vector<int> tmp(m + n, 0);
-        int p1 = 0, p2 = 0;
-        for (int i = 0; i < m + n; i++) {
-            if (p1 >= m && p2 < n)
-                tmp[i] = nums2[p2++];
-            else if (p2 >= n && p1 < m)
-                tmp[i] = nums1[p1++];
-            else {
-                if (nums1[p1] > nums2[p2]) 
-                    tmp[i] = nums2[p2++];
-                else
-                    tmp[i] = nums1[p1++];
-            }   
-        }
-        nums1 = tmp;
-    }
-};
-*/
+#include <bits/stdc++.h>
+#include "LC_IO.h"
+using namespace std;
 
-// 空间复杂度为O(1)
-#include <vector>
-using std::vector;
+// @lc code=begin
+
 class Solution {
-    public:
-    void merge(vector<int>& nums1, int m, vector<int>& nums2, int n) {
-        int p1 = m - 1, p2 = n - 1;
-        int idx = m + n - 1;
-        for (int idx = m + n - 1; idx >= 0; idx--) {
-            if (p1 < 0)
-                nums1[idx] =  nums2[p2--];
-            else if (p1 >= 0 && p2 >= 0) {
-                if (nums1[p1] > nums2[p2])
-                    nums1[idx] = nums1[p1--];
-                else
-                    nums1[idx] = nums2[p2--];
+  public:
+    void merge(vector<int> &nums1, int m, vector<int> &nums2, int n) {
+        int all = m + n;
+        for (int i = m + n - 1; i >= 0; --i) {
+            if (m > 0) {
+                if (n > 0) {
+                    if (nums1[m - 1] >= nums2[n - 1]) {
+                        nums1[i] = nums2[n - 1];
+                        --n;
+                    } else {
+                        nums1[i] = nums1[m - 1];
+                        --m;
+                    }
+                } else {
+                    nums1[i] = nums2[m - 1];
+                    --m;
+                }
+            } else {
+                nums1[i] = nums2[n - 1];
+                --n;
             }
         }
     }
@@ -53,3 +36,24 @@ class Solution {
 
 // @lc code=end
 
+int main() {
+    ios_base::sync_with_stdio(false);
+    stringstream out_stream;
+
+    vector<int> nums1;
+    LeetCodeIO::scan(cin, nums1);
+    int m;
+    LeetCodeIO::scan(cin, m);
+    vector<int> nums2;
+    LeetCodeIO::scan(cin, nums2);
+    int n;
+    LeetCodeIO::scan(cin, n);
+
+    Solution *obj = new Solution();
+    auto res = obj->merge(nums1, m, nums2, n);
+    LeetCodeIO::print(out_stream, res);
+    cout << "\noutput: " << out_stream.rdbuf() << endl;
+
+    delete obj;
+    return 0;
+}

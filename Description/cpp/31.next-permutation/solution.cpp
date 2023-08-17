@@ -14,20 +14,25 @@ class Solution {
     void nextPermutation(vector<int> &nums) {
         int n = nums.size();
         int resr = 0, resl = -1;
-        int maxnum = nums[0], second = nums[0];
+        int rnum = nums[n - 1], lnum = nums[n - 1];
         stack<int> stk;
         for (int i = n - 1; i >= 0; --i) {
-            while (!stk.empty() && nums[i] < nums[stk.top()]) {
-                resr = stk.top();
+            if (nums[i] >= rnum) {
+                resr = i;
+                rnum = nums[i];
+            } else if (nums[i] < rnum) {
                 resl = i;
-                stk.pop();
-            }
-            if (resr > 0) {
+                lnum = nums[i];
                 break;
             }
-            stk.push(i);
         }
-        if (resr <= 0) {
+        for (int i = n - 1; i > lnum; --i) {
+            if (nums[i] > lnum && nums[i] < rnum) {
+                resr = i;
+                rnum = nums[i];
+            }
+        }
+        if (resl < 0) {
             sort(nums.begin(), nums.end());
         } else {
             swap(nums[resl], nums[resr]);

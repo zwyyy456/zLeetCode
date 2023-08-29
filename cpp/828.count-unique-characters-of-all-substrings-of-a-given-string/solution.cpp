@@ -14,18 +14,22 @@ class Solution {
         // 维护每个字符左侧相同字符的最大坐标
         int n = s.size();
         vector<int> arr(26, -1);
-        vector<int> left_same(n);
+        vector<pair<int, int>> left_same(n, {-1, -1});
         for (int i = 0; i < n; ++i) {
             if (arr[s[i] - 'A'] != -1) {
-                left_same[i] = arr[s[i] - 'A'];
+                left_same[i].first = left_same[arr[s[i] - 'A']].second;
+                left_same[i].second = arr[s[i] - 'A'];
             }
             arr[s[i] - 'A'] = i;
         }
-        vector<int> dp(n + 1);
-        for (int i = 1; i <= n; ++i) {
-            dp[i] = dp[i - 1] + i - left_same[i - 1];
+        vector<int> dp(n);
+        dp[0] = 1;
+        int sum = 1;
+        for (int i = 1; i < n; ++i) {
+            dp[i] = dp[i - 1] + i - left_same[i].second - (left_same[i].second - left_same[i].first);
+            sum += dp[i];
         }
-        return dp[n];
+        return sum;
     }
 };
 

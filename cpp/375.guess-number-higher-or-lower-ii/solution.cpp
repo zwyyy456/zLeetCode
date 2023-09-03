@@ -27,6 +27,8 @@ class Solution {
     int getMoneyAmount(int n) {
         // 最大值的最小值
         // 选一种策略，这个策略的最大开销是最小的
+    	vector<vector<int>> cache(n + 2, vector<int>(n + 2, -1));
+    	return dfs(1, n + 1, cache);
     }
 };
 

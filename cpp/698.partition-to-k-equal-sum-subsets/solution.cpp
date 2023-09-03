@@ -1,45 +1,71 @@
-/*
- * @lc app=leetcode id=698 lang=cpp
- *
- * [698] Partition to K Equal Sum Subsets
- */
+// Created by zwyyy456 at 2023/08/29 14:10
+// leetgo: 1.3.5
+// https://leetcode.com/problems/partition-to-k-equal-sum-subsets/
 
-// @lc code=start
-#include <algorithm>
-#include <vector>
-using std::vector;
+#include <bits/stdc++.h>
+#include <numeric>
+#include "LC_IO.h"
+using namespace std;
+
+// @lc code=begin
+
 class Solution {
   public:
-    bool dfs(vector<int> &nums, int index, int sum, int target, int cnt, int k, vector<int> used, int total_idx) {
-        if (cnt == k)
-            return true;
-        if (sum == target) {
-            return dfs(nums, total_idx - 1, 0, target, cnt + 1, k, used, total_idx - 1); // 一定要注意这里不是index - 1
+    bool dfs(vector<int> &nums, int state, int sum, int target, vector<int> &cache) {
+        if (state == (1 << nums.size()) - 1) {
+            return sum == 0;
         }
-
-        for (int i = index; i >= 0; i--) {
-            if (used[i] || sum + nums[i] > target)
+        if (cache[state] >= 0) {
+            return cache[state] == 1;
+        }
+        int n = nums.size();
+        bool res = false;
+        for (int i = 0; i < n; ++i) {
+            if ((state & (1 << i)) != 0) {
                 continue;
-            used[i] = 1;
-            if (dfs(nums, i - 1, sum + nums[i], target, cnt, k, used, total_idx))
-                return true;
-            used[i] = 0;
-            if (sum == 0)
-                return false;
+            }
+            if (sum + nums[i] > target) {
+                continue;
+            }
+            if (sum + nums[i] == target) {
+                res |= dfs(nums, state | (1 << i), 0, target, cache);
+            } else {
+                res |= dfs(nums, state | (1 << i), sum + nums[i], target, cache);
+            }
         }
-        return false;
+        cache[state] = res ? 1 : 0;
+        return res;
     }
     bool canPartitionKSubsets(vector<int> &nums, int k) {
-        int sum = 0;
-        for (int i : nums)
-            sum += i;
-        if (sum % k != 0)
+        int sum = accumulate(nums.begin(), nums.end(), 0);
+        if (sum % k != 0) {
             return false;
-        std::sort(nums.begin(), nums.end());
-        if (nums.back() > sum / k)
-            return false;
-        vector<int> used(nums.size(), 0);
-        return dfs(nums, nums.size() - 1, 0, sum / k, 0, k, used, nums.size() - 1);
+        }
+        sort(nums.begin(), nums.end());
+        int n = nums.size();
+        // 状压 dp
+        int can = (1 << n) - 1;
+        vector<int> cache(1 << n, -1);
+        return dfs(nums, 0, 0, sum / k, cache);
     }
 };
+
 // @lc code=end
+
+int main() {
+    ios_base::sync_with_stdio(false);
+    stringstream out_stream;
+
+    vector<int> nums;
+    LeetCodeIO::scan(cin, nums);
+    int k;
+    LeetCodeIO::scan(cin, k);
+
+    Solution *obj = new Solution();
+    auto res = obj->canPartitionKSubsets(nums, k);
+    LeetCodeIO::print(out_stream, res);
+    cout << "\noutput: " << out_stream.rdbuf() << endl;
+
+    delete obj;
+    return 0;
+}

@@ -40,7 +40,6 @@ class Solution {
                 dp[i][j] = res;
             }
         }
-
         return dp[0][m - 1];
     }
 };

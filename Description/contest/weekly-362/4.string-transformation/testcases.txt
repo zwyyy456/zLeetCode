@@ -1,0 +1,13 @@
+input:
+"abcd"
+"cdab"
+2
+output:
+2
+
+input:
+"ababab"
+"ababab"
+1
+output:
+2

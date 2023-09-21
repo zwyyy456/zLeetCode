@@ -1,0 +1,11 @@
+input:
+[5,3,6,2,4,null,7]
+9
+output:
+true
+
+input:
+[5,3,6,2,4,null,7]
+28
+output:
+false

@@ -1,6 +1,6 @@
-// Created by zwyyy456 at 2023/09/28 11:02
+// Created by zwyyy456 at 2023/09/25 09:40
 // leetgo: 1.3.8
-// https://leetcode.com/problems/count-of-range-sum/
+// https://leetcode.com/problems/maximum-xor-with-an-element-from-array/
 
 #include <bits/stdc++.h>
 #include "LC_IO.h"
@@ -10,7 +10,7 @@ using namespace std;
 
 class Solution {
 public:
-    int countRangeSum(vector<int>& nums, int lower, int upper) {
+    vector<int> maximizeXor(vector<int>& nums, vector<vector<int>>& queries) {
         
     }
 };
@@ -23,13 +23,11 @@ int main() {
 
 	vector<int> nums;
 	LeetCodeIO::scan(cin, nums);
-	int lower;
-	LeetCodeIO::scan(cin, lower);
-	int upper;
-	LeetCodeIO::scan(cin, upper);
+	vector<vector<int>> queries;
+	LeetCodeIO::scan(cin, queries);
 
 	Solution *obj = new Solution();
-	auto res = obj->countRangeSum(nums, lower, upper);
+	auto res = obj->maximizeXor(nums, queries);
 	LeetCodeIO::print(out_stream, res);
 	cout << "\noutput: " << out_stream.rdbuf() << endl;
 

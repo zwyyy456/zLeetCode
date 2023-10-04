@@ -1,8 +1,9 @@
-// Created by zwyyy456 at 2023/07/18 09:52
-// leetgo: 1.3.1
+// Created by zwyyy456 at 2023/09/20 09:16
+// leetgo: 1.3.8
 // https://leetcode.com/problems/sum-of-distances-in-tree/
 
 #include <bits/stdc++.h>
+#include <vector>
 #include "LC_IO.h"
 using namespace std;
 
@@ -10,45 +11,47 @@ using namespace std;
 
 class Solution {
   public:
-    int count(vector<vector<int>> &tree, vector<int> &dis, vector<int> &cnt, int pa, int grandpa) {
-        int res = 1;
-        for (int child : tree[pa]) {
-            if (child == grandpa) { // 防止重复遍历，保证 dfs 遍历时的单向性
+    int get_dis(vector<vector<int>> &graph, int cur, int parent, vector<int> &cnt) {
+        int dis = 0;
+        for (int child : graph[cur]) {
+            if (child == parent) {
                 continue;
             }
-            dis[child] = dis[pa] + 1;
-            res += count(tree, dis, cnt, child, pa);
+            dis = cnt[child] + get_dis(graph, child, cur, cnt);
         }
-        cnt[pa] = res;
+        return dis;
+    }
+    int get_count(vector<vector<int>> &graph, int cur, vector<int> &cnt, int parent) {
+        int res = 0;
+        for (int child : graph[cur]) {
+            if (child == parent) {
+                continue;
+            }
+            res += get_count(graph, child, cnt, cur);
+        }
+        cnt[cur] = res;
         return res;
     }
     vector<int> sumOfDistancesInTree(int n, vector<vector<int>> &edges) {
-        vector<vector<int>> tree(n);
+        if (n == 1) {
+            return {0};
+        }
+        vector<vector<int>> graph(n);
         for (auto &vec : edges) {
-            tree[vec[0]].push_back(vec[1]);
-            tree[vec[1]].push_back(vec[0]); // 注意，建立无向图要 push_back 两次！
+            graph[vec[0]].push_back(vec[1]);
+            graph[vec[1]].push_back(vec[0]);
         }
         vector<int> cnt(n);
-        vector<int> dp(n);
-        vector<int> dis(n); // 表示结点 0 到其他结点的最短距离
-        count(tree, dis, cnt, 0, -1);
-        for (int i = 0; i < n; ++i) {
-            dp[0] += dis[i];
-        }
-        queue<pair<int, int>> q;
-        q.push({0, -1}); // pa, grandpa
+        get_count(graph, 0, cnt, 0);
+        vector<int> dis(n);
+        dis[0] = get_dis(graph, 0, 0, cnt);
+        queue<int> q;
+        q.push(0);
         while (!q.empty()) {
-            auto [pa, grandpa] = q.front();
+            auto cur = q.front();
             q.pop();
-            for (int child : tree[pa]) {
-                if (child == grandpa) { // 保证 bfs 遍历时的单向性
-                    continue;
-                }
-                dp[child] = dp[pa] + n - 2 * cnt[child];
-                q.push({child, pa});
-            }
+            for
         }
-        return dp;
     }
 };
 
@@ -64,13 +67,10 @@ int main() {
     LeetCodeIO::scan(cin, edges);
 
     Solution *obj = new Solution();
-
     auto res = obj->sumOfDistancesInTree(n, edges);
-
     LeetCodeIO::print(out_stream, res);
-    cout << "
-        output : " << out_stream.rdbuf() << endl;
+    cout << "\noutput: " << out_stream.rdbuf() << endl;
 
-                 delete obj;
+    delete obj;
     return 0;
 }

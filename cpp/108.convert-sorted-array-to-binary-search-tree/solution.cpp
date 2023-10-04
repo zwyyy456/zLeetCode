@@ -1,37 +1,44 @@
-/*
- * @lc app=leetcode id=108 lang=cpp
- *
- * [108] Convert Sorted Array to Binary Search Tree
- */
+// Created by zwyyy456 at 2023/09/11 14:12
+// leetgo: 1.3.8
+// https://leetcode.com/problems/convert-sorted-array-to-binary-search-tree/
 
-// @lc code=start
-/**
- * Definition for a binary tree node.
- * struct TreeNode {
- *     int val;
- *     TreeNode *left;
- *     TreeNode *right;
- *     TreeNode() : val(0), left(nullptr), right(nullptr) {}
- *     TreeNode(int x) : val(x), left(nullptr), right(nullptr) {}
- *     TreeNode(int x, TreeNode *left, TreeNode *right) : val(x), left(left), right(right) {}
- * };
- */
-#include <vector>
-using std::vector;
+#include <bits/stdc++.h>
+#include "LC_IO.h"
+using namespace std;
+
+// @lc code=begin
+
 class Solution {
-  private:
-    TreeNode *build_tree(vector<int> &nums, int l, int r) {
-        if (l >= r)
-            return nullptr;
-        TreeNode *root = new TreeNode(nums[(l + r) / 2]);
-        root->left = build_tree(nums, l, (l + r) / 2);
-        root->right = build_tree(nums, (l + r) / 2 + 1, r);
-        return root;
-    }
-
   public:
+    TreeNode *dfs(vector<int> &nums, int l, int r) {
+        if (l == r) {
+            return nullptr;
+        }
+        int mid = l + (r - l) / 2;
+        TreeNode *node = new TreeNode(nums[mid]);
+        node->left = dfs(nums, l, mid);
+        node->right = dfs(nums, mid + 1, r);
+        return node;
+    }
     TreeNode *sortedArrayToBST(vector<int> &nums) {
-        return build_tree(nums, 0, nums.size());
+        return dfs(nums, 0, nums.size()); // 左闭右开
     }
 };
+
 // @lc code=end
+
+int main() {
+    ios_base::sync_with_stdio(false);
+    stringstream out_stream;
+
+    vector<int> nums;
+    LeetCodeIO::scan(cin, nums);
+
+    Solution *obj = new Solution();
+    auto res = obj->sortedArrayToBST(nums);
+    LeetCodeIO::print(out_stream, res);
+    cout << "\noutput: " << out_stream.rdbuf() << endl;
+
+    delete obj;
+    return 0;
+}

@@ -3,6 +3,7 @@
 // https://leetcode.com/problems/count-of-range-sum/
 
 #include <bits/stdc++.h>
+#include <set>
 #include "LC_IO.h"
 using namespace std;
 
@@ -11,7 +12,16 @@ using namespace std;
 class Solution {
 public:
     int countRangeSum(vector<int>& nums, int lower, int upper) {
-        
+       	multiset<int> sums;
+       	sums.insert(0);
+       	int n = nums.size();
+       	int sum = 0;
+       	for (int i = 0; i < n; ++i) {
+       		sum += nums[i];
+       		sums.insert(sum);
+       		int l = sum - upper, r = sum - lower;
+
+       	} 
     }
 };
 

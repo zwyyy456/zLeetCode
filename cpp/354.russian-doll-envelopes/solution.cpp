@@ -1,10 +1,8 @@
-// Created by zwyyy456 at 2023/08/19 15:33
-// leetgo: 1.3.1
+// Created by zwyyy456 at 2023/10/11 10:03
+// leetgo: 1.3.8
 // https://leetcode.com/problems/russian-doll-envelopes/
 
 #include <bits/stdc++.h>
-#include <unordered_map>
-#include <vector>
 #include "LC_IO.h"
 using namespace std;
 
@@ -12,12 +10,11 @@ using namespace std;
 
 class Solution {
   public:
-    int bfind(vector<int> &dp, vector<vector<int>> &envelopes, int w, int h, int r) {
-        int l = 0;
+    int bfind(vector<int> &vec, int target) {
+        int l = 0, r = vec.size();
         while (l < r) {
             int mid = l + (r - l) / 2;
-            int idx = dp[mid];
-            if (envelopes[idx][0] < w && envelopes[idx][1] < h) {
+            if (vec[mid] < target) {
                 l = mid + 1;
             } else {
                 r = mid;
@@ -26,25 +23,24 @@ class Solution {
         return l;
     }
     int maxEnvelopes(vector<vector<int>> &envelopes) {
-        sort(envelopes.begin(), envelopes.end());
-        //	最长递增子序列问题？
-        int n = envelopes.size();
-        map<int, int> recs;
-        unordered_map<int, int> cnt;
-        for (int i = 0; i < n; ++i) {
-            recs[envelopes[i][0]] = max(recs[envelopes[i][0]], i);
-            ++cnt[envelopes[i][0]];
-        }
-        vector<int> dp(n + 1);
-        dp[1] = 0;
+        auto cmp = [](vector<int> &v1, vector<int> &v2) {
+            if (v1[0] == v2[0]) {
+                return v1[1] > v2[1];
+            }
+            return v1[0] < v2[0];
+        };
+        sort(envelopes.begin(), envelopes.end(), cmp);
+        // 对 envelopes[1] 进行 lcs
+        vector<int> vec;
+        vec.push_back(envelopes[0][1]);
         int len = 1;
-        for (int i = 1; i < n; ++i) {
-            if (envelopes[i][0] > envelopes[dp[len]][0] && envelopes[i][1] > envelopes[dp[len]][1]) {
+        for (auto &v : envelopes) {
+            if (v[1] > vec.back()) {
                 ++len;
-                dp[len] = i;
+                vec.push_back(v[1]);
             } else {
-                int id = bfind(dp, envelopes, envelopes[i][0], envelopes[i][1], len);
-                dp[id] = i;
+                int idx = bfind(vec, v[1]);
+                vec[idx] = v[1];
             }
         }
         return len;
@@ -61,13 +57,10 @@ int main() {
     LeetCodeIO::scan(cin, envelopes);
 
     Solution *obj = new Solution();
-
     auto res = obj->maxEnvelopes(envelopes);
-
     LeetCodeIO::print(out_stream, res);
-    cout << "
-        output : " << out_stream.rdbuf() << endl;
+    cout << "\noutput: " << out_stream.rdbuf() << endl;
 
-                 delete obj;
+    delete obj;
     return 0;
 }

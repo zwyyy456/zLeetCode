@@ -1,4 +1,4 @@
-// Created by zwyyy456 at 2023/09/28 09:58
+// Created by zwyyy456 at 2023/10/06 11:52
 // leetgo: 1.3.8
 // https://leetcode.com/problems/number-of-flowers-in-full-bloom/
 
@@ -10,40 +10,44 @@ using namespace std;
 
 class Solution {
   public:
-    int solve(vector<vector<int>> &start, int cur, vector<vector<int>> &end) {
-        int l = 0, r = start.size();
+    int upper(vector<int> &arr, int time) {
+        int l = 0, r = arr.size();
         while (l < r) {
             int mid = l + (r - l) / 2;
-            if (start[mid][0] <= cur) {
+            if (arr[mid] <= time) {
                 l = mid + 1;
             } else {
                 r = mid;
             }
         }
-        int cnt1 = start.size() - l;
-        l = 0, r = end.size();
+        return l;
+    }
+    int lower(vector<int> &arr, int time) {
+        int l = 0, r = arr.size();
         while (l < r) {
             int mid = l + (r - l) / 2;
-            if (end[mid][1] < cur) {
+            if (arr[mid] < time) {
                 l = mid + 1;
             } else {
                 r = mid;
             }
         }
-        int cnt2 = l;
-        return start.size() - cnt1 - cnt2;
+        return l;
     }
     vector<int> fullBloomFlowers(vector<vector<int>> &flowers, vector<int> &people) {
-        vector<vector<int>> start(flowers.begin(), flowers.end());
-        sort(start.begin(), start.end());
-        auto cmp = [](vector<int> &v1, vector<int> &v2) {
-            return v1[1] <= v2[1];
-        };
-        sort(flowers.begin(), flowers.end(), cmp); // 按照花的枯萎时间从小到大排序
-        vector<int> ans(people.size());
-        int n = people.size();
+        // 二分
+        int n = flowers.size();
+        vector<int> start(n), end(n);
         for (int i = 0; i < n; ++i) {
-            ans[i] = solve(start, people[i], flowers);
+            start[i] = flowers[i][0];
+            end[i] = flowers[i][1];
+        }
+        sort(start.begin(), start.end());
+        sort(end.begin(), end.end());
+        vector<int> ans;
+        for (int time : people) {
+            int res = upper(start, time) - lower(end, time);
+            ans.push_back(res);
         }
         return ans;
     }

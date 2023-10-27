@@ -1,5 +1,5 @@
-// Created by zwyyy456 at 2023/07/23 11:14
-// leetgo: 1.3.1
+// Created by zwyyy456 at 2023/10/18 11:36
+// leetgo: 1.3.8
 // https://leetcode.com/problems/trapping-rain-water/
 
 #include <bits/stdc++.h>
@@ -12,21 +12,17 @@ class Solution {
   public:
     int trap(vector<int> &height) {
         int n = height.size();
-        vector<int> sufmax(n);
-        sufmax[n - 1] = height[n - 1];
-        for (int i = n - 2; i >= 0; --i) {
-            sufmax[i] = max(sufmax[i + 1], height[i]);
-        }
-        vector<int> premax(n);
-        premax[0] = height[0];
         int res = 0;
-        for (int i = 1; i < n - 1; ++i) {
-            int cur = height[i];
-            int h = min(premax[i - 1], sufmax[i + 1]);
-            if (h > cur) {
-                res += h - cur;
+        stack<int> stk; // 单调递减栈
+        for (int i = 0; i < n; ++i) {
+            while (!stk.empty() && height[i] >= height[stk.top()]) {
+                int h = height[stk.top()];
+                stk.pop();
+                if (!stk.empty()) {
+                    res += (min(height[stk.top()], height[i]) - h) * (i - stk.top() - 1);
+                }
             }
-            premax[i] = max(cur, premax[i - 1]);
+            stk.push(i);
         }
         return res;
     }
@@ -42,11 +38,9 @@ int main() {
     LeetCodeIO::scan(cin, height);
 
     Solution *obj = new Solution();
-
     auto res = obj->trap(height);
-
     LeetCodeIO::print(out_stream, res);
-    cout << "output: " << out_stream.rdbuf() << endl;
+    cout << "\noutput: " << out_stream.rdbuf() << endl;
 
     delete obj;
     return 0;

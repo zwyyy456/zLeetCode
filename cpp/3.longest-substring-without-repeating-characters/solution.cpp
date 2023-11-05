@@ -28,6 +28,7 @@ class Solution {
                 ++l;
             }
         }
+        return res;
     }
 };
 

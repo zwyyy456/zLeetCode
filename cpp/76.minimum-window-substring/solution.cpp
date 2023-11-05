@@ -26,6 +26,12 @@ class Solution {
                 ++r;
                 continue;
             }
+            while (r < s.size() && window[s[r]] <= record[s[r]]) {
+            	++window[s[r]];
+            	++r;
+            }
+            res = max(r - l, res);
+            while (l < r && window[s[]])
         }
     }
 };

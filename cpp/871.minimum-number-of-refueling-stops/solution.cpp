@@ -13,7 +13,7 @@ class Solution {
 public:
     int minRefuelStops(int target, int startFuel, vector<vector<int>>& stations) {
         // 二分答案
-        stations.emplace_back({target, 0});
+        stations.push_back({target, 0});
         int n = stations.size();
         sort(stations.begin(), stations.end());
         auto cmp = [&stations](int i, int j) {

@@ -19,7 +19,7 @@ class Solution {
                 ++mp[nums[i] * nums[j]];
             }
         }
-        for (auto &[res, cnt] : mp) {
+        for (auto &[key, cnt] : mp) {
             res = res + cnt * (cnt - 1) / 2;
         }
         return res;

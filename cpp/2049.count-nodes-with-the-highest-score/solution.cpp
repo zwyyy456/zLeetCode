@@ -10,8 +10,37 @@ using namespace std;
 
 class Solution {
 public:
+	int get_cnt(vector<int> &cnt, vector<vector<int>> &tree, int cur) {
+		int res = 1;
+		for (auto &child : tree[cur]) {
+			res += get_cnt(cnt, tree, child);
+		}
+		cnt[cur] = res;
+		return res;
+	}
     int countHighestScoreNodes(vector<int>& parents) {
-        
+        int n = parents.size();
+        vector<vector<int>> tree(n);
+        vector<int> cnt(n, 0);
+        vector<int> vis(n);
+        int root = -1;
+        for (int i = 0; i < n; ++i) {
+        	if (parents[i] != -1) {
+        		tree[parents[i]].push_back(i);
+        	} else {
+        		root = i;
+        	}
+        }
+        get_cnt(cnt, tree, root);
+        int res = 0;
+        for (int i = 0; i < n; ++i) {
+        	int tmp = cnt[root] - cnt[i] > 0 ?  cnt[root] - cnt[i] : 1;
+        	for (int j = 0; j < tree[i].size(); ++j) {
+        		tmp *= cnt[tree[i][j]];
+        	}
+        	res = max(res, tmp);
+        }
+        return res;
     }
 };
 

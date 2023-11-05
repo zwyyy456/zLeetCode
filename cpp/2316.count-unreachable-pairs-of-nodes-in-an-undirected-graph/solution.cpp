@@ -10,19 +10,25 @@ using namespace std;
 
 class Solution {
   public:
-    void dfs(int cur, int fa, vector<vector<int>> &edges, int &cnt, vector<int> &vis) {
+    void dfs(int cur, int fa, vector<vector<int>> &graph, int &cnt, vector<int> &vis) {
         ++cnt;
         vis[cur] = 1;
-        for (int child : edges[cur]) {
+        for (int child : graph[cur]) {
             if (vis[child] == 1 || child == fa) {
                 continue;
             }
-            dfs(child, cur, edges, cnt, vis);
+            dfs(child, cur, graph, cnt, vis);
         }
     }
     long long countPairs(int n, vector<vector<int>> &edges) {
         vector<int> vis(n);
         vector<int> cnts;
+        vector<vector<int>> graph(n);
+        for (int i = 0; i < edges.size(); ++i) {
+        	int u = edges[i][0], v = edges[i][1];
+        	graph[u].push_back(v);
+        	graph[v].push_back(u);
+        }
         for (int i = 0; i < n; ++i) {
             if (vis[i] == 1) {
                 continue;
@@ -32,7 +38,7 @@ class Solution {
             cnts.push_back(cnt);
         }
         long long res = 0;
-        for (int i = 0; i < n; ++i) {
+        for (int i = 0; i < cnts.size(); ++i) {
             res += (long long)cnts[i] * (n - cnts[i]);
         }
         return res / 2;

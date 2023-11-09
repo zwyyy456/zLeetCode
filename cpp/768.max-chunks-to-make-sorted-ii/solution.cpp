@@ -1,43 +1,34 @@
-/*
- * @lc app=leetcode id=768 lang=cpp
- *
- * [768] Max Chunks To Make Sorted II
- */
+// Created by zwyyy456 at 2023/11/08 22:51
+// leetgo: 1.3.8
+// https://leetcode.com/problems/max-chunks-to-make-sorted-ii/
 
-// @lc code=start
-#include <map>
-#include <vector>
-using std::map;
-using std::vector;
+#include <bits/stdc++.h>
+#include "LC_IO.h"
+using namespace std;
+
+// @lc code=begin
+
 class Solution {
-  public:
-    int maxChunksToSorted(vector<int> &arr) {
-        int idx = 0; // 表示划分arr
-        int ans = 0;
-        map<int, int, std::greater<int>> l_map;
-        map<int, int> r_map;
-        for (int i = 0; i < arr.size(); i++)
-            r_map[arr[i]]++;
-        while (idx < arr.size()) {
-            for (int i = idx; i < arr.size(); i++) {
-                l_map[arr[i]]++;
-                r_map[arr[i]]--;
-                if (r_map[arr[i]] == 0)
-                    r_map.erase(arr[i]);
-                if (r_map.empty())
-                    break;
-                if (l_map.begin()->first <= r_map.begin()->first) {
-                    idx = i + 1;
-                    ans++;
-                    break;
-                }
-            }
-            if (r_map.empty()) {
-                ans++;
-                break;
-            }
-        }
-        return ans;
+public:
+    int maxChunksToSorted(vector<int>& arr) {
+        
     }
 };
+
 // @lc code=end
+
+int main() {
+	ios_base::sync_with_stdio(false);
+	stringstream out_stream;
+
+	vector<int> arr;
+	LeetCodeIO::scan(cin, arr);
+
+	Solution *obj = new Solution();
+	auto res = obj->maxChunksToSorted(arr);
+	LeetCodeIO::print(out_stream, res);
+	cout << "\noutput: " << out_stream.rdbuf() << endl;
+
+	delete obj;
+	return 0;
+}

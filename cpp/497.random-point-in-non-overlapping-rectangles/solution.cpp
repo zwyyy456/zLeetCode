@@ -1,99 +1,93 @@
-// Created by zwyyy456 at 2023/03/07 13:45
+// Created by zwyyy456 at 2023/10/14 19:09
+// leetgo: 1.3.8
 // https://leetcode.com/problems/random-point-in-non-overlapping-rectangles/
 
-/*
-497. Random Point in Non-overlapping Rectangles (Medium)
-
-You are given an array of non-overlapping axis-aligned rectangles `rects` where `rects[i] = [aᵢ, bᵢ,
-xᵢ, yᵢ]` indicates that `(aᵢ, bᵢ)` is the bottom-left corner point of the `ith` rectangle and `(xᵢ,
-yᵢ)` is the top-right corner point of the `ith` rectangle. Design an algorithm to pick a random
-integer point inside the space covered by one of the given rectangles. A point on the perimeter of a
-rectangle is included in the space covered by the rectangle.
-
-Any integer point inside the space covered by one of the given rectangles should be equally likely
-to be returned.
-
-**Note** that an integer point is a point that has integer coordinates.
-
-Implement the `Solution` class:
-
-- `Solution(int[][] rects)` Initializes the object with the given rectangles `rects`.
-- `int[] pick()` Returns a random integer point `[u, v]` inside the space covered by one of the
-given rectangles.
-
-**Example 1:**
-
-![](https://assets.leetcode.com/uploads/2021/07/24/lc-pickrandomrec.jpg)
-
-```
-Input
-["Solution", "pick", "pick", "pick", "pick", "pick"]
-[[[[-2, -2, 1, 1], [2, 2, 4, 6]]], [], [], [], [], []]
-Output
-[null, [1, -2], [1, -1], [-1, -2], [-2, -2], [0, 0]]
-
-Explanation
-Solution solution = new Solution([[-2, -2, 1, 1], [2, 2, 4, 6]]);
-solution.pick(); // return [1, -2]
-solution.pick(); // return [1, -1]
-solution.pick(); // return [-1, -2]
-solution.pick(); // return [-2, -2]
-solution.pick(); // return [0, 0]
-
-```
-
-**Constraints:**
-
-- `1 <= rects.length <= 100`
-- `rects[i].length == 4`
-- `-10⁹ <= aᵢ < xᵢ <= 10⁹`
-- `-10⁹ <= bᵢ < yᵢ <= 10⁹`
-- `xᵢ - aᵢ <= 2000`
-- `yᵢ - bᵢ <= 2000`
-- All the rectangles do not overlap.
-- At most `10⁴` calls will be made to `pick`.
-*/
+#include <bits/stdc++.h>
+#include "LC_IO.h"
+using namespace std;
 
 // @lc code=begin
-#include <vector>
-using std::vector;
+
 class Solution {
-  private:
-    int total_num = 0;
-    int pick_num = 0;
-    vector<vector<int>> rectangles;
-    vector<int> points_num;
-    int BSearch(int target) {
-        int left = 0, right = points_num.size();
-        while (left < right) {
-            int mid = left + (right - left) / 2;
-            if (points_num[mid] < target) {
-                left = mid + 1;
-            } else {
-                right = mid;
-            }
+  public:
+    Solution(vector<vector<int>> &rects) :
+        recs(rects) {
+        point_cnt.push_back(0); // 前缀和的概念
+        for (auto &vec : rects) {
+            long tmp = ((long)vec[3] - vec[1]) * ((long)vec[2] - vec[0]);
+            total_cnt += tmp;
+            point_cnt.push_back(total_cnt);
         }
-        return left;
     }
 
-  public:
-    Solution(vector<vector<int>> &rects) {
-        points_num.push_back(0);
-        for (auto &vec : rects) {
-            rectangles.push_back(vec);
-            total_num += (vec[2] - vec[0] + 1) * (vec[3] - vec[1] + 1);
-            points_num.push_back(total_num);
-        }
-    }
     vector<int> pick() {
-        int choose = pick_num % total_num;
-        int idx = BSearch(choose + 1) - 1;                                  // 选择索引为idx的矩形
-        choose -= points_num[idx];                                          // 从索引为idx的矩形的索引为choose的点
-        int x_idx = choose % (rectangles[idx][2] - rectangles[idx][0] + 1); // 对矩形的长取模
-        int y_idx = choose / (rectangles[idx][2] - rectangles[idx][0] + 1);
-        pick_num++;
-        return {x_idx + rectangles[idx][0], y_idx + rectangles[idx][1]};
+        long cnt = (rand() % total_cnt + total_cnt) % total_cnt + 1;
+        int idx = bfind(cnt);
+        long new_id = cnt - point_cnt[idx - 1]; // 在矩形的第多少个点处
+        long len = recs[idx - 1][3] - recs[idx - 1][1];
+        long wid = recs[idx - 1][2] - recs[idx - 1][0];
+        int x = (new_id - 1) % wid + recs[idx - 1][0];
+        int y = (new_id - 1) / wid + recs[idx - 1][1];
+        return {x, y};
+
+
+    }
+
+  private:
+    vector<long> point_cnt;
+    vector<vector<int>> recs;
+    long total_cnt;
+    int bfind(long target) {
+    	int l = 0, r = point_cnt.size();
+    	while (l < r) {
+    		int mid = l + (r - l) / 2;
+    		if (point_cnt[mid] < target) {
+    			l = mid + 1;
+    		} else {
+    			r = mid;
+    		}
+    	}
     }
 };
 
 // @lc code=end
+
+int main() {
+    ios_base::sync_with_stdio(false);
+    stringstream out_stream;
+
+    vector<string> method_names;
+    LeetCodeIO::scan(cin, method_names);
+
+    Solution *obj;
+    const unordered_map<string, function<void()>> methods = {
+        {"Solution", [&]() {
+             vector<vector<int>> rects;
+             LeetCodeIO::scan(cin, rects);
+             cin.ignore();
+             int rectsSize;
+             LeetCodeIO::scan(cin, rectsSize);
+             cin.ignore();
+             obj = new Solution(rects, rectsSize);
+             out_stream << "null,";
+         }},
+        {"pick", [&]() {
+             cin.ignore();
+             LeetCodeIO::print(out_stream, obj->pick());
+             out_stream << ',';
+         }},
+    };
+    cin >> ws;
+    out_stream << '[';
+    for (auto &&method_name : method_names) {
+        cin.ignore(2);
+        methods.at(method_name)();
+    }
+    cin.ignore();
+    out_stream.seekp(-1, ios_base::end);
+    out_stream << ']';
+    cout << "\noutput: " << out_stream.rdbuf() << endl;
+
+    delete obj;
+    return 0;
+}

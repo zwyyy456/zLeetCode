@@ -1,28 +1,46 @@
-/*
- * @lc app=leetcode id=11 lang=cpp
- *
- * [11] Container With Most Water
- */
+// Created by zwyyy456 at 2023/10/18 11:16
+// leetgo: 1.3.8
+// https://leetcode.com/problems/container-with-most-water/
 
-// @lc code=start
-#include <vector>
-using std::vector;
+#include <bits/stdc++.h>
+#include "LC_IO.h"
+using namespace std;
+
+// @lc code=begin
+
 class Solution {
-public:
-    int maxArea(vector<int>& height) {
-        int l = 0, r = height.size() - 1;
+  public:
+    int maxArea(vector<int> &height) {
+        int n = height.size();
+        int l = 0, r = n - 1;
         int res = 0;
         while (l < r) {
-            if (height[l] >= height[r]) {
-                res = max(res, (r - l) * height[r]);
-                r--; // 因为此时，增加l只可能缩小res，所以减少r
-            } else {
+            if (height[l] <= height[r]) {
                 res = max(res, (r - l) * height[l]);
-                l++; // height[l] < height[r], 此时减少r也只会缩小res，所以增加l
+                ++l;
+            } else {
+                res = max(res, (r - l) * height[r]);
+                ++r;
             }
         }
         return res;
     }
 };
+
 // @lc code=end
 
+int main() {
+    ios_base::sync_with_stdio(false);
+    stringstream out_stream;
+
+    vector<int> height;
+    LeetCodeIO::scan(cin, height);
+
+    Solution *obj = new Solution();
+    auto res = obj->maxArea(height);
+    LeetCodeIO::print(out_stream, res);
+    cout << "\noutput: " << out_stream.rdbuf() << endl;
+
+    delete obj;
+    return 0;
+}

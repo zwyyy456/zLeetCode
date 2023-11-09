@@ -2,37 +2,35 @@
 
 [link]: https://leetcode.com/problems/longest-uncommon-subsequence-ii/
 
-<p>Given an array of strings <code>strs</code>, return <em>the length of the <strong>longest
-uncommon subsequence</strong> between them</em>. If the longest uncommon subsequence does not exist,
-return <code>-1</code>.</p>
+Given an array of strings `strs`, return the length of the **longest uncommon subsequence** between
+them. If the longest uncommon subsequence does not exist, return `-1`.
 
-<p>An <strong>uncommon subsequence</strong> between an array of strings is a string that is a
-<strong>subsequence of one string but not the others</strong>.</p>
+An **uncommon subsequence** between an array of strings is a string that is a **subsequence of one
+string but not the others**.
 
-<p>A <strong>subsequence</strong> of a string <code>s</code> is a string that can be obtained after
-deleting any number of characters from <code>s</code>.</p>
+A **subsequence** of a string `s` is a string that can be obtained after deleting any number of
+characters from `s`.
 
-<ul>
-	<li>For example, <code>&quot;abc&quot;</code> is a subsequence of <code>&quot;aebdc&quot;</code>
-because you can delete the underlined characters in <code>&quot;a<u>e</u>b<u>d</u>c&quot;</code> to
-get <code>&quot;abc&quot;</code>. Other subsequences of <code>&quot;aebdc&quot;</code> include
-<code>&quot;aebdc&quot;</code>, <code>&quot;aeb&quot;</code>, and <code>&quot;&quot;</code> (empty
-string).</li>
-</ul>
+- For example, `"abc"` is a subsequence of `"aebdc"` because you can delete the underlined characters
+in `"aebdc"` to get `"abc"`. Other subsequences of `"aebdc"` include `"aebdc"`, `"aeb"`, and `""`
+(empty string).
 
-<p>&nbsp;</p>
-<p><strong class="example">Example 1:</strong></p>
-<pre><strong>Input:</strong> strs = ["aba","cdc","eae"]
-<strong>Output:</strong> 3
-</pre><p><strong class="example">Example 2:</strong></p>
-<pre><strong>Input:</strong> strs = ["aaa","aaa","aa"]
-<strong>Output:</strong> -1
-</pre>
-<p>&nbsp;</p>
-<p><strong>Constraints:</strong></p>
+**Example 1:**
 
-<ul>
-	<li><code>2 &lt;= strs.length &lt;= 50</code></li>
-	<li><code>1 &lt;= strs[i].length &lt;= 10</code></li>
-	<li><code>strs[i]</code> consists of lowercase English letters.</li>
-</ul>
+```
+Input: strs = ["aba","cdc","eae"]
+Output: 3
+```
+
+**Example 2:**
+
+```
+Input: strs = ["aaa","aaa","aa"]
+Output: -1
+```
+
+**Constraints:**
+
+- `2 <= strs.length <= 50`
+- `1 <= strs[i].length <= 10`
+- `strs[i]` consists of lowercase English letters.

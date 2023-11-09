@@ -1,97 +1,92 @@
-// Created by zwyyy456 at 2023/03/11 12:13
+// Created by zwyyy456 at 2023/10/05 19:56
+// leetgo: 1.3.8
 // https://leetcode.com/problems/count-of-range-sum/
 
-/*
-327. Count of Range Sum (Hard)
+#include <bits/stdc++.h>
+#include <unordered_map>
+#include "LC_IO.h"
+using namespace std;
 
-Given an integer array `nums` and two integers `lower` and `upper`, return the number of range sums
-that lie in `[lower, upper]`inclusive.
-
-Range sum `S(i, j)` is defined as the sum of the elements in `nums` between indices `i` and `j`
-inclusive, where `i <= j`.
-
-**Example 1:**
-
-```
-Input: nums = [-2,5,-1], lower = -2, upper = 2
-Output: 3
-Explanation: The three ranges are: [0,0], [2,2], and [0,2] and their respective sums are: -2, -1, 2.
-
-```
-
-**Example 2:**
-
-```
-Input: nums = [0], lower = 0, upper = 0
-Output: 1
-
-```
-
-**Constraints:**
-
-- `1 <= nums.length <= 10⁵`
-- `-2³¹ <= nums[i] <= 2³¹ - 1`
-- `-10⁵ <= lower <= upper <= 10⁵`
-- The answer is **guaranteed** to fit in a **32-bit** integer.
-*/
-#include <vector>
-using std::vector;
 // @lc code=begin
-class Solution {
+class TreeArr {
   public:
-    int countRangeSumRecursive(vector<long> &sum, int lower, int upper, int left, int right) {
-        if (left == right) {
-            return 0;
-        } else {
-            int mid = (left + right) / 2;
-            int n1 = countRangeSumRecursive(sum, lower, upper, left, mid);
-            int n2 = countRangeSumRecursive(sum, lower, upper, mid + 1, right);
-            int ret = n1 + n2;
-
-            // 首先统计下标对的数量
-            int i = left;
-            int l = mid + 1;
-            int r = mid + 1;
-            while (i <= mid) {
-                while (l <= right && sum[l] - sum[i] < lower) l++;
-                while (r <= right && sum[r] - sum[i] <= upper) r++;
-                ret += (r - l);
-                i++;
-            }
-
-            // 随后合并两个排序数组
-            vector<long> sorted(right - left + 1);
-            int p1 = left, p2 = mid + 1;
-            int p = 0;
-            while (p1 <= mid || p2 <= right) {
-                if (p1 > mid) {
-                    sorted[p++] = sum[p2++];
-                } else if (p2 > right) {
-                    sorted[p++] = sum[p1++];
-                } else {
-                    if (sum[p1] < sum[p2]) {
-                        sorted[p++] = sum[p1++];
-                    } else {
-                        sorted[p++] = sum[p2++];
-                    }
-                }
-            }
-            for (int i = 0; i < sorted.size(); i++) {
-                sum[left + i] = sorted[i];
-            }
-            return ret;
+    TreeArr(int n) :
+        arr(n + 1), len(n) {
+    }
+    int lowbit(int x) {
+        return x & (~x);
+    }
+    void update(int x) {
+        while (x <= len) {
+            arr[x] += 1;
+            x = x + lowbit(x);
         }
     }
-
-    int countRangeSum(vector<int> &nums, int lower, int upper) {
-        long s = 0;
-        vector<long> sum{0};
-        for (auto &v : nums) {
-            s += v;
-            sum.push_back(s);
+    int getsum(int x) {
+        int sum = 0;
+        while (x > 0) {
+            sum += arr[x];
+            x = x - lowbit(x);
         }
-        return countRangeSumRecursive(sum, lower, upper, 0, sum.size() - 1);
+        return sum;
+    }
+
+  private:
+    vector<int> arr;
+    int len;
+};
+class Solution {
+  public:
+    int countRangeSum(vector<int> &nums, int lower, int upper) {
+        // 求区间和，并进行离散化
+        set<int> sums;
+        int n = nums.size();
+        sums.insert(0);
+        int sum = 0;
+        for (int i = 1; i <= n; ++i) {
+            sum += nums[i - 1];
+            sums.insert(sum);
+            sums.insert(sum - lower);
+            sums.insert(sum - upper);
+        }
+        unordered_map<int, int> num2num;
+        int idx = 1;
+        // 完成映射
+        for (int i : sums) {
+            num2num[i] = idx;
+            ++idx;
+        }
+        TreeArr *arr = new TreeArr(sums.size());
+        arr->update(num2num[0]);
+        sum = 0;
+        int res = 0;
+        for (int i = 0; i < n; ++i) {
+            sum += nums[i];
+            res = arr->getsum(num2num[sum - lower]) - arr->getsum(num2num[sum - upper - 1]);
+            arr->update(num2num[sum]);
+        }
+        return res;
     }
 };
 
 // @lc code=end
+
+int main() {
+    ios_base::sync_with_stdio(false);
+    stringstream out_stream;
+
+    vector<int> nums;
+    LeetCodeIO::scan(cin, nums);
+    int lower;
+    LeetCodeIO::scan(cin, lower);
+    int upper;
+    LeetCodeIO::scan(cin, upper);
+
+    Solution *obj = new Solution();
+    auto res = obj->countRangeSum(nums, lower, upper);
+    LeetCodeIO::print(out_stream, res);
+    cout << "\noutput: " << out_stream.rdbuf() << endl;
+
+    delete obj;
+    return 0;
+}

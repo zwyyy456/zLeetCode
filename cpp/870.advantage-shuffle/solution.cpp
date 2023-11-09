@@ -1,9 +1,8 @@
-// Created by zwyyy456 at 2023/08/26 11:38
-// leetgo: 1.3.1
+// Created by zwyyy456 at 2023/11/06 17:24
+// leetgo: 1.3.8
 // https://leetcode.com/problems/advantage-shuffle/
 
 #include <bits/stdc++.h>
-#include <queue>
 #include "LC_IO.h"
 using namespace std;
 
@@ -12,34 +11,36 @@ using namespace std;
 class Solution {
   public:
     vector<int> advantageCount(vector<int> &nums1, vector<int> &nums2) {
-        queue<int> nomatch;
-        priority_queue<int> nums;
-        auto cmp = [&nums2](int l, int r) {
-            return nums2[l] < nums2[r];
+        int n = nums2.size();
+        vector<int> ids(n);
+        for (int i = 0; i < n; ++i) {
+            ids[i] = i;
+        }
+        auto cmp = [&nums2](int i, int j) {
+            return nums2[i] < nums2[j];
         };
-        priority_queue<int, vector<int>, decltype(cmp)> index(cmp);
-        int n = nums1.size();
-        for (int i = 0; i < n; ++i) {
-            nums.push(nums1[i]);
+        sort(ids.begin(), ids.end(), cmp);
+        map<int, int> mp;
+        for (int &num : nums1) {
+            mp[num]++;
         }
+        vector<int> res(n, -1);
         for (int i = 0; i < n; ++i) {
-            index.push(i);
-        }
-        vector<int> res(n);
-        while (!nums.empty() && !index.empty()) {
-            if (nums.top() > nums2[index.top()]) {
-                res[index.top()] = nums.top();
-                nums.pop();
-                index.pop();
-            } else {
-                nomatch.push(index.top());
-                index.pop();
+            int idx = ids[i];
+            auto iter = mp.upper_bound(nums2[idx]);
+            res[i] = iter->first;
+            if (--iter->second == 0) {
+                mp.erase(iter);
             }
         }
-        while (!nums.empty()) {
-            res[nomatch.front()] = nums.top();
-            nomatch.pop();
-            nums.pop();
+        for (int i = 0; i < n; ++i) {
+            if (res[i] == -1) {
+                auto iter = mp.begin();
+                res[i] = iter->first;
+                if (--iter->second == 0) {
+                    mp.erase(iter);
+                }
+            }
         }
         return res;
     }
@@ -57,13 +58,10 @@ int main() {
     LeetCodeIO::scan(cin, nums2);
 
     Solution *obj = new Solution();
-
     auto res = obj->advantageCount(nums1, nums2);
-
     LeetCodeIO::print(out_stream, res);
-    cout << "
-        output : " << out_stream.rdbuf() << endl;
+    cout << "\noutput: " << out_stream.rdbuf() << endl;
 
-                 delete obj;
+    delete obj;
     return 0;
 }

@@ -1,4 +1,0 @@
-input:
-["abcw","baz","foo","bar","xtfn","abcdef"]
-output:
-16

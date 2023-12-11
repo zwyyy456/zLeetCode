@@ -1,101 +1,109 @@
-<<<<<<< HEAD
-// Created by zwyyy456 at 2023/03/09 09:29
-=======
-// Created by zwyyy456 at 2023/03/09 23:21
->>>>>>> 2435687622386b4e03c7cd5907553e19cbc67e14
+// Created by zwyyy456 at 2023/11/13 10:59
+// leetgo: 1.3.8
 // https://leetcode.com/problems/range-sum-query-mutable/
 
-/*
-307. Range Sum Query - Mutable (Medium)
-
-Given an integer array `nums`, handle multiple queries of the following types:
-
-1. **Update** the value of an element in `nums`.
-2. Calculate the **sum** of the elements of `nums` between indices `left` and `right` **inclusive**
-where `left <= right`.
-
-Implement the `NumArray` class:
-
-- `NumArray(int[] nums)` Initializes the object with the integer array `nums`.
-- `void update(int index, int val)` **Updates** the value of `nums[index]` to be `val`.
-- `int sumRange(int left, int right)` Returns the **sum** of the elements of `nums` between indices
-`left` and `right` **inclusive** (i.e. `nums[left] + nums[left + 1] + ... + nums[right]`).
-
-**Example 1:**
-
-```
-Input
-["NumArray", "sumRange", "update", "sumRange"]
-[[[1, 3, 5]], [0, 2], [1, 2], [0, 2]]
-Output
-[null, 9, null, 8]
-
-Explanation
-NumArray numArray = new NumArray([1, 3, 5]);
-numArray.sumRange(0, 2); // return 1 + 3 + 5 = 9
-numArray.update(1, 2);   // nums = [1, 2, 5]
-numArray.sumRange(0, 2); // return 1 + 2 + 5 = 8
-
-```
-
-**Constraints:**
-
-- `1 <= nums.length <= 3 * 10⁴`
-- `-100 <= nums[i] <= 100`
-- `0 <= index < nums.length`
-- `-100 <= val <= 100`
-- `0 <= left <= right < nums.length`
-- At most `3 * 10⁴` calls will be made to `update` and `sumRange`.
-*/
+#include <bits/stdc++.h>
+#include "LC_IO.h"
+using namespace std;
 
 // @lc code=begin
-#include <vector>
-using std::vector;
-class NumArray {
-  private:
-    vector<int> arr;
-    vector<int> prefix;
-    vector<int> carr;
-    int n;
-    int Lowbit(int x) {
-        return (x & -x);
-    }
-    int GetSum(int x) {
-        int sum = 0;
-        while (x > 0) {
-            sum += carr[x];
-            x -= Lowbit(x);
-        }
-        return sum;
-    }
 
+class NumArray {
   public:
-    NumArray(vector<int> &nums) {
-        n = nums.size();
-        arr.resize(n + 1);
-        prefix.resize(n + 1);
-        carr.resize(n + 1);
-        for (int i = 1; i <= n; ++i) {
-            arr[i] = nums[i - 1];
-            prefix[i] = prefix[i - 1] + arr[i];
-        }
-        for (int i = 1; i <= n; ++i) {
-            carr[i] = prefix[i] - prefix[i - Lowbit(i) + 1 - 1];
+    // 树状数组
+    int lowbit(int x) {
+        return x & (-x);
+    }
+    NumArray(vector<int> &nums) :
+        tree(nums.size() + 1), len(nums.size()) {
+        for (int i = 0; i < nums.size(); ++i) {
+            tree_update(i + 1, nums[i]);
         }
     }
 
     void update(int index, int val) {
         int x = index + 1;
-        while (x < n + 1) {
-            carr[x] += val - arr[index + 1];
-            x += Lowbit(x);
+        int origin = sumRange(index, index);
+        // while (x <= len) {
+        // 	tree[x] += val - origin;
+        // 	x += lowbit(x);
+        // }
+        tree_update(x, val - origin);
+    }
+    void tree_update(int x, int diff) {
+        while (x <= len) {
+            tree[x] += diff;
+            x += lowbit(x);
         }
-        arr[index + 1] = val;
     }
 
     int sumRange(int left, int right) {
-        return GetSum(right + 1) - GetSum(left);
+        return sum(right + 1) - sum(left);
     }
+    int sum(int r) {
+        int res = 0;
+        while (r > 0) {
+            res += tree[r];
+            r -= lowbit(r);
+        }
+        return res;
+    }
+
+  private:
+    vector<int> tree;
+    int len;
 };
 
 // @lc code=end
+
+int main() {
+    ios_base::sync_with_stdio(false);
+    stringstream out_stream;
+
+    vector<string> method_names;
+    LeetCodeIO::scan(cin, method_names);
+
+    NumArray *obj;
+    const unordered_map<string, function<void()>> methods = {
+        {"NumArray", [&]() {
+             vector<int> nums;
+             LeetCodeIO::scan(cin, nums);
+             cin.ignore();
+             obj = new NumArray(nums);
+             out_stream << "null,";
+         }},
+        {"update", [&]() {
+             int index;
+             LeetCodeIO::scan(cin, index);
+             cin.ignore();
+             int val;
+             LeetCodeIO::scan(cin, val);
+             cin.ignore();
+             obj->update(index, val);
+             out_stream << "null,";
+         }},
+        {"sumRange", [&]() {
+             int left;
+             LeetCodeIO::scan(cin, left);
+             cin.ignore();
+             int right;
+             LeetCodeIO::scan(cin, right);
+             cin.ignore();
+             LeetCodeIO::print(out_stream, obj->sumRange(left, right));
+             out_stream << ',';
+         }},
+    };
+    cin >> ws;
+    out_stream << '[';
+    for (auto &&method_name : method_names) {
+        cin.ignore(2);
+        methods.at(method_name)();
+    }
+    cin.ignore();
+    out_stream.seekp(-1, ios_base::end);
+    out_stream << ']';
+    cout << "\noutput: " << out_stream.rdbuf() << endl;
+
+    delete obj;
+    return 0;
+}

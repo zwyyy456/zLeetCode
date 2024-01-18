@@ -139,7 +139,7 @@
 #include <compare>
 #include <concepts>
 #if __cpp_impl_coroutine
-# include <coroutine>
+#include <coroutine>
 #endif
 #include <latch>
 #include <numbers>
@@ -156,7 +156,7 @@
 #include <expected>
 #include <spanstream>
 #if __has_include(<stacktrace>)
-# include <stacktrace>
+#include <stacktrace>
 #endif
 #include <stdatomic.h>
 #endif

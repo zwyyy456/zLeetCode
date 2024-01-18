@@ -1,63 +1,52 @@
-// Created by zwyyy456 at 2023/02/20 09:35
+// Created by zwyyy456 at 2023/12/05 13:15
+// leetgo: 1.3.8
 // https://leetcode.com/problems/maximum-ice-cream-bars/
 
-/*
-1833. Maximum Ice Cream Bars (Medium)
-
-It is a sweltering summer day, and a boy wants to buy some ice cream bars.
-At the store, there are `n` ice cream bars. You are given an array `costs` of length `n`, where
-`costs[i]` is the price of the `ith` ice cream bar in coins. The boy initially has `coins` coins to
-spend, and he wants to buy as many ice cream bars as possible.
-**Note:** The boy can buy the ice cream bars in any order.
-Return the **maximum** number of ice cream bars the boy can buy with  `coins` coins.
-You must solve the problem by counting sort.
-**Example 1:**
-```
-Input: costs = [1,3,2,4,1], coins = 7
-Output: 4
-Explanation: The boy can buy ice cream bars at indices 0,1,2,4 for a total price of 1 + 3 + 2 + 1 =
-7.
-```
-**Example 2:**
-```
-Input: costs = [10,6,8,7,7,8], coins = 5
-Output: 0
-Explanation: The boy cannot afford any of the ice cream bars.
-```
-**Example 3:**
-```
-Input: costs = [1,6,3,1,2,5], coins = 20
-Output: 6
-Explanation: The boy can buy all the ice cream bars for a total price of 1 + 6 + 3 + 1 + 2 + 5 = 18.
-```
-**Constraints:**
-- `costs.length == n`
-- `1 <= n <= 10⁵`
-- `1 <= costs[i] <= 10⁵`
-- `1 <= coins <= 10⁸`
-*/
+#include <bits/stdc++.h>
+#include "LC_IO.h"
+using namespace std;
 
 // @lc code=begin
-#include <functional>
-#include <queue>
-#include <vector>
-using std::vector;
-using std::priority_queue;
+
 class Solution {
   public:
     int maxIceCream(vector<int> &costs, int coins) {
-        priority_queue<int, vector<int>, std::greater<int>> pq;
-        for (int &price : costs) {
-            pq.push(price);
+        const int n = 1e5 + 1;
+        vector<int> cnt(n);
+        for (int cost : costs) {
+            cnt[cost]++;
         }
-        int cnt = 0;
-        while (!pq.empty() && coins >= pq.top()) {
-            cnt++;
-            coins -= pq.top();
-            pq.pop();
+        int res = 0, i = 1;
+        while (i < n && coins > 0) {
+            if (cnt[i] > 0) {
+                coins -= cnt[i];
+                if (coins >= 0) {
+                    ++res;
+                }
+            } else {
+                ++i;
+            }
         }
-        return cnt;
+        return res;
     }
 };
 
 // @lc code=end
+
+int main() {
+    ios_base::sync_with_stdio(false);
+    stringstream out_stream;
+
+    vector<int> costs;
+    LeetCodeIO::scan(cin, costs);
+    int coins;
+    LeetCodeIO::scan(cin, coins);
+
+    Solution *obj = new Solution();
+    auto res = obj->maxIceCream(costs, coins);
+    LeetCodeIO::print(out_stream, res);
+    cout << "\noutput: " << out_stream.rdbuf() << endl;
+
+    delete obj;
+    return 0;
+}

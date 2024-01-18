@@ -26,7 +26,7 @@ class Solution {
         cnt[0] = cnt[1] = 1;
         vector<int> dp(n + 1);
         for (int i = 1; i <= m; i++) {
-                }
+        }
     }
 };
 // @lc code=end

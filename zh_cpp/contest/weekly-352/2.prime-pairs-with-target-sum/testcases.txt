@@ -1,0 +1,9 @@
+input:
+10
+output:
+[[3,7],[5,5]]
+
+input:
+2
+output:
+[]

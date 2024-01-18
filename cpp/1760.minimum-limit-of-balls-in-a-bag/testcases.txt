@@ -1,5 +1,3 @@
-target_case: 0
-
 input:
 [9]
 2

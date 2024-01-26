@@ -1,0 +1,7 @@
+#!/bin/zsh
+
+msg="$1"
+cd /Users/zwyyy/code/bean
+git add .
+git commit -m "$msg"
+git push origin main
